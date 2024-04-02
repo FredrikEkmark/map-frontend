@@ -8,22 +8,15 @@ import {getPlayerNumberFromInput, MapMove, PlayerNumber, TileEdge} from "../../t
 
 interface Props {
     startCoordinates: MapCoordinates
-    mapData: GameMapData // toDo remove the ? when put in proper use
+    mapData: GameMapData
 }
 
 const GameMap = ({startCoordinates, mapData}: Props) => {
-
-    const [centerViewCoordinates, setCenterViewCoordinates] = useState(startCoordinates)
+    
+    const [centerViewCoordinates, setCenterViewCoordinates] = useState({x: startCoordinates.x + (startCoordinates.x % 2), y:startCoordinates.y})
 
     const numRows = 13;
     const numCols = 15;
-    let mapWidth = 100 // toDO replace with map.mapSize.width
-    let mapHeight = 50 // toDO replace with map.mapSize.height
-
-    if (mapData) {
-        mapHeight = mapData.mapSize.height
-        mapWidth = mapData.mapSize.width
-    }
 
     const applyEdge = (row: number, col: number): TileEdge => {
 
@@ -59,24 +52,24 @@ const GameMap = ({startCoordinates, mapData}: Props) => {
     }
 
     const getTile = (row: number, col: number): MapTileData => {
-        let y = (centerViewCoordinates.y - ((numCols - 1) / 2) + col) % mapWidth;
+        let y = (centerViewCoordinates.y - ((numCols - 1) / 2) + col) % mapData.mapSize.width;
         const x = centerViewCoordinates.x - ((numRows - 1) / 2) + row;
 
         if (y < 0) {
-            y += mapWidth;
-        }
-
-        for (const tile of mapData.map) {
-            /* if (!tile.visible) {
-                    return emptyTile
-            } */ // toDo implement when starting to game test and don't want to see all of map
-            if (tile.coordinates.x === x && tile.coordinates.y === y) { // TODO look into the fact that the coordinates obviously is fucked up since I had to switch these here
-                tile.visible = true // toDo remove when implementing above
-                return tile; // Return the tile if coordinates match
-            }
+            y += mapData.mapSize.width;
         }
 
         const emptyTile = { coordinates: { x: x, y: y }, visible: false, tileTerrainValue: 0, tileOwner: getPlayerNumberFromInput("NONE") }
+
+        for (const tile of mapData.map) {
+            if (tile.coordinates.x === x && tile.coordinates.y === y) {
+                if (tile.visible) {
+                    return tile; // Return the tile if coordinates match
+                } else {
+                    return emptyTile
+                }
+            }
+        }
         return emptyTile;
     };
 
@@ -86,13 +79,13 @@ const GameMap = ({startCoordinates, mapData}: Props) => {
                 setCenterViewCoordinates(prevState => ({ y: prevState.y, x: Math.max((numRows - 1) / 2, prevState.x - 2) }))
                 break
             case MapMove.LEFT:
-                setCenterViewCoordinates({y: (centerViewCoordinates.y - 2 + mapWidth) % mapWidth, x: centerViewCoordinates.x})
+                setCenterViewCoordinates({y: (centerViewCoordinates.y - 2 + mapData.mapSize.width) % mapData.mapSize.width, x: centerViewCoordinates.x})
                 break
             case MapMove.RIGHT:
-                setCenterViewCoordinates({y: (centerViewCoordinates.y + 2) % mapWidth, x: centerViewCoordinates.x})
+                setCenterViewCoordinates({y: (centerViewCoordinates.y + 2) % mapData.mapSize.width, x: centerViewCoordinates.x})
                 break
             case MapMove.DOWN:
-                setCenterViewCoordinates(prevState => ({ y: prevState.y, x: Math.min(mapHeight - ((numRows - 1) / 2) - 1, prevState.x + 2) }))
+                setCenterViewCoordinates(prevState => ({ y: prevState.y, x: Math.min(mapData.mapSize.height - ((numRows - 1) / 2) - 1, prevState.x + 2) }))
                 break
             default:
                 console.log("Error, wrong input")
