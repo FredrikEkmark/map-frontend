@@ -1,0 +1,143 @@
+.container {
+    --s: 52px; /* size  */
+    --m: 4px; /* margin */
+    --f: calc(1.732 * var(--s) + 4 * var(--m) - 1px);
+    --d: 60px; /* size  */
+    --n: 0px; /* margin */
+    background-color: #ffffff;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    width: 900px;
+    height: 720px;
+    font-size: 0; /*disable white space between inline block element */
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;/* Allow items to wrap onto the next line */
+}
+
+.container .tile {
+    width: var(--s);
+    padding: 11px; /* not sure this should be here */
+    margin: var(--m);
+    height: calc(var(--s) * 1.1547);
+    font-size: initial;
+    clip-path: polygon(0% 25%, 0% 75%, 50% 100%, 100% 75%, 100% 25%, 50% 0%);
+    margin-bottom: calc(var(--m) - var(--s) * 0.2885);
+}
+
+.container .border {
+    width: var(--d);
+    margin: var(--n);
+    height: calc(var(--d) * 1.1547);
+    font-size: initial;
+    clip-path: polygon(0% 25%, 0% 75%, 50% 100%, 100% 75%, 100% 25%, 50% 0%);
+    margin-bottom: calc(var(--n) - var(--d) * 0.2885);
+}
+
+.row {
+    display: flex;
+}
+
+.container div.leftEdge {
+    clip-path: polygon(50% 100%, 100% 75%, 100% 25%, 50% 0%);
+}
+.container div.rightEdge {
+    clip-path: polygon(0% 25%, 0% 75%, 50% 100%, 50% 0%);
+}
+.container div.topEdge {
+    clip-path: polygon(0% 25%, 0% 75%, 50% 100%, 100% 75%, 100% 25%);
+}
+.container div.bottomEdge {
+    clip-path: polygon(0% 25%, 0% 75%, 100% 75%, 100% 25%, 50% 0%);
+}
+.container div.leftTopEdge {
+    clip-path: polygon(50% 100%, 100% 75%, 100% 25%, 50% 25%);
+}
+.container div.rightTopEdge {
+    clip-path: polygon(0% 25%, 0% 75%, 50% 100%, 50% 25%);
+}
+.container div.leftBottomEdge {
+    clip-path: polygon(50% 75%, 100% 75%, 100% 25%, 50% 0%);
+}
+.container div.rightBottomEdge {
+    clip-path: polygon(0% 25%, 0% 75%, 50% 75%, 50% 0%);
+}
+
+
+
+.glacier {
+    background-color: #c2d7f2;
+}
+.deepWater {
+    background-color: #1433a6;
+}
+.coastalWater {
+    background-color: #3c5cfa;
+}
+.lowlandTundra {
+    background-color: #10944b;
+}
+.highlandsTundra {
+    background-color: #53916f;
+}
+.coldDesert {
+    background-color: #557596;
+}
+.coldDesertHills {
+    background-color: #3c474a;
+}
+.temperateLowlandsPlains {
+    background-color: #18d628;
+}
+.temperateForest {
+    background-color: #10941b;
+}
+.highlandHills {
+    background-color: #6ed477;
+}
+.temperateHighlandForest {
+    background-color: #498f4f;
+}
+.temperateRainforest {
+    background-color: #084d0e;
+}
+.temperateHighlandRainforest {
+    background-color: #2a452c;
+}
+.hotDesert {
+    background-color: #e84827;
+}
+.hotDesertHills {
+    background-color: #9c2e17;
+}
+.hotSteppe {
+    background-color: #459410;
+}
+.hotSteppeHills {
+    background-color: #69914e;
+}
+.tropicalSavanna {
+    background-color: #739410;
+}
+.tropicalSavannaHills {
+    background-color: #7e8f4c;
+}
+.tropicalRainforest {
+    background-color: #3f5209;
+}
+.tropicalRainforestHills {
+    background-color: #464f2b;
+}
+.glacialHeights {
+    background-color: #9dc6fc;
+}
+.frozenMountains {
+    background-color: #ebf0f7;
+}
+.mountains {
+    background-color: #260f02;
+}
+
+.unexplored {
+    background-color: #889294;
+}
