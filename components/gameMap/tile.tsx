@@ -1,13 +1,16 @@
 import "@/styles/map-style.css";
 import {TileEdge} from "../../types/enums";
-import {MapTileData} from "../../types/playerViewTypes";
+import {MapCoordinates, MapTileData} from "../../types/playerViewTypes";
+import {useState} from "react";
 
 interface Props {
     tileData: MapTileData,
     edge?: TileEdge,
+    setMarkedTile: (coordinates: MapCoordinates) => void,
+    isMarked: boolean;
 }
 
-const Tile = ({ tileData, edge = TileEdge.NONE }: Props) => {
+const Tile = ({ tileData, edge = TileEdge.NONE , setMarkedTile, isMarked}: Props) => {
 
     const interpretTile = (value: number) => {
 
@@ -45,9 +48,22 @@ const Tile = ({ tileData, edge = TileEdge.NONE }: Props) => {
         }
     };
 
+    const handleTileClick = () => {
+        setMarkedTile(tileData.coordinates)
+    };
+
+    const userStyle = () => {
+        if (isMarked) {
+            return {backgroundColor: 'rgba(0, 0, 0)'}
+        }
+        return {backgroundColor: tileData.tileOwner.hexCode}
+    }
+
+
+
     return (
-        <div className={`border ${edge}`} style={{ backgroundColor: tileData.tileOwner.hexCode }}>
-            <div className={`tile ${interpretTile(tileData.tileTerrainValue)} ${edge}`} >{tileData.coordinates.x}:{tileData.coordinates.y} {tileData.tileOwner.id}</div>
+        <div onClick={handleTileClick} className={`border ${edge}`} style={userStyle()}>
+            <div className={`tile ${interpretTile(tileData.tileTerrainValue)} ${edge}`} ></div>
         </div>
     )
 }

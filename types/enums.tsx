@@ -23,7 +23,7 @@ export interface MapSizes {
 }
 export const SMALL: MapSizes = {width: 50, height: 25}
 export const MEDIUM: MapSizes = {width: 10, height: 51}
-export const LARGE: MapSizes = {width: 150, height: 75}
+export const LARGE: MapSizes = {width: 200, height: 101}
 export const XLARGE: MapSizes = {width: 400, height: 201}
 
 export function getMapSizeFromInput(input: string): MapSizes {

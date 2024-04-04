@@ -1,7 +1,7 @@
 "use client" // toDo figure out if this should be modified
 
 import "@/styles/map-style.css";
-import {createElement, ReactElement, useEffect, useState} from "react";
+import {createElement, Dispatch, ReactElement, SetStateAction, useEffect, useState} from "react";
 import {GameMapData, MapCoordinates, MapTileData} from "../../types/playerViewTypes";
 import Tile from "./tile";
 import {getPlayerNumberFromInput, MapMove, PlayerNumber, TileEdge} from "../../types/enums";
@@ -9,10 +9,12 @@ import {getPlayerNumberFromInput, MapMove, PlayerNumber, TileEdge} from "../../t
 interface Props {
     startCoordinates: MapCoordinates
     mapData: GameMapData
+    markedTile: MapCoordinates | null
+    setMarkedTile: (coordinates: MapCoordinates) => void;
 }
 
-const GameMap = ({startCoordinates, mapData}: Props) => {
-    
+const GameMap = ({startCoordinates, mapData, markedTile, setMarkedTile}: Props) => {
+
     const [centerViewCoordinates, setCenterViewCoordinates] = useState({x: startCoordinates.x + (startCoordinates.x % 2), y:startCoordinates.y})
 
     const numRows = 13;
@@ -92,15 +94,30 @@ const GameMap = ({startCoordinates, mapData}: Props) => {
         }
     }
 
-    const renderMap = (): ReactElement[] => {
+    const isMarkedTile = (row: number, col: number): boolean => {
+        const y = (centerViewCoordinates.y - ((numCols - 1) / 2) + col) % mapData.mapSize.width;
+        const x = centerViewCoordinates.x - ((numRows - 1) / 2) + row;
 
+        if (markedTile?.y == y && markedTile.x == x) {
+            return true
+        }
+        return false
+    }
+
+    const renderMap = (): ReactElement[] => {
         const rows: ReactElement[] = [];
 
         for (let row = 0; row < numRows; row++) {
             const tiles: ReactElement[] = [];
             const numTiles = row % 2 === 0 ? numCols : numCols - 1;
             for (let col = 0; col < numTiles; col++) {
-                const tileElement = createElement(Tile, { key: col, edge: applyEdge(row, col), tileData: getTile(row, col) });
+                const tileElement = createElement(Tile, {
+                    key: col,
+                    edge: applyEdge(row, col),
+                    tileData: getTile(row, col),
+                    setMarkedTile: setMarkedTile,
+                    isMarked: isMarkedTile(row, col),
+                });
                 tiles.push(tileElement);
             }
             const oddRowOffset = row % 2 !== 0 ? { marginLeft: "30px" } : {}; // Add marginLeft for odd rows
