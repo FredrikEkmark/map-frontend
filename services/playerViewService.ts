@@ -3,14 +3,14 @@ import {MapTileData, PlayerViewData} from "../types/playerViewTypes";
 import {getMapSizeFromInput, getPlayerNumberFromInput,} from "../types/enums";
 
 // Define the base URL for your backend API
-const BASE_URL = 'http://localhost:8080/api';
+const BASE_URL = 'http://localhost:8080/api/playerView';
 
 // Define functions for interacting with the backend
 const playerViewService = {
     // Function to fetch player data
     getPlayerViewData: async (gameId: string): Promise<PlayerViewData> => {
         try {
-            const response = await axios.get<PlayerViewData>(`${BASE_URL}/test/${gameId}`);
+            const response = await axios.get<PlayerViewData>(`${BASE_URL}/${gameId}`);
             return parsePlayerViewData(response.data);
         } catch (error) {
             // Handle errors appropriately
