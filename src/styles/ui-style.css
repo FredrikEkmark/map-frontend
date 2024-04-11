@@ -1,0 +1,25 @@
+.userInterface {
+    background-color: #17699c;
+    width: 260px;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+}
+
+.bannerSkyscraper {
+    background-color: #9c2e17;
+    width: 120px;
+    height: 600px;
+}
+
+.resourceBar {
+    background-color: #179c46;
+    height: 40px;
+    width: 1160px;
+}
+
+.tileInfoDisplay {
+    background-color: pink;
+    width: 260px;
+    height: 300px;
+}

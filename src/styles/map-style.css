@@ -5,10 +5,8 @@
     --d: 60px; /* size  */
     --n: 0px; /* margin */
     background-color: #ffffff;
-    padding-top: 15px;
-    padding-bottom: 15px;
     width: 900px;
-    height: 720px;
+    height: 690px;
     font-size: 0; /*disable white space between inline block element */
     display: flex;
     flex-wrap: wrap;
@@ -140,4 +138,35 @@
 
 .unexplored {
     background-color: #889294;
+}
+
+.mapBottomRow {
+    align-items: center;
+    justify-content: space-between;
+    width: 900px;
+    height: 60px;
+    background-color: #2a452c;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.arrowKeyNavigator {
+    height: 60px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.arrowButtonContainer {
+    display: flex;
+    /* Add any additional styles for the container */
+}
+
+.arrowButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-color: black;
+    border-width: 2px;
+    width: 28px;
+    height: 28px;
 }

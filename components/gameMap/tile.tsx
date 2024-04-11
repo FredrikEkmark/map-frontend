@@ -63,7 +63,7 @@ const Tile = ({ tileData, edge = TileEdge.NONE , setMarkedTile, isMarked}: Props
 
     return (
         <div onClick={handleTileClick} className={`border ${edge}`} style={userStyle()}>
-            <div className={`tile ${interpretTile(tileData.tileTerrainValue)} ${edge}`} ></div>
+            <div className={`tile ${interpretTile(tileData.tileTerrainValue)} ${edge}`} >x:{tileData.coordinates.x} y{tileData.coordinates.y}:</div>
         </div>
     )
 }

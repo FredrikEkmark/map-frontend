@@ -1,10 +1,12 @@
 "use client" // toDo figure out if this should be modified
 
 import "@/styles/map-style.css";
-import {createElement, Dispatch, ReactElement, SetStateAction, useEffect, useState} from "react";
+import {createElement, ReactElement, useEffect, useState} from "react";
 import {GameMapData, MapCoordinates, MapTileData} from "../../types/playerViewTypes";
 import Tile from "./tile";
-import {getPlayerNumberFromInput, MapMove, PlayerNumber, TileEdge} from "../../types/enums";
+import {getPlayerNumberFromInput, MapMove, TileEdge} from "../../types/enums";
+import ArrowKeyNavigator from "./arrowKeyNavigator";
+import MapBottomRow from "./mapBottomRow";
 
 interface Props {
     startCoordinates: MapCoordinates
@@ -163,12 +165,7 @@ const GameMap = ({startCoordinates, mapData, markedTile, setMarkedTile}: Props) 
             <div className="container">
                 {renderMap()}
             </div>
-            <div>
-            <button onClick={() => moveCenterViewPoint(MapMove.LEFT)}>LEFT</button>
-            <button onClick={() => moveCenterViewPoint(MapMove.UP)}>UP</button>
-            <button onClick={() => moveCenterViewPoint(MapMove.DOWN)}>DOWN</button>
-            <button onClick={() => moveCenterViewPoint(MapMove.RIGHT)}>RIGHT</button>
-            </div>
+            <MapBottomRow markedTile={markedTile} moveCenterViewPoint={moveCenterViewPoint}></MapBottomRow>
         </div>
         </main>
     );

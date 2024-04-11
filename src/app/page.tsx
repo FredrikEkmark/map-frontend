@@ -1,4 +1,3 @@
-import GameMap from "../../components/gameMap/gameMap";
 
 const Home = () => {
     return (
