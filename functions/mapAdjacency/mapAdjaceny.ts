@@ -196,7 +196,7 @@ export function ownerIsAdjacent(owner: PlayerNumber, centerCoordinates: MapCoord
 
 export function visibleIsAdjacent(centerCoordinates: MapCoordinates, map: MapTileData[]): boolean {
 
-    const tileDistance = 4
+    const tileDistance = 0
 
     const xOffset = getXOffset(tileDistance)
     const yOffset = getYOffset(centerCoordinates.x, tileDistance)
