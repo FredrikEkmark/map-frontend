@@ -17,6 +17,8 @@ const Map = () => {
     const [eventsData, setEventsData] = useState<GameEvent[]>([])
     const [markedTile, setMarkedTile] = useState<MapCoordinates | null>(null)
 
+    console.log(playerViewData)
+
     useEffect(() => {
         const fetchData = async () => {
             try {

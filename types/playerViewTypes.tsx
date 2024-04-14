@@ -7,6 +7,8 @@ export type PlayerViewData = {
     playerId: UUID,
     playerName: string,
     playerNr: PlayerNumber,
+    turn: number,
+    turnChange: string,
     startCoordinates: MapCoordinates,
     mapData: GameMapData,
     mana: Mana,
