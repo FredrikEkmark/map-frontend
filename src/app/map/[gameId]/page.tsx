@@ -17,6 +17,7 @@ const Map = () => {
     const [eventsData, setEventsData] = useState<GameEvent[]>([])
     const [markedTile, setMarkedTile] = useState<MapCoordinates | null>(null)
 
+    console.log(eventsData)
 
     useEffect(() => {
         const fetchData = async () => {
@@ -30,7 +31,7 @@ const Map = () => {
             }
         };
 
-        fetchData(); // Call the fetchData function when the component mounts
+        fetchData();
     }, [params.gameId]);
 
     if (!playerViewData) {

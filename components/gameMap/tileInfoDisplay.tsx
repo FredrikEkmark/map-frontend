@@ -81,19 +81,19 @@ const [buildable, setBuildable] = useState<boolean>(isBuildable())
         }
 
         if (explorable) {
-            return <button onClick={() => addEvent(GameEventType.EXPLORE_EVENT, {})}>
+            return <button onClick={() => addEvent(GameEventType.EXPLORE_EVENT, "{}")}>
                 Explore
             </button>
         }
 
         if (claimable) {
-            return <button onClick={() => addEvent(GameEventType.CLAIM_TILE_EVENT, {})}>
+            return <button onClick={() => addEvent(GameEventType.CLAIM_TILE_EVENT, "{}")}>
                 Claim
             </button>
         }
 
         if (buildable) {
-            return <button onClick={() => addEvent(GameEventType.EXPLORE_EVENT, {})}>
+            return <button onClick={() => addEvent(GameEventType.EXPLORE_EVENT, "{}")}>
                 Build
             </button>
         }

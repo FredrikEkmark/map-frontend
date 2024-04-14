@@ -2,7 +2,7 @@ import "@/styles/ui-style.css";
 import TileInfoDisplay from "./tileInfoDisplay";
 import {MapCoordinates} from "../../types/mapTypes";
 import {PlayerViewData} from "../../types/playerViewTypes";
-import {GameEvent, GameEventType, NewEvent} from "../../types/eventTypes";
+import {GameEvent, GameEventType, NewEventDTO} from "../../types/eventTypes";
 import {findEventInMap} from "../../functions/utility/eventUtility";
 import {useEffect, useState} from "react";
 import eventService from "../../services/eventService";
@@ -22,36 +22,39 @@ const GameUI = ({markedTile, playerViewData, eventsData, setEventsData}: Props) 
 
     useEffect(() => {
         setMarkedTileEvent(findEventInMap(markedTile, eventsData))
-    }, [eventsData]);
+    }, [eventsData, markedTile]);
 
     const addEvent = async (evenType: GameEventType, eventData: any) => {
         if (!markedTile) {
             return
         }
-        const newEvent: NewEvent = {
-            eventId: "2f7133ff-ffb9-444e-be0e-6520ff74c544",
+        const newEvent: NewEventDTO = {
             gameId: playerViewData.gameId,
             playerNr: playerViewData.playerNr.name,
-            turn: 0, // this has to change
+            turn: 0,
             primaryTileCoordinates: markedTile,
             eventType: evenType,
-            eventData: eventData,
+            eventData: eventData.toString(),
         }
         try {
             const response = await eventService.postNewEvent(newEvent);
             setEventsData(response)
         } catch (error) {
-            console.error('Error fetching map data:', error);
+            console.error('Error posting event data:', error);
         }
     }
 
     const removeEvent = async () => {
+        if (!markedTileEvent) {
+            return
+        }
         try {
+            const response = await eventService.deleteEvent(markedTileEvent);
+            setEventsData(response)
 
         } catch (error) {
-            console.error('Error fetching map data:', error);
+            console.error('Error deleting event data:', error);
         }
-
     }
 
     return (

@@ -3,14 +3,13 @@ import {PlayerNumber} from "./playerViewTypes";
 import {MapCoordinates} from "./mapTypes";
 import {BuildingTypes} from "./buildingTypes";
 
-export type NewEvent = {
-    eventId: UUID,
+export type NewEventDTO = {
     gameId: UUID,
     playerNr: string,
     turn: number,
     primaryTileCoordinates: MapCoordinates,
     eventType: GameEventType,
-    eventData: BuildEventData | EmptyEventData,
+    eventData: string,
 }
 
 export type GameEvent = {

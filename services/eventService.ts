@@ -1,5 +1,5 @@
 import axios, {AxiosError} from 'axios';
-import {GameEvent, NewEvent} from "../types/eventTypes";
+import {GameEvent, NewEventDTO} from "../types/eventTypes";
 import {getPlayerNumberFromInput, PlayerNumber} from "../types/playerViewTypes";
 
 const BASE_URL = 'http://localhost:8080/api/event';
@@ -15,6 +15,7 @@ const eventService = {
                     Authorization: `Bearer ${token}`,
                 },
             });
+            console.log(response.data)
             return parseEvents(response.data);
         } catch (error) {
             if ((error as AxiosError).response?.status === 401) {
@@ -25,7 +26,7 @@ const eventService = {
         }
     },
 
-    postNewEvent: async (event: NewEvent): Promise<GameEvent[]> => {
+    postNewEvent: async (event: NewEventDTO): Promise<GameEvent[]> => {
         const token = localStorage.getItem("token");
         try {
             const response = await axios.post<any>(`${BASE_URL}`, event,{
@@ -43,11 +44,11 @@ const eventService = {
         }
     },
 
-    deleteEvent: async (event: NewEvent): Promise<GameEvent[]> => {
+    deleteEvent: async (event: GameEvent): Promise<GameEvent[]> => {
         const token = localStorage.getItem("token");
         try {
             const response = await axios.delete<any>(
-                `${BASE_URL}/${event.gameId}/${event.playerNr}/${event.eventId}`,{
+                `${BASE_URL}/${event.gameId}/${event.eventId}`,{
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
