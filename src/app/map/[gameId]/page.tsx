@@ -3,24 +3,30 @@
 import { useParams } from 'next/navigation'
 import GameMap from "../../../../components/gameMap/gameMap";
 import {useEffect, useState} from "react";
-import {MapCoordinates, PlayerViewData} from "../../../../types/playerViewTypes";
 import playerViewService from "../../../../services/playerViewService";
 import GameUI from "../../../../components/gameMap/gameUI";
 import ResourceBar from "../../../../components/gameMap/resourceBar";
+import eventService from "../../../../services/eventService";
+import {PlayerViewData} from "../../../../types/playerViewTypes";
+import {MapCoordinates} from "../../../../types/mapTypes";
+import {GameEvent} from "../../../../types/eventTypes";
 
 const Map = () => {
     const params = useParams<{ gameId: string;}>()
     const [playerViewData, setPlayerViewData] = useState<PlayerViewData>()
+    const [eventsData, setEventsData] = useState<GameEvent[]>([])
     const [markedTile, setMarkedTile] = useState<MapCoordinates | null>(null)
 
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const data = await playerViewService.getPlayerViewData(params.gameId);
-                setPlayerViewData(data);
+                const playerViewResponse = await playerViewService.getPlayerViewData(params.gameId);
+                setPlayerViewData(playerViewResponse);
+                const gameEventsResponse = await eventService.getAllPlayerEvent(params.gameId, playerViewResponse.playerNr)
+                setEventsData(gameEventsResponse)
             } catch (error) {
-                console.error('Error fetching map data:', error);
+                console.error('Error fetching data:', error);
             }
         };
 
@@ -44,7 +50,9 @@ const Map = () => {
                                  mapData={playerViewData.mapData} >
                         </GameMap>
                         <GameUI markedTile={markedTile}
-                                playerViewData={playerViewData}>
+                                playerViewData={playerViewData}
+                                eventsData={eventsData}
+                                setEventsData={setEventsData}>
                         </GameUI>
                     </div>
                 </div>

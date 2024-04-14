@@ -2,11 +2,10 @@
 
 import "@/styles/map-style.css";
 import {createElement, ReactElement, useEffect, useState} from "react";
-import {GameMapData, MapCoordinates, MapTileData} from "../../types/playerViewTypes";
 import Tile from "./tile";
-import {getPlayerNumberFromInput, MapMove, TileEdge} from "../../types/enums";
-import ArrowKeyNavigator from "./arrowKeyNavigator";
 import MapBottomRow from "./mapBottomRow";
+import {GameMapData, MapCoordinates, MapMove, MapTileData, TileEdge} from "../../types/mapTypes";
+import {getPlayerNumberFromInput} from "../../types/playerViewTypes";
 
 interface Props {
     startCoordinates: MapCoordinates

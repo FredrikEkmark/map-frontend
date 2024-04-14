@@ -1,8 +1,6 @@
-import {MapCoordinates, MapTileData} from "../../types/playerViewTypes";
-import {PlayerNumber} from "../../types/enums";
 import {findTileInMap} from "../utility/mapUtility";
-import {Simulate} from "react-dom/test-utils";
-import error = Simulate.error;
+import {PlayerNumber} from "../../types/playerViewTypes";
+import {MapCoordinates, MapTileData} from "../../types/mapTypes";
 
 function getXOffset(tileDistance: number) {
 

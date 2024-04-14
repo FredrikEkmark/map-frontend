@@ -1,7 +1,6 @@
 import "@/styles/map-style.css";
 import ArrowKeyNavigator from "./arrowKeyNavigator";
-import {GameMapData, MapCoordinates} from "../../types/playerViewTypes";
-import {MapMove} from "../../types/enums";
+import {MapCoordinates, MapMove} from "../../types/mapTypes";
 
 interface Props {
     markedTile: MapCoordinates | null

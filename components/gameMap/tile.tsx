@@ -1,7 +1,6 @@
 import "@/styles/map-style.css";
-import {TileEdge} from "../../types/enums";
-import {MapCoordinates, MapTileData} from "../../types/playerViewTypes";
-import {useState} from "react";
+
+import {MapCoordinates, MapTileData, TileEdge} from "../../types/mapTypes";
 
 interface Props {
     tileData: MapTileData,

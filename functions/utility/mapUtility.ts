@@ -1,4 +1,5 @@
-import {MapCoordinates, MapTileData} from "../../types/playerViewTypes";
+import {MapCoordinates, MapTileData} from "../../types/mapTypes";
+
 
 export function findTileInMap(mapCoordinates: MapCoordinates, map: MapTileData[]) {
     return map.find(tile => {

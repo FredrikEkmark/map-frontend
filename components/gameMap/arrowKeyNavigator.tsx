@@ -1,7 +1,7 @@
 import "@/styles/map-style.css";
-import {MapMove} from "../../types/enums";
 import Image from "next/image";
 import {useEffect, useState} from "react";
+import {MapMove} from "../../types/mapTypes";
 
 interface Props {
     moveCenterViewPoint: (direction: MapMove) => void;

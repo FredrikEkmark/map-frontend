@@ -1,16 +1,20 @@
 import "@/styles/ui-style.css";
-import {GameMapData, MapCoordinates, MapTileData} from "../../types/playerViewTypes";
-import {getPlayerNumberFromInput, NONE, PlayerNumber} from "../../types/enums";
 import {useEffect, useState} from "react";
 import {findTileInMap} from "../../functions/utility/mapUtility";
 import {ownerIsAdjacent, visibleIsAdjacent} from "../../functions/mapAdjacency/mapAdjaceny";
+import {GameMapData, MapCoordinates, MapTileData} from "../../types/mapTypes";
+import {getPlayerNumberFromInput, NONE, PlayerNumber} from "../../types/playerViewTypes";
+import {GameEvent, GameEventType} from "../../types/eventTypes";
 
 interface Props {
     mapData: GameMapData,
-    markedTile: MapCoordinates | null
-    playerNr: PlayerNumber
+    markedTile: MapCoordinates | null,
+    playerNr: PlayerNumber,
+    event: GameEvent | undefined,
+    addEvent: (evenType: GameEventType, eventData: any) => void,
+    removeEvent: () => void,
 }
-const TileInfoDisplay = ({mapData, markedTile, playerNr}: Props) => {
+const TileInfoDisplay = ({mapData, markedTile, playerNr, event, addEvent, removeEvent}: Props) => {
     const getMarkedTileData = () => {
         if (!markedTile) {
             return null
@@ -24,6 +28,7 @@ const TileInfoDisplay = ({mapData, markedTile, playerNr}: Props) => {
 
         return { coordinates: { x: markedTile.x, y: markedTile.y }, visible: false, tileTerrainValue: 0, tileOwner: getPlayerNumberFromInput("NONE") }
     }
+
 
     const isExplorable = () => {
 
@@ -48,9 +53,14 @@ const TileInfoDisplay = ({mapData, markedTile, playerNr}: Props) => {
         return ownerIsAdjacent(playerNr, markedTile, mapData.map)
     }
 
+    const isBuildable = () => {
+        return false // add logic to see if buildable
+    }
+
     const [tile, setTile] = useState<MapTileData | null>(getMarkedTileData())
     const [explorable, setExplorable] = useState<boolean>(isExplorable())
     const [claimable, setClaimable] = useState<boolean>(isClaimable())
+const [buildable, setBuildable] = useState<boolean>(isBuildable())
 
     useEffect(() => {
         setTile(getMarkedTileData)
@@ -59,7 +69,35 @@ const TileInfoDisplay = ({mapData, markedTile, playerNr}: Props) => {
     useEffect(() => {
         setExplorable(isExplorable)
         setClaimable(isClaimable)
+        setBuildable(isBuildable)
     }, [tile]);
+
+    const eventButton = () => { // Remove, just a placeholder display
+
+        if (event) {
+            return <button onClick={() => removeEvent()}>
+                Remove event
+            </button>
+        }
+
+        if (explorable) {
+            return <button onClick={() => addEvent(GameEventType.EXPLORE_EVENT, {})}>
+                Explore
+            </button>
+        }
+
+        if (claimable) {
+            return <button onClick={() => addEvent(GameEventType.CLAIM_TILE_EVENT, {})}>
+                Claim
+            </button>
+        }
+
+        if (buildable) {
+            return <button onClick={() => addEvent(GameEventType.EXPLORE_EVENT, {})}>
+                Build
+            </button>
+        }
+    }
 
     if (!tile) {
         return (
@@ -69,27 +107,11 @@ const TileInfoDisplay = ({mapData, markedTile, playerNr}: Props) => {
         )
     }
 
-    const explore = () => { // Remove, just a placeholder display
-        if (explorable) {
-            return "Yes"
-        }
-
-        return "No"
-    }
-
-    const claim = () => { // Remove, just a placeholder display
-        if (claimable) {
-            return "Yes"
-        }
-
-        return "No"
-    }
-
     if (!tile.visible) {
         return (
             <div className={"tileInfoDisplay"}>
                 Tile is not visible
-                Explorable: {explore()}
+                {eventButton()}
             </div>
         )
     }
@@ -97,7 +119,7 @@ const TileInfoDisplay = ({mapData, markedTile, playerNr}: Props) => {
     return (
         <div className={"tileInfoDisplay"}>
             There is tile
-            Claimable: {claim()}
+            {eventButton()}
         </div>
     )
 }
