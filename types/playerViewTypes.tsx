@@ -1,13 +1,28 @@
 import {UUID} from "crypto";
 import {GameMapData, MapCoordinates} from "./mapTypes";
+import {EventLog} from "./eventTypes";
 
 export type PlayerViewData = {
     gameId: UUID,
     playerId: UUID,
     playerName: string,
     playerNr: PlayerNumber,
-    startCoordinates: MapCoordinates
-    mapData: GameMapData
+    startCoordinates: MapCoordinates,
+    mapData: GameMapData,
+    mana: Mana,
+    eventLog: EventLog,
+}
+
+export type Mana = {
+    population: number,
+    populationMax: number,
+    manpower: number,
+    food: number,
+    stone: number,
+    wood: number,
+    leather: number,
+    furniture: number,
+    simpleClothes: number,
 }
 
 export interface PlayerNumber {
@@ -62,4 +77,5 @@ export function getPlayerNumberFromInput(input: string) {
             throw new Error(`Unknown Player: ${input}`);
     }
 }
+
 

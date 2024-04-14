@@ -22,6 +22,14 @@ export type GameEvent = {
     eventData: BuildEventData | EmptyEventData,
 }
 
+export type EventLog = {
+    gameId: number,
+    log: string,
+    logIndex: number,
+    playerNr: PlayerNumber,
+    turn: number,
+}
+
 export type EmptyEventData = {
 }
 

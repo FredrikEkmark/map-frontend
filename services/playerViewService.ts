@@ -42,6 +42,8 @@ function parsePlayerViewData(data: any): PlayerViewData {
         startCoordinates: data.startCoordinates,
         playerNr: getPlayerNumberFromInput(data.playerNr), // Parse enum value
         mapData: {mapSize: getMapSizeFromInput(data.mapSize), map: parseMapData(data.map)},
+        mana: data.mana,
+        eventLog: data.eventLog,
     };
 }
 
