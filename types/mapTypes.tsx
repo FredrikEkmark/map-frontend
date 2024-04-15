@@ -1,4 +1,5 @@
 import {PlayerNumber} from "./playerViewTypes";
+import {BuildingTypes} from "./buildingTypes";
 
 export type GameMapData = {
     map: MapTileData[]
@@ -10,6 +11,7 @@ export type MapTileData = {
     tileOwner: PlayerNumber,
     tileTerrainValue: number,
     visible: boolean,
+    building: BuildingTypes,
 }
 
 export type MapCoordinates = {

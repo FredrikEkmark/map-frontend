@@ -5,13 +5,14 @@ import {ownerIsAdjacent, visibleIsAdjacent} from "../../functions/mapAdjacency/m
 import {GameMapData, MapCoordinates, MapTileData} from "../../types/mapTypes";
 import {getPlayerNumberFromInput, NONE, PlayerNumber} from "../../types/playerViewTypes";
 import {GameEvent, GameEventType} from "../../types/eventTypes";
+import {BuildingTypes} from "../../types/buildingTypes";
 
 interface Props {
     mapData: GameMapData,
     markedTile: MapCoordinates | null,
     playerNr: PlayerNumber,
     event: GameEvent | undefined,
-    addEvent: (evenType: GameEventType, eventData: any) => void,
+    addEvent: (evenType: GameEventType, eventData: any, cost: any) => void,
     removeEvent: () => void,
 }
 const TileInfoDisplay = ({mapData, markedTile, playerNr, event, addEvent, removeEvent}: Props) => {
@@ -54,7 +55,11 @@ const TileInfoDisplay = ({mapData, markedTile, playerNr, event, addEvent, remove
     }
 
     const isBuildable = () => {
-        return false // add logic to see if buildable
+        if (!markedTile) {return false}
+        if (!tile) {return false}
+        if (tile.tileOwner !== playerNr ) {return false}
+
+        return true // add logic to see if buildable
     }
 
     const [tile, setTile] = useState<MapTileData | null>(getMarkedTileData())
@@ -81,19 +86,25 @@ const [buildable, setBuildable] = useState<boolean>(isBuildable())
         }
 
         if (explorable) {
-            return <button onClick={() => addEvent(GameEventType.EXPLORE_EVENT, "{}")}>
+            return <button onClick={() => addEvent(GameEventType.EXPLORE_EVENT,
+                {},
+                {manpower: 50})}>
                 Explore
             </button>
         }
 
         if (claimable) {
-            return <button onClick={() => addEvent(GameEventType.CLAIM_TILE_EVENT, "{}")}>
+            return <button onClick={() => addEvent(GameEventType.CLAIM_TILE_EVENT,
+                {},
+                {manpower: 100})}>
                 Claim
             </button>
         }
 
         if (buildable) {
-            return <button onClick={() => addEvent(GameEventType.EXPLORE_EVENT, "{}")}>
+            return <button onClick={() => addEvent(GameEventType.BUILD_EVENT,
+                {building: BuildingTypes.FARM},
+                {manpower: 200})}>
                 Build
             </button>
         }

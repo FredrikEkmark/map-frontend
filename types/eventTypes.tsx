@@ -2,6 +2,7 @@ import {UUID} from "crypto";
 import {PlayerNumber} from "./playerViewTypes";
 import {MapCoordinates} from "./mapTypes";
 import {BuildingTypes} from "./buildingTypes";
+import {ManaCost} from "./manaTypes";
 
 export type NewEventDTO = {
     gameId: UUID,
@@ -10,6 +11,7 @@ export type NewEventDTO = {
     primaryTileCoordinates: MapCoordinates,
     eventType: GameEventType,
     eventData: string,
+    cost: string
 }
 
 export type GameEvent = {
@@ -20,6 +22,7 @@ export type GameEvent = {
     primaryTileCoordinates: MapCoordinates,
     eventType: GameEventType,
     eventData: BuildEventData | EmptyEventData,
+    cost: ManaCost,
 }
 
 export type EventLog = {
@@ -35,6 +38,7 @@ export type EmptyEventData = {
 
 export type BuildEventData = {
     building: BuildingTypes
+
 }
 
 export enum GameEventType {

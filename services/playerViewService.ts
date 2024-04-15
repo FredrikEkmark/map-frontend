@@ -55,6 +55,7 @@ function parseMapData(mapData: any[]): MapTileData[] {
         tileOwner: getPlayerNumberFromInput(tile.tileOwner), // Convert string to enum value
         tileTerrainValue: tile.tileTerrainValue,
         visible: tile.visible,
+        building: tile.building,
     }));
 }
 export default playerViewService;

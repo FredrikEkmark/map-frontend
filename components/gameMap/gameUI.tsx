@@ -2,11 +2,11 @@ import "@/styles/ui-style.css";
 import TileInfoDisplay from "./tileInfoDisplay";
 import {MapCoordinates} from "../../types/mapTypes";
 import {PlayerViewData} from "../../types/playerViewTypes";
-import {GameEvent, GameEventType, NewEventDTO} from "../../types/eventTypes";
+import {BuildEventData, EmptyEventData, GameEvent, GameEventType, NewEventDTO} from "../../types/eventTypes";
 import {findEventInMap} from "../../functions/utility/eventUtility";
 import {useEffect, useState} from "react";
 import eventService from "../../services/eventService";
-import {UUID} from "crypto";
+import {Mana, ManaCost} from "../../types/manaTypes";
 
 interface Props {
     markedTile: MapCoordinates | null,
@@ -24,17 +24,18 @@ const GameUI = ({markedTile, playerViewData, eventsData, setEventsData}: Props) 
         setMarkedTileEvent(findEventInMap(markedTile, eventsData))
     }, [eventsData, markedTile]);
 
-    const addEvent = async (evenType: GameEventType, eventData: any) => {
+    const addEvent = async (evenType: GameEventType, eventData: EmptyEventData | BuildEventData, cost: ManaCost) => {
         if (!markedTile) {
             return
         }
         const newEvent: NewEventDTO = {
             gameId: playerViewData.gameId,
             playerNr: playerViewData.playerNr.name,
-            turn: 0,
+            turn: playerViewData.turn,
             primaryTileCoordinates: markedTile,
             eventType: evenType,
-            eventData: eventData.toString(),
+            eventData: JSON.stringify(eventData),
+            cost: JSON.stringify(cost),
         }
         try {
             const response = await eventService.postNewEvent(newEvent);

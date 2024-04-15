@@ -1,4 +1,5 @@
 export enum BuildingTypes {
+    NONE = "NONE",
     FARM = "FARM",
     GRANARY = "GRANARY",
     QUERY = "QUERY",

@@ -1,6 +1,7 @@
 import {UUID} from "crypto";
 import {GameMapData, MapCoordinates} from "./mapTypes";
 import {EventLog} from "./eventTypes";
+import {Mana} from "./manaTypes";
 
 export type PlayerViewData = {
     gameId: UUID,
@@ -13,18 +14,6 @@ export type PlayerViewData = {
     mapData: GameMapData,
     mana: Mana,
     eventLog: EventLog,
-}
-
-export type Mana = {
-    population: number,
-    populationMax: number,
-    manpower: number,
-    food: number,
-    stone: number,
-    wood: number,
-    leather: number,
-    furniture: number,
-    simpleClothes: number,
 }
 
 export interface PlayerNumber {
