@@ -10,6 +10,7 @@ const About = () => {
             <a href="https://www.flaticon.com/free-icons/leather" title="leather icons">Leather icons created by Freepik - Flaticon</a>
             <a href="https://www.flaticon.com/free-icons/coal" title="coal icons">Coal icons created by Freepik - Flaticon</a>
             <a href="https://www.flaticon.com/free-icons/population" title="population icons">Population icons created by alfanz - Flaticon</a>
+            <a href="https://www.flaticon.com/free-icons/fog" title="fog icons">Fog icons created by Freepik - Flaticon</a>
         </div>
     )
 }

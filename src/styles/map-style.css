@@ -15,13 +15,23 @@
 
 .container .tile {
     width: var(--s);
-    padding: 11px; /* not sure this should be here */
     margin: var(--m);
     height: calc(var(--s) * 1.1547);
     font-size: initial;
     clip-path: polygon(0% 25%, 0% 75%, 50% 100%, 100% 75%, 100% 25%, 50% 0%);
     margin-bottom: calc(var(--m) - var(--s) * 0.2885);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
+.container .tile .img {
+    width: 100%; /* Set the width of the image to fill the container */
+    height: 100%; /* Set the height of the image to fill the container */
+    object-fit: cover;
+}
+
+
 
 .container .border {
     width: var(--d);
@@ -137,7 +147,7 @@
 }
 
 .unexplored {
-    background-color: #889294;
+    background-color: #9b9b9b;
 }
 
 .mapBottomRow {

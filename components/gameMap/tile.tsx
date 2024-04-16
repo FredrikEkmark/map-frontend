@@ -1,6 +1,7 @@
 import "@/styles/map-style.css";
 
 import {MapCoordinates, MapTileData, TileEdge} from "../../types/mapTypes";
+import Image from "next/image";
 
 interface Props {
     tileData: MapTileData,
@@ -47,6 +48,12 @@ const Tile = ({ tileData, edge = TileEdge.NONE , setMarkedTile, isMarked}: Props
         }
     };
 
+    const tileContent = () => {
+        if (!tileData.visible) {
+            return <Image src={`/media/images/tile/fog.png`} className={"img"} alt={"fog"} height={70} width={60}></Image>
+        }
+    }
+
     const handleTileClick = () => {
         setMarkedTile(tileData.coordinates)
     };
@@ -62,7 +69,7 @@ const Tile = ({ tileData, edge = TileEdge.NONE , setMarkedTile, isMarked}: Props
 
     return (
         <div onClick={handleTileClick} className={`border ${edge}`} style={userStyle()}>
-            <div className={`tile ${interpretTile(tileData.tileTerrainValue)} ${edge}`} >x:{tileData.coordinates.x} y{tileData.coordinates.y}:</div>
+            <div className={`tile ${interpretTile(tileData.tileTerrainValue)} ${edge}`}>{tileContent()}</div>
         </div>
     )
 }
