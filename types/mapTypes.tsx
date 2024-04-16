@@ -11,7 +11,12 @@ export type MapTileData = {
     tileOwner: PlayerNumber,
     tileTerrainValue: number,
     visible: boolean,
-    building: BuildingTypes,
+    building: TileBuildingData,
+}
+
+export type TileBuildingData = {
+    type: BuildingTypes,
+    progress: number,
 }
 
 export type MapCoordinates = {

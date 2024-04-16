@@ -18,6 +18,8 @@ const Map = () => {
     const [eventsData, setEventsData] = useState<GameEvent[]>([])
     const [markedTile, setMarkedTile] = useState<MapCoordinates | null>(null)
 
+    console.log(playerViewData)
+
     const adjustedMana = (mana: Mana, events: GameEvent[]) : Mana => {
         let adjustedMana: Mana = {
             population: mana.population,
