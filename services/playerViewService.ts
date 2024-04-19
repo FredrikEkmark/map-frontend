@@ -1,7 +1,8 @@
 import axios, {AxiosError} from 'axios';
 import {getPlayerNumberFromInput, PlayerViewData} from "../types/playerViewTypes";
-import {getMapSizeFromInput, MapTileData} from "../types/mapTypes";
+import {getMapSizeFromInput, MapTileData, TileBuildingData} from "../types/mapTypes";
 import {Console} from "inspector";
+import {getBuildingInfo} from "../types/buildingTypes";
 
 
 // Define the base URL for your backend API
@@ -56,7 +57,15 @@ function parseMapData(mapData: any[]): MapTileData[] {
         tileOwner: getPlayerNumberFromInput(tile.tileOwner), // Convert string to enum value
         tileTerrainValue: tile.tileTerrainValue,
         visible: tile.visible,
-        building: JSON.parse(tile.building),
+        building: parseBuildingData(tile.building),
     }));
+}
+
+function parseBuildingData(buildingData: string): TileBuildingData {
+    const building = JSON.parse(buildingData)
+    return {
+        type: getBuildingInfo(building.type),
+        progress: building.progress
+    }
 }
 export default playerViewService;

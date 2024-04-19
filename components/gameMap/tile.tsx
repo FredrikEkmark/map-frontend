@@ -2,6 +2,7 @@ import "@/styles/map-style.css";
 
 import {MapCoordinates, MapTileData, TileEdge} from "../../types/mapTypes";
 import Image from "next/image";
+import {NONE} from "../../types/buildingTypes";
 
 interface Props {
     tileData: MapTileData,
@@ -50,7 +51,14 @@ const Tile = ({ tileData, edge = TileEdge.NONE , setMarkedTile, isMarked}: Props
 
     const tileContent = () => {
         if (!tileData.visible) {
-            return <Image src={`/media/images/tile/fog.png`} className={"img"} alt={"fog"} height={70} width={60}></Image>
+            return (<Image src={`/media/images/tile/fog.png`} className={"img"} alt={"fog"} height={70} width={60}></Image>)
+        }
+
+        // add if statement for unit prioritized over building
+
+        if (tileData.building.type !== NONE)  {
+            return (
+            <Image src={tileData.building.type.img} className={"img"} alt={tileData.building.type.name} height={30} width={30}></Image>)
         }
     }
 
@@ -64,8 +72,6 @@ const Tile = ({ tileData, edge = TileEdge.NONE , setMarkedTile, isMarked}: Props
         }
         return {backgroundColor: tileData.tileOwner.hexCode}
     }
-
-
 
     return (
         <div onClick={handleTileClick} className={`border ${edge}`} style={userStyle()}>

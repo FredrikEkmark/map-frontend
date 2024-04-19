@@ -1,11 +1,11 @@
 import "@/styles/ui-style.css";
 import {useEffect, useState} from "react";
-import {findTileInMap} from "../../functions/utility/mapUtility";
 import {ownerIsAdjacent, visibleIsAdjacent} from "../../functions/mapAdjacency/mapAdjaceny";
 import {GameMapData, MapCoordinates, MapTileData} from "../../types/mapTypes";
 import {getPlayerNumberFromInput, NONE, PlayerNumber} from "../../types/playerViewTypes";
 import {GameEvent, GameEventType} from "../../types/eventTypes";
-import {BuildingTypes} from "../../types/buildingTypes";
+import {BuildingTypes, getBuildingInfo} from "../../types/buildingTypes";
+import {findTileInMap} from "../../functions/utility/mapUtility";
 
 interface Props {
     mapData: GameMapData,
@@ -27,7 +27,7 @@ const TileInfoDisplay = ({mapData, markedTile, playerNr, event, addEvent, remove
             return markedTileData
         }
 
-        return { coordinates: { x: markedTile.x, y: markedTile.y }, visible: false, tileTerrainValue: 0, tileOwner: getPlayerNumberFromInput("NONE") }
+        return { coordinates: { x: markedTile.x, y: markedTile.y }, visible: false, tileTerrainValue: 0, tileOwner: getPlayerNumberFromInput("NONE"), building: {type: getBuildingInfo("NONE"), progress: 0}}
     }
 
 
@@ -68,7 +68,7 @@ const TileInfoDisplay = ({mapData, markedTile, playerNr, event, addEvent, remove
 const [buildable, setBuildable] = useState<boolean>(isBuildable())
 
     useEffect(() => {
-        setTile(getMarkedTileData)
+        setTile(getMarkedTileData())
     }, [markedTile]);
 
     useEffect(() => {
@@ -121,16 +121,16 @@ const [buildable, setBuildable] = useState<boolean>(isBuildable())
     if (!tile.visible) {
         return (
             <div className={"tileInfoDisplay"}>
-                Tile is not visible
-                {eventButton()}
+                <div>Tile is not visible</div>
+                <div>{eventButton()}</div>
             </div>
         )
     }
 
     return (
         <div className={"tileInfoDisplay"}>
-            There is tile
-            {eventButton()}
+            <div>There is tile</div>
+            <div>{eventButton()}</div>
         </div>
     )
 }
