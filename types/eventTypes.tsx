@@ -1,8 +1,8 @@
 import {UUID} from "crypto";
 import {PlayerNumber} from "./playerViewTypes";
 import {MapCoordinates} from "./mapTypes";
-import {BuildingTypes} from "./buildingTypes";
 import {ManaCost} from "./manaTypes";
+import {BuildingTypes} from "./buildingTypes";
 
 export type NewEventDTO = {
     gameId: UUID,
@@ -38,7 +38,6 @@ export type EmptyEventData = {
 
 export type BuildEventData = {
     building: BuildingTypes
-
 }
 
 export enum GameEventType {

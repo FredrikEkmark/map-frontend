@@ -6,6 +6,7 @@ import Tile from "./tile";
 import MapBottomRow from "./mapBottomRow";
 import {GameMapData, MapCoordinates, MapMove, MapTileData, TileEdge} from "../../types/mapTypes";
 import {getPlayerNumberFromInput} from "../../types/playerViewTypes";
+import {getBuildingInfo} from "../../types/buildingTypes";
 
 interface Props {
     startCoordinates: MapCoordinates
@@ -62,7 +63,7 @@ const GameMap = ({startCoordinates, mapData, markedTile, setMarkedTile}: Props) 
             y += mapData.mapSize.width;
         }
 
-        const emptyTile = { coordinates: { x: x, y: y }, visible: false, tileTerrainValue: 0, tileOwner: getPlayerNumberFromInput("NONE") }
+        const emptyTile = { coordinates: { x: x, y: y }, visible: false, tileTerrainValue: 0, tileOwner: getPlayerNumberFromInput("NONE"), building: {type: getBuildingInfo("NONE"), progress: 0} }
 
         for (const tile of mapData.map) {
             if (tile.coordinates.x === x && tile.coordinates.y === y) {

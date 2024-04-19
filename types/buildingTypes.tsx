@@ -2,41 +2,62 @@ export enum BuildingTypes {
     NONE = "NONE",
     FARM = "FARM",
     GRANARY = "GRANARY",
-    QUERY = "QUERY",
+    QUARRY = "QUARRY",
     LUMBER_CAMP = "LUMBER_CAMP",
     CARPENTRY = "CARPENTRY",
     RANCH = "RANCH",
     LEATHER_WORKER = "LEATHER_WORKER",
+    FISHERY = "FISHERY",
+    VILLAGE = "VILLAGE",
+    TOWN = "TOWN",
+    CITY = "CITY",
 }
 
 export interface BuildingInfo {
+    name: string,
+    img: string,
 }
 
-export const FARM: BuildingInfo = {}
-export const GRANARY: BuildingInfo = {}
-export const QUERY: BuildingInfo = {}
-export const LUMBER_CAMP: BuildingInfo = {}
-export const CARPENTRY: BuildingInfo = {}
-export const RANCH: BuildingInfo = {}
-export const LEATHER_WORKER: BuildingInfo = {}
+export const NONE: BuildingInfo = {name: "none", img: ""}
+export const FARM: BuildingInfo = {name: "Farm", img: `/media/images/buildings/farm.png`}
+export const GRANARY: BuildingInfo = {name: "Granary", img: `/media/images/buildings/granary.png`}
+export const QUARRY: BuildingInfo = {name: "Quarry", img: `/media/images/buildings/quarry.png`}
+export const LUMBER_CAMP: BuildingInfo = {name: "Lumber camp", img: `/media/images/buildings/lumberCamp.png`}
+export const CARPENTRY: BuildingInfo = {name: "Carpentry", img: `/media/images/buildings/carpentry.png`}
+export const RANCH: BuildingInfo = {name: "Ranch", img: `/media/images/buildings/ranch.png`}
+export const LEATHER_WORKER: BuildingInfo = {name: "Leather worker", img: `/media/images/buildings/leatherWorker.png`}
+export const FISHERY: BuildingInfo = {name: "Fishery", img: `/media/images/buildings/fishery.png`}
+export const VILLAGE: BuildingInfo = {name: "Village", img: `/media/images/buildings/village.png`}
+export const TOWN: BuildingInfo = {name: "Town", img: `/media/images/buildings/town.png`}
+export const CITY: BuildingInfo = {name: "City", img: `/media/images/buildings/city.png`}
 
 
-export function getBuildingInfo(building: BuildingTypes) : BuildingInfo {
+export function getBuildingInfo(building: string) : BuildingInfo {
     switch (building) {
-        case BuildingTypes.FARM:
+        case "NONE":
+            return NONE
+        case "FARM":
             return FARM
-        case BuildingTypes.GRANARY:
+        case "GRANARY":
             return GRANARY
-        case BuildingTypes.QUERY:
-            return QUERY
-        case BuildingTypes.LUMBER_CAMP:
+        case "QUARRY":
+            return QUARRY
+        case "LUMBER_CAMP":
             return LUMBER_CAMP
-        case BuildingTypes.CARPENTRY:
+        case "CARPENTRY":
             return CARPENTRY
-        case BuildingTypes.RANCH:
+        case "RANCH":
             return RANCH
-        case BuildingTypes.LEATHER_WORKER:
+        case "LEATHER_WORKER":
             return LEATHER_WORKER
+        case "FISHERY":
+            return FISHERY
+        case "VILLAGE":
+            return VILLAGE
+        case "TOWN":
+            return TOWN
+        case "CITY":
+            return CITY
         default:
             throw new Error(`Unknown building: ${building}`);
     }
