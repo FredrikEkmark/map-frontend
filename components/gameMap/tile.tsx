@@ -51,14 +51,22 @@ const Tile = ({ tileData, edge = TileEdge.NONE , setMarkedTile, isMarked}: Props
 
     const tileContent = () => {
         if (!tileData.visible) {
-            return (<Image src={`/media/images/tile/fog.png`} className={"img"} alt={"fog"} height={70} width={60}></Image>)
+            return (<Image src={`/media/images/tile/fog.png`} className={"img"}
+                           alt={"fog"} height={70} width={60}></Image>)
         }
 
         // add if statement for unit prioritized over building
 
-        if (tileData.building.type !== NONE)  {
-            return (
-            <Image src={tileData.building.type.img} className={"img"} alt={tileData.building.type.name} height={30} width={30}></Image>)
+        const buildingComplete = tileData.building.type.completeAtProgress <= tileData.building.progress
+
+        if (tileData.building.type !== NONE && buildingComplete)  {
+            return (<Image src={tileData.building.type.img} className={"img"}
+                           alt={tileData.building.type.name} height={30} width={30}></Image>)
+        }
+
+        if (tileData.building.progress > 0) {
+            return (<Image src={`/media/images/buildings/construction.png`} className={"img"}
+                           alt={tileData.building.type.name} height={30} width={30}></Image>)
         }
     }
 

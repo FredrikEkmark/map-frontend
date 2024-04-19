@@ -16,20 +16,21 @@ export enum BuildingTypes {
 export interface BuildingInfo {
     name: string,
     img: string,
+    completeAtProgress: number,
 }
 
-export const NONE: BuildingInfo = {name: "none", img: ""}
-export const FARM: BuildingInfo = {name: "Farm", img: `/media/images/buildings/farm.png`}
-export const GRANARY: BuildingInfo = {name: "Granary", img: `/media/images/buildings/granary.png`}
-export const QUARRY: BuildingInfo = {name: "Quarry", img: `/media/images/buildings/quarry.png`}
-export const LUMBER_CAMP: BuildingInfo = {name: "Lumber camp", img: `/media/images/buildings/lumberCamp.png`}
-export const CARPENTRY: BuildingInfo = {name: "Carpentry", img: `/media/images/buildings/carpentry.png`}
-export const RANCH: BuildingInfo = {name: "Ranch", img: `/media/images/buildings/ranch.png`}
-export const LEATHER_WORKER: BuildingInfo = {name: "Leather worker", img: `/media/images/buildings/leatherWorker.png`}
-export const FISHERY: BuildingInfo = {name: "Fishery", img: `/media/images/buildings/fishery.png`}
-export const VILLAGE: BuildingInfo = {name: "Village", img: `/media/images/buildings/village.png`}
-export const TOWN: BuildingInfo = {name: "Town", img: `/media/images/buildings/town.png`}
-export const CITY: BuildingInfo = {name: "City", img: `/media/images/buildings/city.png`}
+export const NONE: BuildingInfo = {name: "none", img: "", completeAtProgress: 0}
+export const FARM: BuildingInfo = {name: "Farm", img: `/media/images/buildings/farm.png`, completeAtProgress: 400}
+export const GRANARY: BuildingInfo = {name: "Granary", img: `/media/images/buildings/granary.png`, completeAtProgress: 500}
+export const QUARRY: BuildingInfo = {name: "Quarry", img: `/media/images/buildings/quarry.png`, completeAtProgress: 500}
+export const LUMBER_CAMP: BuildingInfo = {name: "Lumber camp", img: `/media/images/buildings/lumberCamp.png`, completeAtProgress: 400}
+export const CARPENTRY: BuildingInfo = {name: "Carpentry", img: `/media/images/buildings/carpentry.png`, completeAtProgress: 500}
+export const RANCH: BuildingInfo = {name: "Ranch", img: `/media/images/buildings/ranch.png`, completeAtProgress: 500}
+export const LEATHER_WORKER: BuildingInfo = {name: "Leather worker", img: `/media/images/buildings/leatherWorker.png`, completeAtProgress: 400}
+export const FISHERY: BuildingInfo = {name: "Fishery", img: `/media/images/buildings/fishery.png`, completeAtProgress: 400}
+export const VILLAGE: BuildingInfo = {name: "Village", img: `/media/images/buildings/village.png`, completeAtProgress: 400}
+export const TOWN: BuildingInfo = {name: "Town", img: `/media/images/buildings/town.png`, completeAtProgress: 400}
+export const CITY: BuildingInfo = {name: "City", img: `/media/images/buildings/city.png`, completeAtProgress: 400}
 
 
 export function getBuildingInfo(building: string) : BuildingInfo {

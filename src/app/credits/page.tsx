@@ -21,7 +21,8 @@ const About = () => {
             <a href="https://www.flaticon.com/free-icons/ranch" title="ranch icons">Ranch icons created by Freepik - Flaticon</a>
             <a href="https://www.flaticon.com/free-icons/silo" title="silo icons">Silo icons created by Aranagraphics - Flaticon</a>
             <a href="https://www.flaticon.com/free-icons/hatchet" title="hatchet icons">Hatchet icons created by photo3idea_studio - Flaticon</a>
-                <a href="https://www.flaticon.com/free-icons/fishing" title="fishing icons">Fishing icons created by Eucalyp - Flaticon</a>
+            <a href="https://www.flaticon.com/free-icons/fishing" title="fishing icons">Fishing icons created by Eucalyp - Flaticon</a>
+            <a href="https://www.flaticon.com/free-icons/structure" title="structure icons">Structure icons created by Smashicons - Flaticon</a>
         </div>
     )
 }

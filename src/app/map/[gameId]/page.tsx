@@ -11,6 +11,7 @@ import {PlayerViewData} from "../../../../types/playerViewTypes";
 import {MapCoordinates} from "../../../../types/mapTypes";
 import {GameEvent} from "../../../../types/eventTypes";
 import {Mana} from "../../../../types/manaTypes";
+import turnChangeService from "../../../../services/turnChangeService";
 
 const Map = () => {
     const params = useParams<{ gameId: string;}>()
@@ -58,6 +59,18 @@ const Map = () => {
         fetchData();
     }, [params.gameId]);
 
+    const turnChange = async () => {
+        try {
+            const turnChange = await turnChangeService.turnChange();
+            if (turnChange) {
+                window.location.reload()
+            }
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+
+    }
+
     if (!playerViewData) {
         return <div>Loading...</div>
     }
@@ -83,6 +96,7 @@ const Map = () => {
                 </div>
                 <div className={"bannerSkyscraper"}></div>
             </div>
+            <button onClick={() => (turnChange())}>Next Turn</button>
         </div>
     )
 }
