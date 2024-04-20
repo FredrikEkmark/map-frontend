@@ -20,6 +20,9 @@ export function findAllEventsInMap(mapCoordinates: MapCoordinates | null, map: G
     if (!mapCoordinates) {
         return []
     }
+    if (!map) {
+        return []
+    }
     const array: GameEvent[] = []
     map.forEach(event => {
         if (event.primaryTileCoordinates.x === mapCoordinates.x && event.primaryTileCoordinates.y === mapCoordinates.y) {

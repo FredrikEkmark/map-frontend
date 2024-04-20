@@ -14,13 +14,14 @@ import Image from "next/image";
 interface Props {
     mapData: GameMapData,
     markedTile: MapCoordinates | null,
+    setCenterViewCoordinates: (coordinates: MapCoordinates) => void,
     playerNr: PlayerNumber,
     tileEvents: GameEvent[],
     addEvent: (evenType: GameEventType, eventData: any, cost: any) => void,
     removeEvent: (coordinates: MapCoordinates) => void,
     mana: Mana
 }
-const TileInfoDisplay = ({mapData, markedTile, playerNr, tileEvents, addEvent, removeEvent, mana}: Props) => {
+const TileInfoDisplay = ({mapData, markedTile, setCenterViewCoordinates, playerNr, tileEvents, addEvent, removeEvent, mana}: Props) => {
     const getMarkedTileData = () => {
         if (!markedTile) {
             return null
@@ -140,7 +141,11 @@ const TileInfoDisplay = ({mapData, markedTile, playerNr, tileEvents, addEvent, r
     if (!tile.visible) {
         return (
             <div className={"tileInfoDisplay"}>
-                <div className={"textRow"}><p>Coordinates:</p><p>{tile.coordinates.x}:{tile.coordinates.y}</p> </div>
+                <div onClick={() => {setCenterViewCoordinates(tile.coordinates)}}
+                     className={"textRow"}>
+                    <p>Coordinates:</p>
+                    <p>{tile.coordinates.x}:{tile.coordinates.y}</p>
+                </div>
                 <div>{eventButton()}</div>
             </div>
         )
@@ -165,7 +170,7 @@ const TileInfoDisplay = ({mapData, markedTile, playerNr, tileEvents, addEvent, r
     return (
         <div className={"tileInfoDisplay"}>
             <div>
-            <div className={"textRow"}><p>Coordinates:</p><p>{tile.coordinates.x}:{tile.coordinates.y}</p> </div>
+            <div onClick={() => {setCenterViewCoordinates(tile.coordinates)}} className={"textRow"}><p>Coordinates:</p><p>{tile.coordinates.x}:{tile.coordinates.y}</p> </div>
             <div className={"textRow"}><p>Terrain:</p><p>{tile.tileTerrainValue.name}</p></div>
             {(tile.building.type.name !== "none") && (
                 <div className={"textRow"}><p>Building:</p><p>{tile.building.type.name}</p></div>

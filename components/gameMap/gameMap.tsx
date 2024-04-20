@@ -14,6 +14,8 @@ import {
 } from "../../types/mapTypes";
 import {getPlayerNumberFromInput} from "../../types/playerViewTypes";
 import {getBuildingInfo} from "../../types/buildingTypes";
+import {GameEvent} from "../../types/eventTypes";
+import {findAllEventsInMap} from "../../functions/utility/eventUtility";
 
 interface Props {
     centerViewCoordinates: MapCoordinates
@@ -21,9 +23,12 @@ interface Props {
     mapData: GameMapData
     markedTile: MapCoordinates | null
     setMarkedTile: (coordinates: MapCoordinates) => void;
+    events: GameEvent[]
 }
 
-const GameMap = ({centerViewCoordinates, setCenterViewCoordinates, mapData, markedTile, setMarkedTile}: Props) => {
+const GameMap = ({centerViewCoordinates, setCenterViewCoordinates, mapData, markedTile, setMarkedTile, events}: Props) => {
+
+    const [mouseOverTile, setMouseOverTile] = useState<MapCoordinates | null>(null)
 
     const numRows = 13;
     const numCols = 15;
@@ -119,6 +124,15 @@ const GameMap = ({centerViewCoordinates, setCenterViewCoordinates, mapData, mark
         return false
     }
 
+    const getEventsOnTile = (row: number, col: number) => {
+        const y = (centerViewCoordinates.y - ((numCols - 1) / 2) + col) % mapData.mapSize.width;
+        const x = centerViewCoordinates.x - ((numRows - 1) / 2) + row;
+
+        const tileEvents = findAllEventsInMap({x: x, y: y}, events)
+
+        return tileEvents
+    }
+
     const renderMap = (): ReactElement[] => {
         const rows: ReactElement[] = [];
 
@@ -132,6 +146,8 @@ const GameMap = ({centerViewCoordinates, setCenterViewCoordinates, mapData, mark
                     tileData: getTile(row, col),
                     setMarkedTile: setMarkedTile,
                     isMarked: isMarkedTile(row, col),
+                    tileEvents: getEventsOnTile(row,col),
+                    setMouseOverTile: setMouseOverTile,
                 });
                 tiles.push(tileElement);
             }
@@ -178,7 +194,7 @@ const GameMap = ({centerViewCoordinates, setCenterViewCoordinates, mapData, mark
             <div className="container">
                 {renderMap()}
             </div>
-            <MapBottomRow markedTile={markedTile} moveCenterViewPoint={moveCenterViewPoint}></MapBottomRow>
+            <MapBottomRow mouseOverTile={mouseOverTile} moveCenterViewPoint={moveCenterViewPoint}></MapBottomRow>
         </div>
         </main>
     );

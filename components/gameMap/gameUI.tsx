@@ -74,6 +74,7 @@ const GameUI = ({markedTile, setMarkedTile, playerViewData, eventsData, setEvent
             <TileInfoDisplay
                 playerNr={playerViewData.playerNr}
                 markedTile={markedTile}
+                setCenterViewCoordinates={setCenterViewCoordinates}
                 mapData={playerViewData.mapData}
                 tileEvents={markedTileEvents}
                 mana={playerViewData.mana}

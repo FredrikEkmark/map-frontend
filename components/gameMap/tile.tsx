@@ -3,15 +3,18 @@ import "@/styles/map-style.css";
 import {MapCoordinates, MapTileData, TileEdge} from "../../types/mapTypes";
 import Image from "next/image";
 import {NONE} from "../../types/buildingTypes";
+import {GameEvent} from "../../types/eventTypes";
 
 interface Props {
     tileData: MapTileData,
     edge?: TileEdge,
     setMarkedTile: (coordinates: MapCoordinates) => void,
-    isMarked: boolean;
+    isMarked: boolean,
+    tileEvents: GameEvent[],
+    setMouseOverTile: (coordinates: MapCoordinates) => void,
 }
 
-const Tile = ({ tileData, edge = TileEdge.NONE , setMarkedTile, isMarked}: Props) => {
+const Tile = ({ tileData, edge = TileEdge.NONE , setMarkedTile, isMarked, setMouseOverTile, tileEvents}: Props) => {
 
     const tileContent = () => {
         if (!tileData.visible) {
@@ -34,19 +37,27 @@ const Tile = ({ tileData, edge = TileEdge.NONE , setMarkedTile, isMarked}: Props
         }
     }
 
-    const handleTileClick = () => {
-        setMarkedTile(tileData.coordinates)
-    };
-
-    const userStyle = () => {
+    const tileStyle = () => {
         if (isMarked) {
             return {backgroundColor: 'rgba(0, 0, 0)'}
+        }
+        if (tileEvents.length > 0) {
+            const backgroundColor = 'rgba(0, 0, 0)';
+            const linearGradientColor = `repeating-conic-gradient(
+                ${tileData.tileOwner.hexCode} 0deg,
+                ${tileData.tileOwner.hexCode} 30deg,
+                ${backgroundColor} 30deg,
+                ${backgroundColor} 90deg,
+                ${tileData.tileOwner.hexCode} 90deg,
+                ${tileData.tileOwner.hexCode} 120deg)`;
+
+            return {backgroundImage: linearGradientColor, backgroundSize: 'cover' };
         }
         return {backgroundColor: tileData.tileOwner.hexCode}
     }
 
     return (
-        <div onClick={handleTileClick} className={`border ${edge}`} style={userStyle()}>
+        <div onMouseOver={() => setMouseOverTile(tileData.coordinates)} onClick={() => setMarkedTile(tileData.coordinates)} className={`border ${edge}`} style={tileStyle()}>
             <div className={`tile ${tileData.tileTerrainValue.css} ${edge}`}>{tileContent()}</div>
         </div>
     )

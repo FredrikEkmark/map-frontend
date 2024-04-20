@@ -14,13 +14,25 @@ import {Mana} from "../../../../types/manaTypes";
 import turnChangeService from "../../../../services/turnChangeService";
 
 const Map = () => {
+
     const params = useParams<{ gameId: string;}>()
     const [playerViewData, setPlayerViewData] = useState<PlayerViewData>()
     const [eventsData, setEventsData] = useState<GameEvent[]>([])
     const [markedTile, setMarkedTile] = useState<MapCoordinates | null>(null)
     const [centerViewCoordinates, setCenterViewCoordinates] = useState<MapCoordinates>({x: 20, y: 20})
 
-    console.log(eventsData)
+    const mapViewFriendlyCenterViewCoordinates = (coordinates: MapCoordinates) => {
+        if (!playerViewData) {
+            return
+        }
+        const numRowsInMapView = 13;
+        if (coordinates.x < (numRowsInMapView - 1) / 2) {
+            coordinates.x = Math.max((numRowsInMapView - 1) / 2, centerViewCoordinates.x - 2)
+        } else if (coordinates.x > playerViewData.mapData.mapSize.height - ((numRowsInMapView - 1) / 2) - 1) {
+            coordinates.x = Math.min(playerViewData.mapData.mapSize.height - ((numRowsInMapView - 1) / 2) - 1)
+        }
+        setCenterViewCoordinates(coordinates)
+    }
     const adjustedMana = (mana: Mana, events: GameEvent[]) : Mana => {
         let adjustedMana: Mana = {
             population: mana.population,
@@ -57,7 +69,7 @@ const Map = () => {
                 console.error('Error fetching data:', error);
             }
         };
-        fetchData();
+        fetchData().then();
     }, [params.gameId]);
 
     const turnChange = async () => {
@@ -69,7 +81,6 @@ const Map = () => {
         } catch (error) {
             console.error('Error fetching data:', error);
         }
-
     }
 
     if (!playerViewData) {
@@ -81,20 +92,25 @@ const Map = () => {
             <div className={"flex flex-row w-full justify-around items-center"}>
                 <div className={"bannerSkyscraper"}></div>
                 <div className={"flex flex-col"}>
-                    <ResourceBar mana={adjustedMana(playerViewData.mana, eventsData)} events={eventsData} turn={playerViewData.turn}></ResourceBar>
+                    <ResourceBar
+                        mana={adjustedMana(playerViewData.mana,
+                        eventsData)} events={eventsData} turn={playerViewData.turn}></ResourceBar>
                     <div className={"flex flex-row"}>
-                        <GameMap setMarkedTile={setMarkedTile}
-                                 markedTile={markedTile}
-                                 centerViewCoordinates={centerViewCoordinates}
-                                 setCenterViewCoordinates={setCenterViewCoordinates}
-                                 mapData={playerViewData.mapData} >
+                        <GameMap
+                            setMarkedTile={setMarkedTile}
+                            markedTile={markedTile}
+                            centerViewCoordinates={centerViewCoordinates}
+                            setCenterViewCoordinates={setCenterViewCoordinates}
+                            mapData={playerViewData.mapData}
+                            events={eventsData}>
                         </GameMap>
-                        <GameUI markedTile={markedTile}
-                                setMarkedTile={setMarkedTile}
-                                playerViewData={playerViewData}
-                                eventsData={eventsData}
-                                setEventsData={setEventsData}
-                                setCenterViewCoordinates={setCenterViewCoordinates}>
+                        <GameUI
+                            markedTile={markedTile}
+                            setMarkedTile={setMarkedTile}
+                            playerViewData={playerViewData}
+                            eventsData={eventsData}
+                            setEventsData={setEventsData}
+                            setCenterViewCoordinates={mapViewFriendlyCenterViewCoordinates}>
                         </GameUI>
                     </div>
                 </div>
