@@ -18,6 +18,7 @@ const Map = () => {
     const [playerViewData, setPlayerViewData] = useState<PlayerViewData>()
     const [eventsData, setEventsData] = useState<GameEvent[]>([])
     const [markedTile, setMarkedTile] = useState<MapCoordinates | null>(null)
+    const [centerViewCoordinates, setCenterViewCoordinates] = useState<MapCoordinates>({x: 20, y: 20})
 
     console.log(eventsData)
     const adjustedMana = (mana: Mana, events: GameEvent[]) : Mana => {
@@ -51,11 +52,11 @@ const Map = () => {
                 setPlayerViewData(playerViewResponse);
                 const gameEventsResponse = await eventService.getAllPlayerEvent(params.gameId, playerViewResponse.playerNr)
                 setEventsData(gameEventsResponse)
+                setCenterViewCoordinates(playerViewResponse.startCoordinates)
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
         };
-
         fetchData();
     }, [params.gameId]);
 
@@ -76,7 +77,7 @@ const Map = () => {
     }
 
     return (
-        <div className={"flex flex-col w-full h-full bg-amber-700 justify-center items-center"}>
+        <div className={"flex flex-col w-full h-full justify-center items-center"}>
             <div className={"flex flex-row w-full justify-around items-center"}>
                 <div className={"bannerSkyscraper"}></div>
                 <div className={"flex flex-col"}>
@@ -84,13 +85,16 @@ const Map = () => {
                     <div className={"flex flex-row"}>
                         <GameMap setMarkedTile={setMarkedTile}
                                  markedTile={markedTile}
-                                 startCoordinates={playerViewData.startCoordinates}
+                                 centerViewCoordinates={centerViewCoordinates}
+                                 setCenterViewCoordinates={setCenterViewCoordinates}
                                  mapData={playerViewData.mapData} >
                         </GameMap>
                         <GameUI markedTile={markedTile}
+                                setMarkedTile={setMarkedTile}
                                 playerViewData={playerViewData}
                                 eventsData={eventsData}
-                                setEventsData={setEventsData}>
+                                setEventsData={setEventsData}
+                                setCenterViewCoordinates={setCenterViewCoordinates}>
                         </GameUI>
                     </div>
                 </div>

@@ -4,7 +4,7 @@
     --f: calc(1.732 * var(--s) + 4 * var(--m) - 1px);
     --d: 60px; /* size  */
     --n: 0px; /* margin */
-    background-color: #ffffff;
+    background-color: #044369;
     width: 900px;
     height: 690px;
     font-size: 0; /*disable white space between inline block element */
@@ -152,16 +152,14 @@
     align-items: center;
     justify-content: space-between;
     width: 900px;
-    height: 60px;
-    background-color: #2a452c;
+    height: 70px;
+    background-color: #044369;
     padding-left: 20px;
     padding-right: 20px;
 }
 
 .arrowKeyNavigator {
-    height: 60px;
-    padding-top: 2px;
-    padding-bottom: 2px;
+    height: 70px;
 }
 
 .arrowButtonContainer {

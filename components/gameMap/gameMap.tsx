@@ -4,20 +4,26 @@ import "@/styles/map-style.css";
 import {createElement, ReactElement, useEffect, useState} from "react";
 import Tile from "./tile";
 import MapBottomRow from "./mapBottomRow";
-import {GameMapData, MapCoordinates, MapMove, MapTileData, TileEdge} from "../../types/mapTypes";
+import {
+    GameMapData,
+    getTileTerrainValueFromInput,
+    MapCoordinates,
+    MapMove,
+    MapTileData,
+    TileEdge
+} from "../../types/mapTypes";
 import {getPlayerNumberFromInput} from "../../types/playerViewTypes";
 import {getBuildingInfo} from "../../types/buildingTypes";
 
 interface Props {
-    startCoordinates: MapCoordinates
+    centerViewCoordinates: MapCoordinates
+    setCenterViewCoordinates: (coordinates: MapCoordinates) => void
     mapData: GameMapData
     markedTile: MapCoordinates | null
     setMarkedTile: (coordinates: MapCoordinates) => void;
 }
 
-const GameMap = ({startCoordinates, mapData, markedTile, setMarkedTile}: Props) => {
-
-    const [centerViewCoordinates, setCenterViewCoordinates] = useState({x: startCoordinates.x + (startCoordinates.x % 2), y:startCoordinates.y})
+const GameMap = ({centerViewCoordinates, setCenterViewCoordinates, mapData, markedTile, setMarkedTile}: Props) => {
 
     const numRows = 13;
     const numCols = 15;
@@ -63,7 +69,14 @@ const GameMap = ({startCoordinates, mapData, markedTile, setMarkedTile}: Props) 
             y += mapData.mapSize.width;
         }
 
-        const emptyTile = { coordinates: { x: x, y: y }, visible: false, tileTerrainValue: 0, tileOwner: getPlayerNumberFromInput("NONE"), building: {type: getBuildingInfo("NONE"), progress: 0} }
+        const emptyTile = {
+            coordinates: { x: x, y: y },
+            visible: false,
+            tileTerrainValue: getTileTerrainValueFromInput(0),
+            tileOwner: getPlayerNumberFromInput("NONE"),
+            building: {type: getBuildingInfo("NONE"),
+            progress: 0}
+        }
 
         for (const tile of mapData.map) {
             if (tile.coordinates.x === x && tile.coordinates.y === y) {
@@ -80,7 +93,7 @@ const GameMap = ({startCoordinates, mapData, markedTile, setMarkedTile}: Props) 
     const moveCenterViewPoint = (direction: MapMove) => {
         switch (direction.valueOf()) {
             case MapMove.UP:
-                setCenterViewCoordinates(prevState => ({ y: prevState.y, x: Math.max((numRows - 1) / 2, prevState.x - 2) }))
+                setCenterViewCoordinates({ y: centerViewCoordinates.y, x: Math.max((numRows - 1) / 2, centerViewCoordinates.x - 2) })
                 break
             case MapMove.LEFT:
                 setCenterViewCoordinates({y: (centerViewCoordinates.y - 2 + mapData.mapSize.width) % mapData.mapSize.width, x: centerViewCoordinates.x})
@@ -89,7 +102,7 @@ const GameMap = ({startCoordinates, mapData, markedTile, setMarkedTile}: Props) 
                 setCenterViewCoordinates({y: (centerViewCoordinates.y + 2) % mapData.mapSize.width, x: centerViewCoordinates.x})
                 break
             case MapMove.DOWN:
-                setCenterViewCoordinates(prevState => ({ y: prevState.y, x: Math.min(mapData.mapSize.height - ((numRows - 1) / 2) - 1, prevState.x + 2) }))
+                setCenterViewCoordinates({ y: centerViewCoordinates.y, x: Math.min(mapData.mapSize.height - ((numRows - 1) / 2) - 1, centerViewCoordinates.x + 2) })
                 break
             default:
                 console.log("Error, wrong input")

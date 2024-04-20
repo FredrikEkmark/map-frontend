@@ -3,25 +3,28 @@ import TileInfoDisplay from "./tileInfoDisplay";
 import {MapCoordinates} from "../../types/mapTypes";
 import {PlayerViewData} from "../../types/playerViewTypes";
 import {BuildEventData, EmptyEventData, GameEvent, GameEventType, NewEventDTO} from "../../types/eventTypes";
-import {findEventInMap} from "../../functions/utility/eventUtility";
 import {useEffect, useState} from "react";
 import eventService from "../../services/eventService";
 import {Mana, ManaCost} from "../../types/manaTypes";
+import ActionInterface from "./actionInterface";
+import {findAllEventsInMap} from "../../functions/utility/eventUtility";
 
 interface Props {
     markedTile: MapCoordinates | null,
+    setMarkedTile: (coordinates: MapCoordinates | null) => void,
     playerViewData: PlayerViewData,
     eventsData: GameEvent[]
     setEventsData: (events: GameEvent[]) => void;
+    setCenterViewCoordinates: (coordinates: MapCoordinates) => void
 }
 
-const GameUI = ({markedTile, playerViewData, eventsData, setEventsData}: Props) => {
+const GameUI = ({markedTile, setMarkedTile, playerViewData, eventsData, setEventsData, setCenterViewCoordinates}: Props) => {
 
-    const [markedTileEvent, setMarkedTileEvent] = (
-        useState<GameEvent | undefined>(findEventInMap(markedTile, eventsData)))
+    const [markedTileEvents, setMarkedTileEvents] = (
+        useState<GameEvent[]>(findAllEventsInMap(markedTile, eventsData)))
 
     useEffect(() => {
-        setMarkedTileEvent(findEventInMap(markedTile, eventsData))
+        setMarkedTileEvents(findAllEventsInMap(markedTile, eventsData))
     }, [eventsData, markedTile]);
 
     const addEvent = async (evenType: GameEventType, eventData: EmptyEventData | BuildEventData, cost: ManaCost) => {
@@ -45,12 +48,15 @@ const GameUI = ({markedTile, playerViewData, eventsData, setEventsData}: Props) 
         }
     }
 
-    const removeEvent = async () => {
-        if (!markedTileEvent) {
+    const removeEvent = async (coordinates: MapCoordinates) => {
+        const event = eventsData.find((event => {
+            return event.primaryTileCoordinates === coordinates
+        }))
+        if (!event) {
             return
         }
         try {
-            const response = await eventService.deleteEvent(markedTileEvent);
+            const response = await eventService.deleteEvent(event);
             setEventsData(response)
 
         } catch (error) {
@@ -59,13 +65,18 @@ const GameUI = ({markedTile, playerViewData, eventsData, setEventsData}: Props) 
     }
 
     return (
-        <div className={"userInterface"}>
-            <div></div>
+        <div className={"sideInterface"}>
+            <ActionInterface eventsData={eventsData}
+                             setMarkedTile={setMarkedTile}
+                             mapData={playerViewData.mapData}
+                             removeEvent={removeEvent}
+                             setCenterViewCoordinates={setCenterViewCoordinates}></ActionInterface>
             <TileInfoDisplay
                 playerNr={playerViewData.playerNr}
                 markedTile={markedTile}
                 mapData={playerViewData.mapData}
-                event={markedTileEvent}
+                tileEvents={markedTileEvents}
+                mana={playerViewData.mana}
                 addEvent={addEvent}
                 removeEvent={removeEvent}>
             </TileInfoDisplay>

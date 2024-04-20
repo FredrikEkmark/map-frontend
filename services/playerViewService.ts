@@ -1,6 +1,6 @@
 import axios, {AxiosError} from 'axios';
 import {getPlayerNumberFromInput, PlayerViewData} from "../types/playerViewTypes";
-import {getMapSizeFromInput, MapTileData, TileBuildingData} from "../types/mapTypes";
+import {getMapSizeFromInput, getTileTerrainValueFromInput, MapTileData, TileBuildingData} from "../types/mapTypes";
 import {Console} from "inspector";
 import {getBuildingInfo} from "../types/buildingTypes";
 
@@ -55,7 +55,7 @@ function parseMapData(mapData: any[]): MapTileData[] {
     return mapData.map((tile: any) => ({
         coordinates: tile.coordinates,
         tileOwner: getPlayerNumberFromInput(tile.tileOwner), // Convert string to enum value
-        tileTerrainValue: tile.tileTerrainValue,
+        tileTerrainValue: getTileTerrainValueFromInput(tile.tileTerrainValue),
         visible: tile.visible,
         building: parseBuildingData(tile.building),
     }));

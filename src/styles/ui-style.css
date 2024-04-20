@@ -1,9 +1,39 @@
-.userInterface {
-    background-color: #17699c;
-    width: 260px;
+.sideInterface {
+    background-color: #044369;
+    width: 270px;
     display: flex;
     flex-direction: column;
-    justify-content: end;
+    justify-content: space-between;
+}
+
+.actionInterface {
+    margin-top: 20px;
+    border-radius: 20px;
+    width: 250px;
+    height: 480px;
+    background-color: #086696;
+    box-shadow:
+            0 0 1px 0 rgba(15, 100, 146, 0.6),
+            0 0 2px 0 rgba(15, 100, 146, 0.2),
+            0 0 3px 0 rgba(15, 100, 146, 0.2),
+            0 0 4px 0 rgba(15, 100, 146, 0.2),
+            0 0 5px 0 rgba(15, 100, 146, 0.2),
+            0 0 6px 0 rgba(15, 100, 146, 0.2),
+            0 0 7px 0 rgba(15, 100, 146, 0.2),
+            0 0 8px 0 rgba(15, 100, 146, 0.2),
+            0 0 9px 0 rgba(15, 100, 146, 0.2),
+            0 0 10px 0 rgba(15, 100, 146, 0.2);
+    overflow-y: auto;
+
+}
+
+.actionInterface .eventListing {
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+    background-color: #374e6b;
+    border-radius: 20px;
+    padding: 10px;
 }
 
 .bannerSkyscraper {
@@ -15,10 +45,10 @@
 .resourceBar {
     display: flex;
     justify-content: space-around;
-    align-items: center;
-    background-color: #179c46;
+    align-items: end;
+    background-color: #044369;
     height: 40px;
-    width: 1160px;
+    width: 1170px;
 }
 
 .resourceInfo {
@@ -44,7 +74,58 @@
 }
 
 .tileInfoDisplay {
-    background-color: pink;
-    width: 260px;
-    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-right: 10px;
+    margin-bottom: 20px;
+    border-radius: 20px;
+    padding: 10px;
+    background-color: #086696;
+    width: 250px;
+    height: 220px;
+    box-shadow:
+            0 0 1px 0 rgba(15, 100, 146, 0.6),
+            0 0 2px 0 rgba(15, 100, 146, 0.2),
+            0 0 3px 0 rgba(15, 100, 146, 0.2),
+            0 0 4px 0 rgba(15, 100, 146, 0.2),
+            0 0 5px 0 rgba(15, 100, 146, 0.2),
+            0 0 6px 0 rgba(15, 100, 146, 0.2),
+            0 0 7px 0 rgba(15, 100, 146, 0.2),
+            0 0 8px 0 rgba(15, 100, 146, 0.2),
+            0 0 9px 0 rgba(15, 100, 146, 0.2),
+            0 0 10px 0 rgba(15, 100, 146, 0.2);
+}
+
+.textRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.tileInfoDisplay .addEventButton {
+    width: 100%;
+    background-color: #374e6b;
+    border-radius: 20px;
+    padding: 4px 10px;
+}
+
+.buildViewDisplay {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.buildEventButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #8eafc5;
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
+    border-width: 5px;
+    border-color: #044369;
+    padding: 4px 10px;
 }

@@ -39,24 +39,24 @@ const ArrowKeyNavigator = ({moveCenterViewPoint} : Props) => {
                 <button style={{ transform: 'rotate(270deg)', backgroundColor: pressedKey === 'ArrowUp' ? 'gray' : 'white' }}
                         className={"arrowButton"}
                         onClick={() => moveCenterViewPoint(MapMove.UP)}>
-                    <Image width={20} height={20} src={"/media/images/arrow.svg"} alt={""}/>
+                    <Image width={20} height={20} src={"/media/images/ui/arrow.svg"} alt={""}/>
                 </button>
             </div>
             <div className={"arrowButtonContainer"}>
                 <button style={{ transform: 'rotate(180deg)', backgroundColor: pressedKey === 'ArrowLeft' ? 'gray' : 'white' }}
                         className={"arrowButton"}
                         onClick={() => moveCenterViewPoint(MapMove.LEFT)}>
-                    <Image width={20} height={20} src={"/media/images/arrow.svg"} alt={""}/>
+                    <Image width={20} height={20} src={"/media/images/ui/arrow.svg"} alt={""}/>
                 </button>
                 <button style={{ transform: 'rotate(90deg)', backgroundColor:
                         pressedKey === 'ArrowDown' ? 'gray' : 'white' }} className={"arrowButton"}
                         onClick={() => moveCenterViewPoint(MapMove.DOWN)}>
-                    <Image width={20} height={20} src={"/media/images/arrow.svg"} alt={""}/>
+                    <Image width={20} height={20} src={"/media/images/ui/arrow.svg"} alt={""}/>
                 </button>
                 <button style={{backgroundColor: pressedKey === 'ArrowRight' ? 'gray' : 'white'}}
                         className={"arrowButton"}
                         onClick={() => moveCenterViewPoint(MapMove.RIGHT)}>
-                    <Image width={20} height={20} src={"/media/images/arrow.svg"} alt={""}/>
+                    <Image width={20} height={20} src={"/media/images/ui/arrow.svg"} alt={""}/>
                 </button>
             </div>
         </div>
