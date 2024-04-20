@@ -21,18 +21,6 @@ const Map = () => {
     const [markedTile, setMarkedTile] = useState<MapCoordinates | null>(null)
     const [centerViewCoordinates, setCenterViewCoordinates] = useState<MapCoordinates>({x: 20, y: 20})
 
-    const mapViewFriendlyCenterViewCoordinates = (coordinates: MapCoordinates) => {
-        if (!playerViewData) {
-            return
-        }
-        const numRowsInMapView = 13;
-        if (coordinates.x < (numRowsInMapView - 1) / 2) {
-            coordinates.x = Math.max((numRowsInMapView - 1) / 2, centerViewCoordinates.x - 2)
-        } else if (coordinates.x > playerViewData.mapData.mapSize.height - ((numRowsInMapView - 1) / 2) - 1) {
-            coordinates.x = Math.min(playerViewData.mapData.mapSize.height - ((numRowsInMapView - 1) / 2) - 1)
-        }
-        setCenterViewCoordinates(coordinates)
-    }
     const adjustedMana = (mana: Mana, events: GameEvent[]) : Mana => {
         let adjustedMana: Mana = {
             population: mana.population,
@@ -110,7 +98,7 @@ const Map = () => {
                             playerViewData={playerViewData}
                             eventsData={eventsData}
                             setEventsData={setEventsData}
-                            setCenterViewCoordinates={mapViewFriendlyCenterViewCoordinates}>
+                            setCenterViewCoordinates={setCenterViewCoordinates}>
                         </GameUI>
                     </div>
                 </div>

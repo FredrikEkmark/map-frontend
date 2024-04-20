@@ -141,7 +141,7 @@ const TileInfoDisplay = ({mapData, markedTile, setCenterViewCoordinates, playerN
     if (!tile.visible) {
         return (
             <div className={"tileInfoDisplay"}>
-                <div onClick={() => {setCenterViewCoordinates(tile.coordinates)}}
+                <div onClick={() => {setCenterViewCoordinates({x: (Math.round(tile?.coordinates.x / 2)) * 2, y: tile.coordinates.y})}}
                      className={"textRow"}>
                     <p>Coordinates:</p>
                     <p>{tile.coordinates.x}:{tile.coordinates.y}</p>
@@ -170,7 +170,11 @@ const TileInfoDisplay = ({mapData, markedTile, setCenterViewCoordinates, playerN
     return (
         <div className={"tileInfoDisplay"}>
             <div>
-            <div onClick={() => {setCenterViewCoordinates(tile.coordinates)}} className={"textRow"}><p>Coordinates:</p><p>{tile.coordinates.x}:{tile.coordinates.y}</p> </div>
+            <div className={"textRow"}
+                onClick={() => {setCenterViewCoordinates({x: (Math.round(tile?.coordinates.x / 2)) * 2, y: tile.coordinates.y})}}>
+                <p>Coordinates:</p>
+                <p>{tile.coordinates.x}:{tile.coordinates.y}</p>
+            </div>
             <div className={"textRow"}><p>Terrain:</p><p>{tile.tileTerrainValue.name}</p></div>
             {(tile.building.type.name !== "none") && (
                 <div className={"textRow"}><p>Building:</p><p>{tile.building.type.name}</p></div>

@@ -135,7 +135,7 @@ function getYOffset(xCoordinate: number, tileDistance: number) {
     return yOffsets
 }
 
-function tilesInRange(tileDistance: number) {
+export function tilesInRange(tileDistance: number) {
 
     let counter = 0;
 

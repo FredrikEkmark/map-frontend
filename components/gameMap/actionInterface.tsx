@@ -15,7 +15,7 @@ const ActionInterface = ({eventsData, setMarkedTile, setCenterViewCoordinates, r
 
     const click = (coordinates: MapCoordinates) => {
         setMarkedTile(coordinates)
-        setCenterViewCoordinates(coordinates)
+        setCenterViewCoordinates({x: (Math.round(coordinates.x / 2)) * 2, y: coordinates.y})
     }
 
     const renderEventsList = () => {
