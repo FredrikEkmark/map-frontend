@@ -20,8 +20,9 @@ interface Props {
     addEvent: (evenType: GameEventType, eventData: any, cost: any) => void,
     removeEvent: (coordinates: MapCoordinates) => void,
     mana: Mana
+    playerOwnedTiles: number,
 }
-const TileInfoDisplay = ({mapData, markedTile, setCenterViewCoordinates, playerNr, tileEvents, addEvent, removeEvent, mana}: Props) => {
+const TileInfoDisplay = ({mapData, markedTile, setCenterViewCoordinates, playerNr, tileEvents, addEvent, removeEvent, mana, playerOwnedTiles}: Props) => {
     const getMarkedTileData = () => {
         if (!markedTile) {
             return null
@@ -55,7 +56,9 @@ const TileInfoDisplay = ({mapData, markedTile, setCenterViewCoordinates, playerN
 
     const isClaimable = () => {
 
-        if (Math.floor(mana.population/100) > 200) {return false}
+        const populationAllowsMoreTiles = Math.floor(mana.population/100) > playerOwnedTiles
+
+        if (!populationAllowsMoreTiles) {return false}
 
         if (!markedTile) {return false}
         if (!tile) {return false}

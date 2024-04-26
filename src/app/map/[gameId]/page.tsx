@@ -21,6 +21,7 @@ const Map = () => {
     const [markedTile, setMarkedTile] = useState<MapCoordinates | null>(null)
     const [centerViewCoordinates, setCenterViewCoordinates] = useState<MapCoordinates>({x: 20, y: 20})
 
+
     const adjustedMana = (mana: Mana, events: GameEvent[]) : Mana => {
         let adjustedMana: Mana = {
             population: mana.population,
@@ -52,7 +53,8 @@ const Map = () => {
                 setPlayerViewData(playerViewResponse);
                 const gameEventsResponse = await eventService.getAllPlayerEvent(params.gameId, playerViewResponse.playerNr)
                 setEventsData(gameEventsResponse)
-                setCenterViewCoordinates(playerViewResponse.startCoordinates)
+                const startCoordinates = {x: playerViewResponse.startCoordinates.x + (playerViewResponse.startCoordinates.x % 2), y: playerViewResponse.startCoordinates.y}
+                setCenterViewCoordinates(startCoordinates)
             } catch (error) {
                 console.error('Error fetching data:', error);
             }

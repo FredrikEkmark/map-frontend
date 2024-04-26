@@ -13,7 +13,7 @@ export type PlayerViewData = {
     startCoordinates: MapCoordinates,
     mapData: GameMapData,
     mana: Mana,
-    eventLog: EventLog,
+    eventLog: EventLog[],
 }
 
 export interface PlayerNumber {

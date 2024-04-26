@@ -23,8 +23,6 @@
             0 0 8px 0 rgba(15, 100, 146, 0.2),
             0 0 9px 0 rgba(15, 100, 146, 0.2),
             0 0 10px 0 rgba(15, 100, 146, 0.2);
-    overflow-y: auto;
-
 }
 
 .actionInterface .eventListing {
@@ -36,10 +34,58 @@
     padding: 10px;
 }
 
+.actionInterface .navigationBar {
+    position: absolute;
+    display: flex;
+    justify-content: space-around;
+    width: 250px;
+    height: 30px;
+    background-color: rgba(55, 78, 107, 0.5);
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    margin-bottom: 10px;
+}
+
+.actionInterface .navigationBar button {
+    width: 125px;
+}
+
+.actionInterface .navigationBar .selected {
+    background-color: #374e6b;
+    width: 125px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+.actionInterface .actionInterfaceContent {
+    margin-top: 30px;
+    width: 100%;
+    height: 450px;
+    overflow-y: auto;
+}
+
+.eventLogEntryText {
+    width: 100%;
+    margin-bottom: 5px;
+    font-size: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.eventLogEntryHeadline {
+    width: 100%;
+    font-size: 14px;
+    margin-bottom: 5px;
+    margin-top: 10px;
+    padding-left: 10px;
+    padding-right: 20px;
+}
+
 .bannerSkyscraper {
     background-color: #9c2e17;
     width: 120px;
     height: 600px;
+
 }
 
 .resourceBar {

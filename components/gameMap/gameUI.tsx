@@ -2,12 +2,13 @@ import "@/styles/ui-style.css";
 import TileInfoDisplay from "./tileInfoDisplay";
 import {MapCoordinates} from "../../types/mapTypes";
 import {PlayerViewData} from "../../types/playerViewTypes";
-import {BuildEventData, EmptyEventData, GameEvent, GameEventType, NewEventDTO} from "../../types/eventTypes";
+import {BuildEventData, EmptyEventData, EventLog, GameEvent, GameEventType, NewEventDTO} from "../../types/eventTypes";
 import {useEffect, useState} from "react";
 import eventService from "../../services/eventService";
 import {Mana, ManaCost} from "../../types/manaTypes";
 import ActionInterface from "./actionInterface";
 import {findAllEventsInMap} from "../../functions/utility/eventUtility";
+import {numberOfPlayerOwnedTiles} from "../../functions/utility/mapUtility";
 
 interface Props {
     markedTile: MapCoordinates | null,
@@ -70,6 +71,7 @@ const GameUI = ({markedTile, setMarkedTile, playerViewData, eventsData, setEvent
                              setMarkedTile={setMarkedTile}
                              mapData={playerViewData.mapData}
                              removeEvent={removeEvent}
+                             eventLog={playerViewData.eventLog}
                              setCenterViewCoordinates={setCenterViewCoordinates}></ActionInterface>
             <TileInfoDisplay
                 playerNr={playerViewData.playerNr}
@@ -79,7 +81,9 @@ const GameUI = ({markedTile, setMarkedTile, playerViewData, eventsData, setEvent
                 tileEvents={markedTileEvents}
                 mana={playerViewData.mana}
                 addEvent={addEvent}
-                removeEvent={removeEvent}>
+                removeEvent={removeEvent}
+                playerOwnedTiles={numberOfPlayerOwnedTiles(playerViewData.mapData, playerViewData.playerNr)}
+            >
             </TileInfoDisplay>
         </div>
     )
