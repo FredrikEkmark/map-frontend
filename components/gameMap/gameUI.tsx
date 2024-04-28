@@ -2,10 +2,10 @@ import "@/styles/ui-style.css";
 import TileInfoDisplay from "./tileInfoDisplay";
 import {MapCoordinates} from "../../types/mapTypes";
 import {PlayerViewData} from "../../types/playerViewTypes";
-import {BuildEventData, EmptyEventData, EventLog, GameEvent, GameEventType, NewEventDTO} from "../../types/eventTypes";
+import {BuildEventData, EmptyEventData, GameEvent, GameEventType, NewEventDTO} from "../../types/eventTypes";
 import {useEffect, useState} from "react";
 import eventService from "../../services/eventService";
-import {Mana, ManaCost} from "../../types/manaTypes";
+import {ManaCost} from "../../types/manaTypes";
 import ActionInterface from "./actionInterface";
 import {findAllEventsInMap} from "../../functions/utility/eventUtility";
 import {numberOfPlayerOwnedTiles} from "../../functions/utility/mapUtility";
@@ -27,6 +27,11 @@ const GameUI = ({markedTile, setMarkedTile, playerViewData, eventsData, setEvent
     useEffect(() => {
         setMarkedTileEvents(findAllEventsInMap(markedTile, eventsData))
     }, [eventsData, markedTile]);
+
+    const playerClaimedTiles = () => {
+        const claimEvents = eventsData.filter(event => event.eventType === GameEventType.CLAIM_TILE_EVENT)
+        return numberOfPlayerOwnedTiles(playerViewData.mapData, playerViewData.playerNr) + claimEvents.length
+    }
 
     const addEvent = async (evenType: GameEventType, eventData: EmptyEventData | BuildEventData, cost: ManaCost) => {
         if (!markedTile) {
@@ -82,7 +87,7 @@ const GameUI = ({markedTile, setMarkedTile, playerViewData, eventsData, setEvent
                 mana={playerViewData.mana}
                 addEvent={addEvent}
                 removeEvent={removeEvent}
-                playerOwnedTiles={numberOfPlayerOwnedTiles(playerViewData.mapData, playerViewData.playerNr)}
+                playerOwnedTiles={playerClaimedTiles()}
             >
             </TileInfoDisplay>
         </div>

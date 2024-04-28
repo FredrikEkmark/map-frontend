@@ -56,7 +56,7 @@ function parseMapData(mapData: any[]): MapTileData[] {
         coordinates: tile.coordinates,
         tileOwner: getPlayerNumberFromInput(tile.tileOwner), // Convert string to enum value
         tileTerrainValue: getTileTerrainValueFromInput(tile.tileTerrainValue),
-        visible: tile.visible,
+        visible: true,
         building: parseBuildingData(tile.building),
     }));
 }

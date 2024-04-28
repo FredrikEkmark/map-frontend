@@ -46,6 +46,21 @@ const Map = () => {
         return adjustedMana
     }
 
+    const safeCenterViewPoint = (coordinates: MapCoordinates) => {
+        if (!playerViewData) {
+            setCenterViewCoordinates(coordinates)
+            return
+        }
+        const numRows = 13;
+        let x = coordinates.x
+        if (x < (numRows - 1) / 2) {
+            x = (numRows - 1) / 2
+        } else if (x > playerViewData.mapData.mapSize.height - ((numRows - 1) / 2) - 1) {
+            x = playerViewData.mapData.mapSize.height - ((numRows - 1) / 2) - 1
+        }
+        setCenterViewCoordinates({x: x, y: coordinates.y})
+    }
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -100,7 +115,7 @@ const Map = () => {
                             playerViewData={playerViewData}
                             eventsData={eventsData}
                             setEventsData={setEventsData}
-                            setCenterViewCoordinates={setCenterViewCoordinates}>
+                            setCenterViewCoordinates={safeCenterViewPoint}>
                         </GameUI>
                     </div>
                 </div>
