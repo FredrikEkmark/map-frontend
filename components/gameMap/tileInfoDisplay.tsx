@@ -157,15 +157,15 @@ const TileInfoDisplay = ({mapData, markedTile, setCenterViewCoordinates, playerN
     if (buildView) {
         return (<div className={"tileInfoDisplay"}>
             <div className={"buildViewDisplay"}>
-                <BuildingEventButton building={getBuildingInfo("FARM")} addEvent={addEvent} setBuildView={setBuildView}></BuildingEventButton>
-                <BuildingEventButton building={getBuildingInfo("GRANARY")} addEvent={addEvent} setBuildView={setBuildView}></BuildingEventButton>
-                <BuildingEventButton building={getBuildingInfo("RANCH")} addEvent={addEvent} setBuildView={setBuildView}></BuildingEventButton>
-                <BuildingEventButton building={getBuildingInfo("LUMBER_CAMP")} addEvent={addEvent} setBuildView={setBuildView}></BuildingEventButton>
-                <BuildingEventButton building={getBuildingInfo("QUARRY")} addEvent={addEvent} setBuildView={setBuildView}></BuildingEventButton>
-                <BuildingEventButton building={getBuildingInfo("CARPENTRY")} addEvent={addEvent} setBuildView={setBuildView}></BuildingEventButton>
-                <BuildingEventButton building={getBuildingInfo("LEATHER_WORKER")} addEvent={addEvent} setBuildView={setBuildView}></BuildingEventButton>
-                <BuildingEventButton building={getBuildingInfo("FISHERY")} addEvent={addEvent} setBuildView={setBuildView}></BuildingEventButton>
-                <BuildingEventButton building={getBuildingInfo("VILLAGE")} addEvent={addEvent} setBuildView={setBuildView}></BuildingEventButton>
+                <BuildingEventButton building={getBuildingInfo("FARM")} addEvent={addEvent} setBuildView={setBuildView} tile={getMarkedTileData()}></BuildingEventButton>
+                <BuildingEventButton building={getBuildingInfo("GRANARY")} addEvent={addEvent} setBuildView={setBuildView} tile={getMarkedTileData()}></BuildingEventButton>
+                <BuildingEventButton building={getBuildingInfo("RANCH")} addEvent={addEvent} setBuildView={setBuildView} tile={getMarkedTileData()}></BuildingEventButton>
+                <BuildingEventButton building={getBuildingInfo("LUMBER_CAMP")} addEvent={addEvent} setBuildView={setBuildView} tile={getMarkedTileData()}></BuildingEventButton>
+                <BuildingEventButton building={getBuildingInfo("QUARRY")} addEvent={addEvent} setBuildView={setBuildView} tile={getMarkedTileData()}></BuildingEventButton>
+                <BuildingEventButton building={getBuildingInfo("CARPENTRY")} addEvent={addEvent} setBuildView={setBuildView} tile={getMarkedTileData()}></BuildingEventButton>
+                <BuildingEventButton building={getBuildingInfo("LEATHER_WORKER")} addEvent={addEvent} setBuildView={setBuildView} tile={getMarkedTileData()}></BuildingEventButton>
+                <BuildingEventButton building={getBuildingInfo("FISHERY")} addEvent={addEvent} setBuildView={setBuildView} tile={getMarkedTileData()}></BuildingEventButton>
+                <BuildingEventButton building={getBuildingInfo("VILLAGE")} addEvent={addEvent} setBuildView={setBuildView} tile={getMarkedTileData()}></BuildingEventButton>
             </div>
         </div>)
     }

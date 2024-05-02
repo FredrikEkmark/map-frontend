@@ -67,35 +67,66 @@ export function getMapSizeFromInput(input: string): MapSizes {
     }
 }
 
+export enum Temperature {
+
+    IRRELEVANT,
+    ARCTIC,
+    SUBARCTIC,
+    TEMPERATE,
+    SUBTROPICAL,
+    TROPICAL,
+}
+
+export enum Elevation {
+
+    DEEP,
+    SHALLOW,
+    LOWLANDS,
+    HIGHLANDS,
+    MOUNTAIN,
+
+}
+
+export enum Precipitation {
+
+    IRRELEVANT,
+    LOW,
+    MODERATE,
+    HIGH,
+}
+
 export interface TileTerrainValue {
     name: string,
     css: string;
+    temperature: Temperature,
+    elevation: Elevation,
+    precipitation: Precipitation,
 }
 
-export const UNEXPLORED: TileTerrainValue = {name: "Unexplored", css: "unexplored"}
-export const GLACIER: TileTerrainValue = {name: "Glacier", css: "glacier"}
-export const DEEP_WATER: TileTerrainValue = {name: "Deep Water", css: "deepWater"}
-export const COASTAL_WATER: TileTerrainValue = {name: "Coastal Water", css: "coastalWater"}
-export const LOWLAND_TUNDRA: TileTerrainValue = {name: "Lowland Tundra", css: "lowlandTundra"}
-export const HIGHLANDS_TUNDRA: TileTerrainValue = {name: "Highlands Tundra", css: "highlandsTundra"}
-export const COLD_DESERT: TileTerrainValue = {name: "Cold Desert", css: "coldDesert"}
-export const COLD_DESERT_HILLS: TileTerrainValue = {name: "Cold Desert Hills", css: "coldDesertHills"}
-export const TEMPERATE_LOWLANDS_PLAIN: TileTerrainValue = {name: "Temperate Lowlands Plain", css: "temperateLowlandsPlains"}
-export const TEMPERATE_FOREST: TileTerrainValue = {name: "Temperate Forest", css: "temperateForest"}
-export const HIGHLAND_HILLS: TileTerrainValue = {name: "Highland Hills", css: "highlandHills"}
-export const TEMPERATE_HIGHLAND_FOREST: TileTerrainValue = {name: "Temperate Highland Forest", css: "temperateHighlandForest"}
-export const TEMPERATE_RAINFOREST: TileTerrainValue = {name: "Temperate Rainforest", css: "temperateRainforest"}
-export const TEMPERATE_HIGHLAND_RAINFOREST: TileTerrainValue = {name: "Temperate Highland Rainforest", css: "temperateHighlandRainforest"}
-export const HOT_DESERT: TileTerrainValue = {name: "Hot Desert", css: "hotDesert"}
-export const HOT_DESERT_HILLS: TileTerrainValue = {name: "Hot Desert Hills", css: "hotDesertHills"}
-export const HOT_STEPPE: TileTerrainValue = {name: "Hot Steppe", css: "hotSteppe"}
-export const HOT_STEPPE_HILLS: TileTerrainValue = {name: "Hot Steppe Hills", css: "hotSteppeHills"}
-export const TROPICAL_SAVANNA: TileTerrainValue = {name: "Tropical Savanna", css: "tropicalSavanna"}
-export const TROPICAL_SAVANNA_HILLS: TileTerrainValue = {name: "Tropical Savanna Hills", css: "tropicalSavannaHills"}
-export const TROPICAL_RAINFOREST: TileTerrainValue = {name: "Tropical Rainforest", css: "tropicalRainforest"}
-export const TROPICAL_RAINFOREST_HILLS: TileTerrainValue = {name: "Tropical Rainforest Hills", css: "tropicalRainforestHills"}
-export const GLACIAL_HEIGHTS: TileTerrainValue = {name: "Glacial Heights", css: "glacialHeights"}
-export const MOUNTAINS: TileTerrainValue = {name: "Mountains", css: "mountains"}
+export const UNEXPLORED: TileTerrainValue = {name: "Unexplored", css: "unexplored", temperature: Temperature.IRRELEVANT, elevation: Elevation.DEEP, precipitation: Precipitation.IRRELEVANT}
+export const GLACIER: TileTerrainValue = {name: "Glacier", css: "glacier", temperature: Temperature.ARCTIC, elevation: Elevation.LOWLANDS, precipitation: Precipitation.IRRELEVANT}
+export const DEEP_WATER: TileTerrainValue = {name: "Deep Water", css: "deepWater", temperature: Temperature.IRRELEVANT, elevation: Elevation.DEEP, precipitation: Precipitation.IRRELEVANT}
+export const COASTAL_WATER: TileTerrainValue = {name: "Coastal Water", css: "coastalWater", temperature: Temperature.IRRELEVANT, elevation: Elevation.SHALLOW, precipitation: Precipitation.IRRELEVANT}
+export const LOWLAND_TUNDRA: TileTerrainValue = {name: "Lowland Tundra", css: "lowlandTundra", temperature: Temperature.SUBARCTIC, elevation: Elevation.LOWLANDS, precipitation: Precipitation.MODERATE}
+export const HIGHLANDS_TUNDRA: TileTerrainValue = {name: "Highlands Tundra", css: "highlandsTundra", temperature: Temperature.SUBARCTIC, elevation: Elevation.HIGHLANDS, precipitation: Precipitation.MODERATE}
+export const COLD_DESERT: TileTerrainValue = {name: "Cold Desert", css: "coldDesert", temperature: Temperature.SUBARCTIC, elevation: Elevation.LOWLANDS, precipitation: Precipitation.LOW}
+export const COLD_DESERT_HILLS: TileTerrainValue = {name: "Cold Desert Hills", css: "coldDesertHills", temperature: Temperature.SUBARCTIC, elevation: Elevation.HIGHLANDS, precipitation: Precipitation.LOW}
+export const TEMPERATE_LOWLANDS_PLAIN: TileTerrainValue = {name: "Temperate Lowlands Plain", css: "temperateLowlandsPlains", temperature: Temperature.TEMPERATE, elevation: Elevation.LOWLANDS, precipitation: Precipitation.LOW}
+export const TEMPERATE_FOREST: TileTerrainValue = {name: "Temperate Forest", css: "temperateForest", temperature: Temperature.TEMPERATE, elevation: Elevation.LOWLANDS, precipitation: Precipitation.MODERATE}
+export const HIGHLAND_HILLS: TileTerrainValue = {name: "Highland Hills", css: "highlandHills", temperature: Temperature.TEMPERATE, elevation: Elevation.HIGHLANDS, precipitation: Precipitation.LOW}
+export const TEMPERATE_HIGHLAND_FOREST: TileTerrainValue = {name: "Temperate Highland Forest", css: "temperateHighlandForest", temperature: Temperature.TEMPERATE, elevation: Elevation.HIGHLANDS, precipitation: Precipitation.MODERATE}
+export const TEMPERATE_RAINFOREST: TileTerrainValue = {name: "Temperate Rainforest", css: "temperateRainforest", temperature: Temperature.TEMPERATE, elevation: Elevation.LOWLANDS, precipitation: Precipitation.HIGH}
+export const TEMPERATE_HIGHLAND_RAINFOREST: TileTerrainValue = {name: "Temperate Highland Rainforest", css: "temperateHighlandRainforest", temperature: Temperature.TEMPERATE, elevation: Elevation.HIGHLANDS, precipitation: Precipitation.HIGH}
+export const HOT_DESERT: TileTerrainValue = {name: "Hot Desert", css: "hotDesert", temperature: Temperature.SUBTROPICAL, elevation: Elevation.LOWLANDS, precipitation: Precipitation.LOW}
+export const HOT_DESERT_HILLS: TileTerrainValue = {name: "Hot Desert Hills", css: "hotDesertHills", temperature: Temperature.SUBTROPICAL, elevation: Elevation.HIGHLANDS, precipitation: Precipitation.LOW}
+export const HOT_STEPPE: TileTerrainValue = {name: "Hot Steppe", css: "hotSteppe", temperature: Temperature.SUBTROPICAL, elevation: Elevation.LOWLANDS, precipitation: Precipitation.MODERATE}
+export const HOT_STEPPE_HILLS: TileTerrainValue = {name: "Hot Steppe Hills", css: "hotSteppeHills", temperature: Temperature.SUBTROPICAL, elevation: Elevation.HIGHLANDS, precipitation: Precipitation.MODERATE}
+export const TROPICAL_SAVANNA: TileTerrainValue = {name: "Tropical Savanna", css: "tropicalSavanna", temperature: Temperature.TROPICAL, elevation: Elevation.LOWLANDS, precipitation: Precipitation.MODERATE}
+export const TROPICAL_SAVANNA_HILLS: TileTerrainValue = {name: "Tropical Savanna Hills", css: "tropicalSavannaHills", temperature: Temperature.TROPICAL, elevation: Elevation.HIGHLANDS, precipitation: Precipitation.MODERATE}
+export const TROPICAL_RAINFOREST: TileTerrainValue = {name: "Tropical Rainforest", css: "tropicalRainforest", temperature: Temperature.TROPICAL, elevation: Elevation.LOWLANDS, precipitation: Precipitation.HIGH}
+export const TROPICAL_RAINFOREST_HILLS: TileTerrainValue = {name: "Tropical Rainforest Hills", css: "tropicalRainforestHills", temperature: Temperature.TROPICAL, elevation: Elevation.HIGHLANDS, precipitation: Precipitation.HIGH}
+export const GLACIAL_HEIGHTS: TileTerrainValue = {name: "Glacial Heights", css: "glacialHeights", temperature: Temperature.ARCTIC, elevation: Elevation.HIGHLANDS, precipitation: Precipitation.IRRELEVANT}
+export const MOUNTAINS: TileTerrainValue = {name: "Mountains", css: "mountains", temperature: Temperature.IRRELEVANT, elevation: Elevation.MOUNTAIN, precipitation: Precipitation.IRRELEVANT}
 
 
 
@@ -128,4 +159,4 @@ export function getTileTerrainValueFromInput(tileValue: number): TileTerrainValu
         default:
             return UNEXPLORED;
     }
-};
+}

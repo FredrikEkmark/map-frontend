@@ -176,3 +176,17 @@
     border-color: #044369;
     padding: 4px 10px;
 }
+
+.buildEventButtonInactive {
+    margin: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(142, 175, 197, 0.50);
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
+    border-width: 5px;
+    border-color: rgba(4, 67, 105, 0.5);
+    padding: 4px 10px;
+}
