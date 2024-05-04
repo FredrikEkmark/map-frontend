@@ -14,6 +14,7 @@ export type PlayerViewData = {
     mapData: GameMapData,
     mana: Mana,
     eventLog: EventLog[],
+    isUpdating: boolean,
 }
 
 export interface PlayerNumber {

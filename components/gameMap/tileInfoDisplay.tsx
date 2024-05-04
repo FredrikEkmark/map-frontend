@@ -17,7 +17,7 @@ interface Props {
     setCenterViewCoordinates: (coordinates: MapCoordinates) => void,
     playerNr: PlayerNumber,
     tileEvents: GameEvent[],
-    addEvent: (evenType: GameEventType, eventData: any, cost: any) => void,
+    addEvent: (evenType: GameEventType, eventData: any, cost: any) => Promise<boolean>,
     removeEvent: (coordinates: MapCoordinates) => void,
     mana: Mana
     playerOwnedTiles: number,
@@ -85,10 +85,12 @@ const TileInfoDisplay = ({mapData, markedTile, setCenterViewCoordinates, playerN
     const [claimable, setClaimable] = useState<boolean>(isClaimable())
     const [buildable, setBuildable] = useState<boolean>(isBuildable())
     const [buildView, setBuildView] = useState<boolean>(false)
+    const [addEventButtonClass, setAddEventButtonClass] = useState<string>("addEventButton")
 
     useEffect(() => {
         setTile(getMarkedTileData())
         setBuildView(false)
+        setAddEventButtonClass("addEventButton")
     }, [markedTile]);
 
     useEffect(() => {
@@ -113,23 +115,27 @@ const TileInfoDisplay = ({mapData, markedTile, setCenterViewCoordinates, playerN
         }
 
         if (explorable) {
-            return <button className={"addEventButton"} onClick={() => addEvent(GameEventType.EXPLORE_EVENT,
+            return <button className={addEventButtonClass} onClick={() => addEvent(
+                GameEventType.EXPLORE_EVENT,
                 {},
-                {manpower: 50})}>
+                {manpower: 50})
+                .then(r => r ? null : setAddEventButtonClass("addEventButtonReject"))}>
                 Explore Tile
             </button>
         }
 
         if (claimable) {
-            return <button className={"addEventButton"} onClick={() => addEvent(GameEventType.CLAIM_TILE_EVENT,
+            return <button className={addEventButtonClass} onClick={() => addEvent(
+                GameEventType.CLAIM_TILE_EVENT,
                 {},
-                {manpower: 100})}>
+                {manpower: 100})
+                .then(r => r ? null : setAddEventButtonClass("addEventButtonReject"))}>
                 Claim Tile
             </button>
         }
 
         if (buildable) {
-            return <button className={"addEventButton"} onClick={() => setBuildView(true)}>
+            return <button className={addEventButtonClass} onClick={() => setBuildView(true)}>
                 Build
             </button>
         }

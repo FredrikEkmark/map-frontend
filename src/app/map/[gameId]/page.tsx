@@ -20,7 +20,7 @@ const Map = () => {
     const [eventsData, setEventsData] = useState<GameEvent[]>([])
     const [markedTile, setMarkedTile] = useState<MapCoordinates | null>(null)
     const [centerViewCoordinates, setCenterViewCoordinates] = useState<MapCoordinates>({x: 20, y: 20})
-    
+
     const adjustedMana = (mana: Mana, events: GameEvent[]) : Mana => {
         let adjustedMana: Mana = {
             population: mana.population,
@@ -65,8 +65,10 @@ const Map = () => {
             try {
                 const playerViewResponse = await playerViewService.getPlayerViewData(params.gameId);
                 setPlayerViewData(playerViewResponse);
-                const gameEventsResponse = await eventService.getAllPlayerEvent(params.gameId, playerViewResponse.playerNr)
-                setEventsData(gameEventsResponse)
+                if (!playerViewResponse.isUpdating) {
+                    const gameEventsResponse = await eventService.getAllPlayerEvent(params.gameId, playerViewResponse.playerNr)
+                    setEventsData(gameEventsResponse)
+                }
                 const startCoordinates = {x: playerViewResponse.startCoordinates.x + (playerViewResponse.startCoordinates.x % 2), y: playerViewResponse.startCoordinates.y}
                 setCenterViewCoordinates(startCoordinates)
             } catch (error) {
@@ -91,14 +93,18 @@ const Map = () => {
         return <div>Loading...</div>
     }
 
+    if (playerViewData.isUpdating) {
+        return <div>Updating...</div>
+    }
+
     return (
         <div className={"flex flex-col w-full h-full justify-center items-center"}>
             <div className={"flex flex-row w-full justify-around items-center"}>
                 <div className={"bannerSkyscraper"}></div>
                 <div className={"flex flex-col"}>
                     <ResourceBar
-                        mana={adjustedMana(playerViewData.mana,
-                        eventsData)} events={eventsData} turn={playerViewData.turn}></ResourceBar>
+                        mana={adjustedMana(playerViewData.mana, eventsData)}
+                        events={eventsData} turn={playerViewData.turn}></ResourceBar>
                     <div className={"flex flex-row"}>
                         <GameMap
                             setMarkedTile={setMarkedTile}
@@ -114,7 +120,8 @@ const Map = () => {
                             playerViewData={playerViewData}
                             eventsData={eventsData}
                             setEventsData={setEventsData}
-                            setCenterViewCoordinates={safeCenterViewPoint}>
+                            setCenterViewCoordinates={safeCenterViewPoint}
+                            adjustedMana={adjustedMana(playerViewData.mana, eventsData)}>
                         </GameUI>
                     </div>
                 </div>

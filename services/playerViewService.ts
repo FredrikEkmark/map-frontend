@@ -40,14 +40,15 @@ function parsePlayerViewData(data: any): PlayerViewData {
     return {
         gameId: data.gameId,
         playerId: data.playerId,
-        playerName: data.playerName, // Parse enum value
+        playerName: data.playerName,
         startCoordinates: data.startCoordinates,
-        playerNr: getPlayerNumberFromInput(data.playerNr), // Parse enum value
+        playerNr: getPlayerNumberFromInput(data.playerNr),
         turn: data.turn,
         turnChange: data.turnChange,
         mapData: {mapSize: getMapSizeFromInput(data.mapSize), map: parseMapData(data.map)},
         mana: data.mana,
         eventLog: data.eventLog,
+        isUpdating: data.updating
     };
 }
 
