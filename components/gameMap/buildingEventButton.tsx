@@ -24,16 +24,24 @@ const BuildingEventButton = ({building, addEvent, setBuildView, tile} : Props) =
         return false
     }
 
-    const clicked = () => {
+    const addBuildEvent = () => {
 
         let manpowerCost = 200;
+
+        let cost = building.nonManpowerCost
+
+        if (tile?.building && tile?.building.progress > 0 && tile.building.type.type == building.type) {
+            cost = {}
+        }
 
         if (tile) {
               manpowerCost = Math.min(building.completeAtProgress - tile.building.progress, manpowerCost)
         }
 
+        cost.manpower = manpowerCost
+
         addEvent(GameEventType.BUILD_EVENT, {building: building.type},
-            {manpower: manpowerCost}).then(r => r ? setBuildView(false) : setButtonClass("buildEventButtonReject"));
+            cost).then(r => r ? setBuildView(false) : setButtonClass("buildEventButtonReject"));
 
     }
 
@@ -45,7 +53,7 @@ const BuildingEventButton = ({building, addEvent, setBuildView, tile} : Props) =
                     alt={`Icon of ${building.name}`}
                     width={40}
                     height={40}
-                    onClick={() => clicked()}
+                    onClick={() => addBuildEvent()}
                 />
             </div>
         )
