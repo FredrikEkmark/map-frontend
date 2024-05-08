@@ -71,6 +71,7 @@ const Map = () => {
                 }
                 const startCoordinates = {x: playerViewResponse.startCoordinates.x + (playerViewResponse.startCoordinates.x % 2), y: playerViewResponse.startCoordinates.y}
                 setCenterViewCoordinates(startCoordinates)
+                console.log(playerViewResponse)
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
@@ -80,7 +81,7 @@ const Map = () => {
 
     const turnChange = async () => {
         try {
-            const turnChange = await turnChangeService.turnChange();
+            const turnChange = await turnChangeService.turnChange(playerViewData?.gameId);
             if (turnChange) {
                 window.location.reload()
             }
@@ -127,7 +128,7 @@ const Map = () => {
                 </div>
                 <div className={"bannerSkyscraper"}></div>
             </div>
-            <button onClick={() => (turnChange())}>Next Turn</button>
+            {playerViewData.isAdmin ? <button onClick={() => (turnChange())}>Next Turn</button> : <></>}
         </div>
     )
 }

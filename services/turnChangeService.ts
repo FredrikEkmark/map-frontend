@@ -7,11 +7,11 @@ const HOME = 'http://localhost:8080';
 
 const turnChangeService = {
 
-    turnChange: async (): Promise<boolean> => {
+    turnChange: async (gameId: any): Promise<boolean> => {
 
         const token = localStorage.getItem("token");
         try {
-            const response = await axios.get<boolean>(`${BASE_URL}`,{
+            const response = await axios.get<boolean>(`${BASE_URL}/${gameId}`,{
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },

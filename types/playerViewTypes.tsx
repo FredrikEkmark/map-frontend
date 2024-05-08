@@ -15,6 +15,7 @@ export type PlayerViewData = {
     mana: Mana,
     eventLog: EventLog[],
     isUpdating: boolean,
+    isAdmin: boolean,
 }
 
 export interface PlayerNumber {

@@ -1,7 +1,6 @@
 import axios, {AxiosError} from 'axios';
 import {getPlayerNumberFromInput, PlayerViewData} from "../types/playerViewTypes";
 import {getMapSizeFromInput, getTileTerrainValueFromInput, MapTileData, TileBuildingData} from "../types/mapTypes";
-import {Console} from "inspector";
 import {getBuildingInfo} from "../types/buildingTypes";
 
 
@@ -24,6 +23,7 @@ const playerViewService = {
             if (response.data.gameId !== gameId) {
                 window.location.href = HOME;
             }
+            console.log(response)
             return parsePlayerViewData(response.data);
         } catch (error) {
             if ((error as AxiosError).response?.status === 401) {
@@ -48,7 +48,8 @@ function parsePlayerViewData(data: any): PlayerViewData {
         mapData: {mapSize: getMapSizeFromInput(data.mapSize), map: parseMapData(data.map)},
         mana: data.mana,
         eventLog: data.eventLog,
-        isUpdating: data.updating
+        isUpdating: data.updating,
+        isAdmin: data.admin,
     };
 }
 
