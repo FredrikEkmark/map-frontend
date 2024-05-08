@@ -4,6 +4,7 @@ import {BuildingInfo, BuildingTypes} from "../../types/buildingTypes";
 import {GameEventType} from "../../types/eventTypes";
 import {MapTileData} from "../../types/mapTypes";
 import {useState} from "react";
+import Tooltip from "./tooltip";
 
 interface Props {
     building: BuildingInfo,
@@ -47,27 +48,31 @@ const BuildingEventButton = ({building, addEvent, setBuildView, tile} : Props) =
 
     if (buildable()) {
         return (
-            <div className={buttonClass}>
+            <Tooltip reverseTooltipDisplay={true} tooltipContent={building.tooltipBuildContent}>
+                <div className={buttonClass}>
+                    <Image
+                        src={building.img}
+                        alt={`Icon of ${building.name}`}
+                        width={40}
+                        height={40}
+                        onClick={() => addBuildEvent()}
+                    />
+                </div>
+            </Tooltip>
+        )
+    }
+
+    return (
+        <Tooltip reverseTooltipDisplay={true} tooltipContent={building.tooltipBuildContent}>
+            <div className={"buildEventButtonInactive"}>
                 <Image
                     src={building.img}
                     alt={`Icon of ${building.name}`}
                     width={40}
                     height={40}
-                    onClick={() => addBuildEvent()}
                 />
             </div>
-        )
-    }
-
-    return (
-        <div className={"buildEventButtonInactive"}>
-            <Image
-                src={building.img}
-                alt={`Icon of ${building.name}`}
-                width={40}
-                height={40}
-            />
-        </div>
+        </Tooltip>
     )
 }
 export default BuildingEventButton

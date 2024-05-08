@@ -13,7 +13,7 @@ import {
     TileEdge
 } from "../../types/mapTypes";
 import {getPlayerNumberFromInput} from "../../types/playerViewTypes";
-import {getBuildingInfo} from "../../types/buildingTypes";
+import {BuildingTypes, getBuildingInfo} from "../../types/buildingTypes";
 import {GameEvent} from "../../types/eventTypes";
 import {findAllEventsInMap} from "../../functions/utility/eventUtility";
 
@@ -79,7 +79,7 @@ const GameMap = ({centerViewCoordinates, setCenterViewCoordinates, mapData, mark
             visible: false,
             tileTerrainValue: getTileTerrainValueFromInput(0),
             tileOwner: getPlayerNumberFromInput("NONE"),
-            building: {type: getBuildingInfo("NONE"),
+            building: {type: getBuildingInfo(BuildingTypes.NONE),
             progress: 0}
         }
 

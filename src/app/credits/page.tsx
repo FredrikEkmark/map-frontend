@@ -1,3 +1,5 @@
+import Tooltip from "../../../components/gameMap/tooltip";
+
 const About = () => {
     return (
         <div className={"flex flex-col"}>

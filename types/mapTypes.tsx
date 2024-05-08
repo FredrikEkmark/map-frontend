@@ -1,5 +1,6 @@
 import {PlayerNumber} from "./playerViewTypes";
 import {BuildingInfo} from "./buildingTypes";
+import React, {ReactNode} from "react";
 
 export type GameMapData = {
     map: MapTileData[]
@@ -96,12 +97,34 @@ export enum Precipitation {
     HIGH = "High",
 }
 
+function getToolTipContent(tileTerrainValue: TileTerrainValue): ReactNode {
+    return (<div className={"tooltipContent"}>
+        <h2>{tileTerrainValue.name}</h2>
+        <div className={"textRow"}>
+            <p className={"start"}>Elevation:&nbsp;</p><p className={"end"}>{tileTerrainValue.elevation}</p>
+        </div>
+        {tileTerrainValue.temperature != Temperature.IRRELEVANT ?
+            <div className={"textRow"}>
+                <p className={"start"}>Temperature:&nbsp;</p><p className={"end"}>{tileTerrainValue.temperature}</p>
+             </div>
+            : <></>
+        }
+        {tileTerrainValue.precipitation != Precipitation.IRRELEVANT ?
+            <div className={"textRow"}>
+                <p className={"start"}>Precipitation:&nbsp;</p><p className={"end"}>{tileTerrainValue.precipitation}</p>
+            </div>
+            : <></>
+        }
+    </div>)
+}
+
 export interface TileTerrainValue {
     name: string,
     css: string;
     temperature: Temperature,
     elevation: Elevation,
     precipitation: Precipitation,
+    tooltipContent: React.ReactNode;
 }
 
 export const UNEXPLORED: TileTerrainValue = {
@@ -109,145 +132,216 @@ export const UNEXPLORED: TileTerrainValue = {
     css: "unexplored",
     temperature: Temperature.IRRELEVANT,
     elevation: Elevation.DEEP,
-    precipitation: Precipitation.IRRELEVANT}
+    precipitation: Precipitation.IRRELEVANT,
+    tooltipContent: <></>
+}
 export const GLACIER: TileTerrainValue = {
     name: "Glacier",
     css: "glacier",
     temperature: Temperature.ARCTIC,
     elevation: Elevation.LOWLANDS,
-    precipitation: Precipitation.IRRELEVANT}
+    precipitation: Precipitation.IRRELEVANT,
+    tooltipContent: <></>
+}
+GLACIER.tooltipContent = getToolTipContent(GLACIER)
 export const DEEP_WATER: TileTerrainValue = {
     name: "Deep Water",
     css: "deepWater",
     temperature: Temperature.IRRELEVANT,
     elevation: Elevation.DEEP,
-    precipitation: Precipitation.IRRELEVANT}
+    precipitation: Precipitation.IRRELEVANT,
+    tooltipContent: <></>
+}
+DEEP_WATER.tooltipContent = getToolTipContent(DEEP_WATER)
 export const COASTAL_WATER: TileTerrainValue = {
     name: "Coastal Water",
     css: "coastalWater",
     temperature: Temperature.IRRELEVANT,
     elevation: Elevation.SHALLOW,
-    precipitation: Precipitation.IRRELEVANT}
+    precipitation: Precipitation.IRRELEVANT,
+    tooltipContent: <></>
+}
+COASTAL_WATER.tooltipContent = getToolTipContent(COASTAL_WATER)
 export const LOWLAND_TUNDRA: TileTerrainValue = {
     name: "Lowland Tundra",
     css: "lowlandTundra",
     temperature: Temperature.SUBARCTIC,
     elevation: Elevation.LOWLANDS,
-    precipitation: Precipitation.MODERATE}
+    precipitation: Precipitation.MODERATE,
+    tooltipContent: <></>
+}
+LOWLAND_TUNDRA.tooltipContent = getToolTipContent(LOWLAND_TUNDRA)
 export const HIGHLANDS_TUNDRA: TileTerrainValue = {
     name: "Highlands Tundra",
     css: "highlandsTundra",
     temperature: Temperature.SUBARCTIC,
     elevation: Elevation.HIGHLANDS,
-    precipitation: Precipitation.MODERATE}
+    precipitation: Precipitation.MODERATE,
+    tooltipContent: <></>
+}
+HIGHLANDS_TUNDRA.tooltipContent = getToolTipContent(HIGHLANDS_TUNDRA)
 export const COLD_DESERT: TileTerrainValue = {
     name: "Cold Desert",
     css: "coldDesert",
     temperature: Temperature.SUBARCTIC,
     elevation: Elevation.LOWLANDS,
-    precipitation: Precipitation.NONE}
+    precipitation: Precipitation.NONE,
+    tooltipContent: <></>
+}
+COLD_DESERT.tooltipContent = getToolTipContent(COLD_DESERT)
 export const COLD_DESERT_HILLS: TileTerrainValue = {
     name: "Cold Desert Hills",
     css: "coldDesertHills",
     temperature: Temperature.SUBARCTIC,
     elevation: Elevation.HIGHLANDS,
-    precipitation: Precipitation.NONE}
+    precipitation: Precipitation.NONE,
+    tooltipContent: <></>
+}
+COLD_DESERT_HILLS.tooltipContent = getToolTipContent(COLD_DESERT_HILLS)
 export const TEMPERATE_LOWLANDS_PLAIN: TileTerrainValue = {
     name: "Temperate Lowlands Plain",
     css: "temperateLowlandsPlains",
     temperature: Temperature.TEMPERATE,
     elevation: Elevation.LOWLANDS,
-    precipitation: Precipitation.LOW}
+    precipitation: Precipitation.LOW,
+    tooltipContent: <></>
+}
+TEMPERATE_LOWLANDS_PLAIN.tooltipContent = getToolTipContent(TEMPERATE_LOWLANDS_PLAIN)
 export const TEMPERATE_FOREST: TileTerrainValue = {
     name: "Temperate Forest",
     css: "temperateForest",
     temperature: Temperature.TEMPERATE,
     elevation: Elevation.LOWLANDS,
-    precipitation: Precipitation.MODERATE}
+    precipitation: Precipitation.MODERATE,
+    tooltipContent: <></>
+}
+TEMPERATE_FOREST.tooltipContent = getToolTipContent(TEMPERATE_FOREST)
 export const HIGHLAND_HILLS: TileTerrainValue = {
     name: "Highland Hills",
     css: "highlandHills",
     temperature: Temperature.TEMPERATE,
     elevation: Elevation.HIGHLANDS,
-    precipitation: Precipitation.LOW}
+    precipitation: Precipitation.LOW,
+    tooltipContent: <></>
+}
+HIGHLAND_HILLS.tooltipContent = getToolTipContent(HIGHLAND_HILLS)
 export const TEMPERATE_HIGHLAND_FOREST: TileTerrainValue = {
     name: "Temperate Highland Forest",
     css: "temperateHighlandForest",
     temperature: Temperature.TEMPERATE,
     elevation: Elevation.HIGHLANDS,
-    precipitation: Precipitation.MODERATE}
+    precipitation: Precipitation.MODERATE,
+    tooltipContent: <></>
+}
+TEMPERATE_HIGHLAND_FOREST.tooltipContent = getToolTipContent(TEMPERATE_HIGHLAND_FOREST)
 export const TEMPERATE_RAINFOREST: TileTerrainValue = {
     name: "Temperate Rainforest",
     css: "temperateRainforest",
     temperature: Temperature.TEMPERATE,
     elevation: Elevation.LOWLANDS,
-    precipitation: Precipitation.HIGH}
+    precipitation: Precipitation.HIGH,
+    tooltipContent: <></>
+}
+TEMPERATE_RAINFOREST.tooltipContent = getToolTipContent(TEMPERATE_RAINFOREST)
 export const TEMPERATE_HIGHLAND_RAINFOREST: TileTerrainValue = {
     name: "Temperate Highland Rainforest",
     css: "temperateHighlandRainforest",
     temperature: Temperature.TEMPERATE,
     elevation: Elevation.HIGHLANDS,
-    precipitation: Precipitation.HIGH}
+    precipitation: Precipitation.HIGH,
+    tooltipContent: <></>
+}
+TEMPERATE_HIGHLAND_RAINFOREST.tooltipContent = getToolTipContent(TEMPERATE_HIGHLAND_FOREST)
 export const HOT_DESERT: TileTerrainValue = {
     name: "Hot Desert",
     css: "hotDesert",
     temperature: Temperature.SUBTROPICAL,
     elevation: Elevation.LOWLANDS,
-    precipitation: Precipitation.NONE}
+    precipitation: Precipitation.NONE,
+    tooltipContent: <></>
+}
+HOT_DESERT.tooltipContent = getToolTipContent(HOT_DESERT)
 export const HOT_DESERT_HILLS: TileTerrainValue = {
     name: "Hot Desert Hills",
     css: "hotDesertHills",
     temperature: Temperature.SUBTROPICAL,
     elevation: Elevation.HIGHLANDS,
-    precipitation: Precipitation.NONE}
+    precipitation: Precipitation.NONE,
+    tooltipContent: <></>
+}
+HOT_DESERT_HILLS.tooltipContent = getToolTipContent(HOT_DESERT_HILLS)
 export const HOT_STEPPE: TileTerrainValue = {
     name: "Hot Steppe",
     css: "hotSteppe",
     temperature: Temperature.SUBTROPICAL,
     elevation: Elevation.LOWLANDS,
-    precipitation: Precipitation.MODERATE}
+    precipitation: Precipitation.MODERATE,
+    tooltipContent: <></>
+}
+HOT_STEPPE.tooltipContent = getToolTipContent(HOT_STEPPE)
 export const HOT_STEPPE_HILLS: TileTerrainValue = {
     name: "Hot Steppe Hills",
     css: "hotSteppeHills",
     temperature: Temperature.SUBTROPICAL,
     elevation: Elevation.HIGHLANDS,
-    precipitation: Precipitation.MODERATE}
+    precipitation: Precipitation.MODERATE,
+    tooltipContent: <></>
+}
+HOT_DESERT_HILLS.tooltipContent = getToolTipContent(HOT_DESERT_HILLS)
 export const TROPICAL_SAVANNA: TileTerrainValue = {
     name: "Tropical Savanna",
     css: "tropicalSavanna",
     temperature: Temperature.TROPICAL,
     elevation: Elevation.LOWLANDS,
-    precipitation: Precipitation.MODERATE}
+    precipitation: Precipitation.MODERATE,
+    tooltipContent: <></>
+}
+TROPICAL_SAVANNA.tooltipContent = getToolTipContent(TROPICAL_SAVANNA)
 export const TROPICAL_SAVANNA_HILLS: TileTerrainValue = {
     name: "Tropical Savanna Hills",
     css: "tropicalSavannaHills",
     temperature: Temperature.TROPICAL,
     elevation: Elevation.HIGHLANDS,
-    precipitation: Precipitation.MODERATE}
+    precipitation: Precipitation.MODERATE,
+    tooltipContent: <></>
+}
+TROPICAL_SAVANNA_HILLS.tooltipContent = getToolTipContent(TROPICAL_SAVANNA_HILLS)
 export const TROPICAL_RAINFOREST: TileTerrainValue = {
     name: "Tropical Rainforest",
     css: "tropicalRainforest",
     temperature: Temperature.TROPICAL,
     elevation: Elevation.LOWLANDS,
-    precipitation: Precipitation.HIGH}
+    precipitation: Precipitation.HIGH,
+    tooltipContent: <></>
+}
+TROPICAL_RAINFOREST.tooltipContent = getToolTipContent(TROPICAL_RAINFOREST)
 export const TROPICAL_RAINFOREST_HILLS: TileTerrainValue = {
     name: "Tropical Rainforest Hills",
     css: "tropicalRainforestHills",
     temperature: Temperature.TROPICAL,
     elevation: Elevation.HIGHLANDS,
-    precipitation: Precipitation.HIGH}
+    precipitation: Precipitation.HIGH,
+    tooltipContent: <></>
+}
+TROPICAL_RAINFOREST_HILLS.tooltipContent = getToolTipContent(TROPICAL_RAINFOREST_HILLS)
 export const GLACIAL_HEIGHTS: TileTerrainValue = {
     name: "Glacial Heights",
     css: "glacialHeights",
     temperature: Temperature.ARCTIC,
     elevation: Elevation.HIGHLANDS,
-    precipitation: Precipitation.IRRELEVANT}
+    precipitation: Precipitation.IRRELEVANT,
+    tooltipContent: <></>
+}
+GLACIAL_HEIGHTS.tooltipContent = getToolTipContent(GLACIAL_HEIGHTS)
 export const MOUNTAINS: TileTerrainValue = {
     name: "Mountains",
     css: "mountains",
     temperature: Temperature.IRRELEVANT,
     elevation: Elevation.MOUNTAIN,
-    precipitation: Precipitation.IRRELEVANT}
+    precipitation: Precipitation.IRRELEVANT,
+    tooltipContent: <></>
+}
+MOUNTAINS.tooltipContent = getToolTipContent(MOUNTAINS)
 
 
 

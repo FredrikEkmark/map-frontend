@@ -1,18 +1,32 @@
 import "@/styles/ui-style.css";
 import ResourceIcon from "./resourceIcon";
-import {Resource} from "../../types/manaTypes";
+import {AlternativeResource, getResourceInfo, Resource} from "../../types/manaTypes";
+import Tooltip from "./tooltip";
+import {ReactNode} from "react";
+import Image from "next/image";
 
 interface Props {
-    resource: Resource
+    resource: Resource,
     amount: number,
+    secondaryResource?: AlternativeResource,
+    secondaryAmount?: number,
 }
-const ResourceInfo = ({resource, amount} : Props) => {
+const ResourceInfo = ({resource, amount, secondaryResource, secondaryAmount,} : Props) => {
 
-    return (
+    const addSecondaryResource = () => {
+        if (secondaryResource && secondaryAmount) {
+            return "/" + secondaryAmount
+        }
+    }
+
+    const resourceInfo = getResourceInfo(resource)
+
+    return (<Tooltip
+            tooltipContent={resourceInfo.tooltipContent}>
         <div className={"resourceInfo"}>
-            <ResourceIcon size={20} resource={resource}></ResourceIcon>
-            <div className={"resourceAmount"}>{amount}</div>
-        </div>
+            <ResourceIcon size={20} resourceInfo={resourceInfo}></ResourceIcon>
+            <div className={"resourceAmount"}>{amount}{addSecondaryResource()}</div>
+        </div></Tooltip>
     )
 }
 export default ResourceInfo

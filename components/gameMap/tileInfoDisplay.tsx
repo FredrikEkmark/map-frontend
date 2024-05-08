@@ -10,6 +10,7 @@ import BuildingEventButton from "./buildingEventButton";
 import {Mana} from "../../types/manaTypes";
 import {eventName} from "../../functions/utility/eventUtility";
 import Image from "next/image";
+import Tooltip from "./tooltip";
 
 interface Props {
     mapData: GameMapData,
@@ -39,7 +40,7 @@ const TileInfoDisplay = ({mapData, markedTile, setCenterViewCoordinates, playerN
             visible: false,
             tileTerrainValue: getTileTerrainValueFromInput(0),
             tileOwner: getPlayerNumberFromInput("NONE"),
-            building: {type: getBuildingInfo("NONE"),
+            building: {type: getBuildingInfo(BuildingTypes.NONE),
             progress: 0}
         }
     }
@@ -115,29 +116,74 @@ const TileInfoDisplay = ({mapData, markedTile, setCenterViewCoordinates, playerN
         }
 
         if (explorable) {
-            return <button className={addEventButtonClass} onClick={() => addEvent(
-                GameEventType.EXPLORE_EVENT,
-                {},
-                {manpower: 50})
-                .then(r => r ? null : setAddEventButtonClass("addEventButtonReject"))}>
-                Explore Tile
-            </button>
+
+            const manpowerCost = 100
+
+            const tooltipContent = (
+                <div className={"tooltipContent"}>
+                    <p>Explore Event</p>
+                    <div className={"textRow"}>
+                        <p>Manpower Cost: </p><p>{manpowerCost}</p>
+                    </div>
+                </div>
+            )
+
+            return (
+                <Tooltip tooltipContent={tooltipContent} bottomDistance={100}>
+                    <button className={addEventButtonClass} onClick={() => addEvent(
+                        GameEventType.EXPLORE_EVENT,
+                        {},
+                        {manpower: 50})
+                        .then(r => r ? null : setAddEventButtonClass("addEventButtonReject"))}>
+                        Explore Tile
+                    </button>
+                </Tooltip>)
         }
 
         if (claimable) {
-            return <button className={addEventButtonClass} onClick={() => addEvent(
-                GameEventType.CLAIM_TILE_EVENT,
-                {},
-                {manpower: 100})
-                .then(r => r ? null : setAddEventButtonClass("addEventButtonReject"))}>
-                Claim Tile
-            </button>
+
+            const manpowerCost = 100
+
+            const tooltipContent = (
+                <div className={"tooltipContent"}>
+                    <p>Claim Tile Event</p>
+                    <div className={"textRow"}>
+                        <p>Manpower Cost: </p><p>{manpowerCost}</p>
+                    </div>
+                </div>
+            )
+
+            return (
+                <Tooltip tooltipContent={tooltipContent} bottomDistance={100}>
+                    <button className={addEventButtonClass} onClick={() => addEvent(
+                        GameEventType.CLAIM_TILE_EVENT,
+                        {},
+                        {manpower: manpowerCost})
+                        .then(r => r ? null : setAddEventButtonClass("addEventButtonReject"))}>
+                        Claim Tile
+                    </button>
+                </Tooltip>)
         }
 
         if (buildable) {
-            return <button className={addEventButtonClass} onClick={() => setBuildView(true)}>
-                Build
-            </button>
+
+            const manpowerCost = 200
+
+            const tooltipContent = (
+                <div className={"tooltipContent"}>
+                    <p>Build Event</p>
+                    <div className={"textRow"}>
+                        <p>Manpower Cost: </p><p>{manpowerCost}</p>
+                    </div>
+                </div>
+            )
+
+            return (
+                <Tooltip tooltipContent={tooltipContent} bottomDistance={100}>
+                    <button className={addEventButtonClass} onClick={() => setBuildView(true)}>
+                        Build
+                    </button>
+                </Tooltip>)
         }
     }
 
@@ -163,15 +209,15 @@ const TileInfoDisplay = ({mapData, markedTile, setCenterViewCoordinates, playerN
     if (buildView) {
         return (<div className={"tileInfoDisplay"}>
             <div className={"buildViewDisplay"}>
-                <BuildingEventButton building={getBuildingInfo("FARM")} addEvent={addEvent} setBuildView={setBuildView} tile={getMarkedTileData()}></BuildingEventButton>
-                <BuildingEventButton building={getBuildingInfo("GRANARY")} addEvent={addEvent} setBuildView={setBuildView} tile={getMarkedTileData()}></BuildingEventButton>
-                <BuildingEventButton building={getBuildingInfo("RANCH")} addEvent={addEvent} setBuildView={setBuildView} tile={getMarkedTileData()}></BuildingEventButton>
-                <BuildingEventButton building={getBuildingInfo("LUMBER_CAMP")} addEvent={addEvent} setBuildView={setBuildView} tile={getMarkedTileData()}></BuildingEventButton>
-                <BuildingEventButton building={getBuildingInfo("QUARRY")} addEvent={addEvent} setBuildView={setBuildView} tile={getMarkedTileData()}></BuildingEventButton>
-                <BuildingEventButton building={getBuildingInfo("CARPENTRY")} addEvent={addEvent} setBuildView={setBuildView} tile={getMarkedTileData()}></BuildingEventButton>
-                <BuildingEventButton building={getBuildingInfo("LEATHER_WORKER")} addEvent={addEvent} setBuildView={setBuildView} tile={getMarkedTileData()}></BuildingEventButton>
-                <BuildingEventButton building={getBuildingInfo("FISHERY")} addEvent={addEvent} setBuildView={setBuildView} tile={getMarkedTileData()}></BuildingEventButton>
-                <BuildingEventButton building={getBuildingInfo("VILLAGE")} addEvent={addEvent} setBuildView={setBuildView} tile={getMarkedTileData()}></BuildingEventButton>
+                <BuildingEventButton building={getBuildingInfo(BuildingTypes.FARM)} addEvent={addEvent} setBuildView={setBuildView} tile={getMarkedTileData()}></BuildingEventButton>
+                <BuildingEventButton building={getBuildingInfo(BuildingTypes.GRANARY)} addEvent={addEvent} setBuildView={setBuildView} tile={getMarkedTileData()}></BuildingEventButton>
+                <BuildingEventButton building={getBuildingInfo(BuildingTypes.RANCH)} addEvent={addEvent} setBuildView={setBuildView} tile={getMarkedTileData()}></BuildingEventButton>
+                <BuildingEventButton building={getBuildingInfo(BuildingTypes.LUMBER_CAMP)} addEvent={addEvent} setBuildView={setBuildView} tile={getMarkedTileData()}></BuildingEventButton>
+                <BuildingEventButton building={getBuildingInfo(BuildingTypes.QUARRY)} addEvent={addEvent} setBuildView={setBuildView} tile={getMarkedTileData()}></BuildingEventButton>
+                <BuildingEventButton building={getBuildingInfo(BuildingTypes.CARPENTRY)} addEvent={addEvent} setBuildView={setBuildView} tile={getMarkedTileData()}></BuildingEventButton>
+                <BuildingEventButton building={getBuildingInfo(BuildingTypes.LEATHER_WORKER)} addEvent={addEvent} setBuildView={setBuildView} tile={getMarkedTileData()}></BuildingEventButton>
+                <BuildingEventButton building={getBuildingInfo(BuildingTypes.FISHERY)} addEvent={addEvent} setBuildView={setBuildView} tile={getMarkedTileData()}></BuildingEventButton>
+                <BuildingEventButton building={getBuildingInfo(BuildingTypes.VILLAGE)} addEvent={addEvent} setBuildView={setBuildView} tile={getMarkedTileData()}></BuildingEventButton>
             </div>
         </div>)
     }
@@ -184,9 +230,19 @@ const TileInfoDisplay = ({mapData, markedTile, setCenterViewCoordinates, playerN
                 <p>Coordinates:</p>
                 <p>{tile.coordinates.x}:{tile.coordinates.y}</p>
             </div>
-            <div className={"textRow"}><p>Terrain:</p><p>{tile.tileTerrainValue.name}</p></div>
+            <div className={"textRow"}>
+                <p>Terrain:</p>
+                <Tooltip tooltipContent={tile.tileTerrainValue.tooltipContent} bottomDistance={150}>
+                    <p>{tile.tileTerrainValue.name}</p>
+                </Tooltip>
+            </div>
             {(tile.building.type.name !== "none") && (
-                <div className={"textRow"}><p>Building:</p><p>{tile.building.type.name}</p></div>
+                <div className={"textRow"}>
+                    <p>Building:</p>
+                    <Tooltip tooltipContent={tile.building.type.tooltipContent}>
+                        <p>{tile.building.type.name}</p>
+                    </Tooltip>
+                </div>
             )}
             {!(tile.building.progress === 0 || tile.building.type.completeAtProgress === tile.building.progress) && (
                     <div className={"textRow"}><p>Progress:</p><p>{tile.building.progress}/{tile.building.type.completeAtProgress}</p></div>

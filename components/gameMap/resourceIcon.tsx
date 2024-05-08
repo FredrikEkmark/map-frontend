@@ -1,17 +1,19 @@
 import "@/styles/ui-style.css";
 import Image from "next/image";
-import {Resource} from "../../types/manaTypes";
+import ResourceInfo from "./resourceInfo";
+import {ResourceInfoType} from "../../types/manaTypes";
+
 
 
 interface Props {
-    resource: Resource
+    resourceInfo: ResourceInfoType
     size: number
 }
-const ResourceIcon = ({resource, size} : Props) => {
+const ResourceIcon = ({resourceInfo, size} : Props) => {
 
     return (
         <div className={"resourceIcon"}>
-            <Image src={`/media/images/resources/${resource}.png`} alt={`Icon of ${resource}`} width={size} height={size} />
+            <Image src={resourceInfo.img} alt={`Icon of ${resourceInfo.name}`} width={size} height={size} />
         </div>
     )
 }
