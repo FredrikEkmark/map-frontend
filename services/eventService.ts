@@ -11,7 +11,7 @@ const eventService = {
     getAllPlayerEvent: async (gameId: string, player: PlayerNumber): Promise<GameEvent[]> => {
         const token = localStorage.getItem("token");
         try {
-            const response = await axios.get<any>(`${BASE_URL}/${gameId}/${player.name}`,{
+            const response = await axios.get<any>(`${BASE_URL}/${gameId}`,{
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
