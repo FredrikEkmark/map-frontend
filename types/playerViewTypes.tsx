@@ -1,5 +1,5 @@
 import {UUID} from "crypto";
-import {GameMapData, MapCoordinates} from "./mapTypes";
+import {GameMapData, getMapSizeFromInput, MapCoordinates} from "./mapTypes";
 import {EventLog} from "./eventTypes";
 import {Mana} from "./manaTypes";
 
@@ -16,6 +16,33 @@ export type PlayerViewData = {
     eventLog: EventLog[],
     isUpdating: boolean,
     isAdmin: boolean,
+}
+
+export function emptyPlayerView(gameId: any): PlayerViewData {
+    return {
+        gameId: gameId,
+        playerId: gameId,
+        playerName: "",
+        startCoordinates: {x: 20, y: 20},
+        playerNr: getPlayerNumberFromInput("PLAYER_ONE"),
+        turn: 0,
+        turnChange: "",
+        mapData: {mapSize: getMapSizeFromInput("SMALL"), map: []},
+        mana: {
+            population: 0,
+            populationMax: 0,
+            manpower: 0,
+            food: 0,
+            stone: 0,
+            wood: 0,
+            leather: 0,
+            furniture: 0,
+            simpleClothes: 0,
+        },
+        eventLog: [],
+        isUpdating: true,
+        isAdmin: false,
+    }
 }
 
 export interface PlayerNumber {

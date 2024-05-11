@@ -1,5 +1,5 @@
 import axios, {AxiosError} from 'axios';
-import {getPlayerNumberFromInput, PlayerViewData} from "../types/playerViewTypes";
+import {emptyPlayerView, getPlayerNumberFromInput, PlayerViewData} from "../types/playerViewTypes";
 import {getMapSizeFromInput, getTileTerrainValueFromInput, MapTileData, TileBuildingData} from "../types/mapTypes";
 import {getBuildingInfo} from "../types/buildingTypes";
 
@@ -20,6 +20,9 @@ const playerViewService = {
                     Authorization: `Bearer ${token}`,
                 },
             });
+            if (response.status === 204) {
+                return emptyPlayerView(gameId)
+            }
             if (response.data.gameId !== gameId) {
                 window.location.href = HOME;
             }
@@ -28,7 +31,7 @@ const playerViewService = {
         } catch (error) {
             if ((error as AxiosError).response?.status === 401) {
                 window.location.href = LOGIN;
-        }
+            }
             // Handle errors appropriately
             console.error('Error fetching player data:', error);
             throw error;
@@ -70,4 +73,5 @@ function parseBuildingData(buildingData: string): TileBuildingData {
         progress: building.progress
     }
 }
+
 export default playerViewService;

@@ -16,6 +16,7 @@ const eventService = {
                     Authorization: `Bearer ${token}`,
                 },
             });
+            console.log(response)
             return parseEvents(response.data);
         } catch (error) {
             if ((error as AxiosError).response?.status === 401) {
