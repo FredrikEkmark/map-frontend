@@ -1,6 +1,5 @@
-"use client" // toDo figure out if this should be modified
-
-import "@/styles/map-style.css";
+import "@/styles/gameMap/map-style.css";
+import "@/styles/global/global.css";
 import {createElement, ReactElement, useEffect, useState} from "react";
 import Tile from "./tile";
 import MapBottomRow from "./mapBottomRow";

@@ -1,5 +1,5 @@
-import "@/styles/map-style.css";
-
+import "@/styles/gameMap/map-style.css";
+import "@/styles/global/global.css";
 import {MapCoordinates, MapTileData, TileEdge} from "../../types/mapTypes";
 import Image from "next/image";
 import {NONE} from "../../types/buildingTypes";

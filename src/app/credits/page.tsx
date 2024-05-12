@@ -1,4 +1,4 @@
-import Tooltip from "../../../components/gameMap/tooltip";
+import Tooltip from "../../../components/global/tooltip";
 
 const About = () => {
     return (

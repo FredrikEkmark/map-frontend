@@ -1,4 +1,5 @@
-import "@/styles/ui-style.css";
+import "@/styles/gameUi/gameUi.css";
+import "@/styles/global/global.css";
 import {EventLog, GameEvent, GameEventType} from "../../types/eventTypes";
 import {GameMapData, MapCoordinates} from "../../types/mapTypes";
 import {eventName} from "../../functions/utility/eventUtility";

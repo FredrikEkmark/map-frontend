@@ -1,4 +1,5 @@
-import "@/styles/ui-style.css";
+import "@/styles/gameUi/gameUi.css";
+import "@/styles/global/global.css";
 import Image from "next/image";
 import ResourceInfo from "./resourceInfo";
 import {ResourceInfoType} from "../../types/manaTypes";

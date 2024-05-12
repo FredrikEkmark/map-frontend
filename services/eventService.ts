@@ -29,6 +29,7 @@ const eventService = {
 
     postNewEvent: async (event: NewEventDTO): Promise<GameEvent[]> => {
         const token = localStorage.getItem("token");
+        console.log(event)
         try {
             const response = await axios.post<any>(`${BASE_URL}`, event,{
                 headers: {

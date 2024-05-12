@@ -1,4 +1,3 @@
-import "@/styles/ui-style.css";
 import React, {ReactNode, useState} from "react";
 
 

@@ -4,8 +4,8 @@ import { useParams } from 'next/navigation'
 import GameMap from "../../../../components/gameMap/gameMap";
 import {useEffect, useState} from "react";
 import playerViewService from "../../../../services/playerViewService";
-import GameUI from "../../../../components/gameMap/gameUI";
-import ResourceBar from "../../../../components/gameMap/resourceBar";
+import GameUI from "../../../../components/gameUi/gameUI";
+import ResourceBar from "../../../../components/resourceBar/resourceBar";
 import eventService from "../../../../services/eventService";
 import {PlayerViewData} from "../../../../types/playerViewTypes";
 import {MapCoordinates} from "../../../../types/mapTypes";
@@ -101,7 +101,6 @@ const Map = () => {
     return (
         <div className={"flex flex-col w-full h-full justify-center items-center"}>
             <div className={"flex flex-row w-full justify-around items-center"}>
-                <div className={"bannerSkyscraper"}></div>
                 <div className={"flex flex-col"}>
                     <ResourceBar
                         mana={adjustedMana(playerViewData.mana, eventsData)}
@@ -126,7 +125,6 @@ const Map = () => {
                         </GameUI>
                     </div>
                 </div>
-                <div className={"bannerSkyscraper"}></div>
             </div>
             {playerViewData.isAdmin ? <button onClick={() => (turnChange())}>Next Turn</button> : <></>}
         </div>

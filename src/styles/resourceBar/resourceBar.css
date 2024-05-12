@@ -1,0 +1,31 @@
+
+.resourceBar {
+    display: flex;
+    justify-content: space-around;
+    align-items: end;
+    background-color: #044369;
+    height: 40px;
+    width: 1170px;
+}
+
+.resourceInfo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.resourceIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3px;
+    border-width: 2px;
+    border-radius: 20px;
+    border-color: black;
+    background-color: white;
+}
+
+.resourceAmount {
+    padding-left: 6px;
+    padding-right: 2px;
+}

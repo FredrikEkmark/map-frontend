@@ -147,32 +147,3 @@
 .unexplored {
     background-color: #9b9b9b;
 }
-
-.mapBottomRow {
-    align-items: center;
-    justify-content: space-between;
-    width: 900px;
-    height: 70px;
-    background-color: #044369;
-    padding-left: 20px;
-    padding-right: 20px;
-}
-
-.arrowKeyNavigator {
-    height: 70px;
-}
-
-.arrowButtonContainer {
-    display: flex;
-    /* Add any additional styles for the container */
-}
-
-.arrowButton {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-color: black;
-    border-width: 2px;
-    width: 28px;
-    height: 28px;
-}

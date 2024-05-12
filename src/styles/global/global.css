@@ -1,0 +1,42 @@
+div {
+    font-family: "Arial", sans-serif;
+    font-size: 16px;
+}
+
+h1 {
+    font-size: 20px;
+}
+
+h2 {
+    font-size: 16px;
+}
+
+p {
+    font-size: 14px;
+}
+
+.textRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.tooltipContent {
+    width: 240px;
+    background: #7c7c7c;
+    padding: 8px;
+    color: white;
+}
+
+.tooltipContent .textRow .start  {
+    text-align: start;
+}
+
+.tooltipContent .textRow .end{
+    text-align: end;
+}
+
+.tooltipContent p {
+    font-size: 12px;
+}

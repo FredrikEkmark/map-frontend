@@ -1,4 +1,5 @@
-import "@/styles/map-style.css";
+import "@/styles/gameMap/gameMap.css";
+import "@/styles/global/global.css";
 import Image from "next/image";
 import {useEffect, useState} from "react";
 import {MapMove} from "../../types/mapTypes";

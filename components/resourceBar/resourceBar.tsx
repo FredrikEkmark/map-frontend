@@ -1,4 +1,5 @@
-import "@/styles/ui-style.css";
+import "@/styles/global/global.css";
+import "@/styles/resourceBar/resourceBar.css";
 import {AlternativeResource, Mana, Resource} from "../../types/manaTypes";
 import ResourceInfo from "./resourceInfo";
 import {GameEvent} from "../../types/eventTypes";

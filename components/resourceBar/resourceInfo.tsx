@@ -1,7 +1,8 @@
-import "@/styles/ui-style.css";
+import "@/styles/gameUi/gameUi.css";
+import "@/styles/global/global.css";
 import ResourceIcon from "./resourceIcon";
 import {AlternativeResource, getResourceInfo, Resource} from "../../types/manaTypes";
-import Tooltip from "./tooltip";
+import Tooltip from "../global/tooltip";
 import {ReactNode} from "react";
 import Image from "next/image";
 

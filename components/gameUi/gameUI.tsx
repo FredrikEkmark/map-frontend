@@ -1,4 +1,5 @@
-import "@/styles/ui-style.css";
+import "@/styles/gameUi/gameUi.css";
+import "@/styles/global/global.css";
 import TileInfoDisplay from "./tileInfoDisplay";
 import {MapCoordinates} from "../../types/mapTypes";
 import {PlayerViewData} from "../../types/playerViewTypes";

@@ -1,4 +1,5 @@
-import "@/styles/map-style.css";
+import "@/styles/gameMap/gameMap.css";
+import "@/styles/global/global.css";
 import ArrowKeyNavigator from "./arrowKeyNavigator";
 import {MapCoordinates, MapMove} from "../../types/mapTypes";
 

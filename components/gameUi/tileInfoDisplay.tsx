@@ -1,4 +1,5 @@
-import "@/styles/ui-style.css";
+import "@/styles/gameUi/gameUi.css";
+import "@/styles/global/global.css";
 import {useEffect, useState} from "react";
 import {ownerIsAdjacent, visibleIsAdjacent} from "../../functions/mapAdjacency/mapAdjaceny";
 import {GameMapData, getTileTerrainValueFromInput, MapCoordinates, MapTileData} from "../../types/mapTypes";
@@ -10,7 +11,7 @@ import BuildingEventButton from "./buildingEventButton";
 import {Mana} from "../../types/manaTypes";
 import {eventName} from "../../functions/utility/eventUtility";
 import Image from "next/image";
-import Tooltip from "./tooltip";
+import Tooltip from "../global/tooltip";
 
 interface Props {
     mapData: GameMapData,
@@ -81,10 +82,24 @@ const TileInfoDisplay = ({mapData, markedTile, setCenterViewCoordinates, playerN
         return tile.building.progress > 0 && tile.building.type.completeAtProgress > tile.building.progress // add logic to see if buildable
     }
 
+    const isDemolishable = () => {
+
+        if (!markedTile) {return false}
+        if (!tile) {return false}
+        if (tile.tileOwner !== playerNr ) {return false}
+        if (tile.building.type.type === BuildingTypes.VILLAGE) {return false}
+        if (tile.building.type.completeAtProgress === tile.building.progress) {
+            return true
+        }
+
+        return false;
+    }
+
     const [tile, setTile] = useState<MapTileData | null>(getMarkedTileData())
     const [explorable, setExplorable] = useState<boolean>(isExplorable())
     const [claimable, setClaimable] = useState<boolean>(isClaimable())
     const [buildable, setBuildable] = useState<boolean>(isBuildable())
+    const [demolishable, setDemolishable] = useState<boolean>(isDemolishable)
     const [buildView, setBuildView] = useState<boolean>(false)
     const [addEventButtonClass, setAddEventButtonClass] = useState<string>("addEventButton")
 
@@ -98,6 +113,7 @@ const TileInfoDisplay = ({mapData, markedTile, setCenterViewCoordinates, playerN
         setExplorable(isExplorable)
         setClaimable(isClaimable)
         setBuildable(isBuildable)
+        setDemolishable(isDemolishable)
     }, [tile]);
 
     const eventButton = () => { // Remove, just a placeholder display
@@ -182,6 +198,31 @@ const TileInfoDisplay = ({mapData, markedTile, setCenterViewCoordinates, playerN
                 <Tooltip tooltipContent={tooltipContent} bottomDistance={100}>
                     <button className={addEventButtonClass} onClick={() => setBuildView(true)}>
                         Build
+                    </button>
+                </Tooltip>)
+        }
+
+        if (demolishable) {
+
+            const manpowerCost = 0
+
+            const tooltipContent = (
+                <div className={"tooltipContent"}>
+                    <p>Demolish Event</p>
+                    <div className={"textRow"}>
+                        <p>Manpower Cost: </p><p>{manpowerCost}</p>
+                    </div>
+                </div>
+            )
+
+            return (
+                <Tooltip tooltipContent={tooltipContent} bottomDistance={100}>
+                    <button className={addEventButtonClass} onClick={() => addEvent(
+                        GameEventType.DEMOLISH_EVENT,
+                        {},
+                        {manpower: manpowerCost})
+                        .then(r => r ? null : setAddEventButtonClass("addEventButtonReject"))}>
+                        Demolish Building
                     </button>
                 </Tooltip>)
         }
