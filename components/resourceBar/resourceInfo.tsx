@@ -1,4 +1,4 @@
-import "@/styles/gameUi/gameUi.css";
+import "@/styles/resourceBar/resourceBar.css";
 import "@/styles/global/global.css";
 import ResourceIcon from "./resourceIcon";
 import {AlternativeResource, getResourceInfo, Resource} from "../../types/manaTypes";

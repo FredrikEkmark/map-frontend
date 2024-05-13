@@ -3,19 +3,20 @@ import "@/styles/resourceBar/resourceBar.css";
 import {AlternativeResource, Mana, Resource} from "../../types/manaTypes";
 import ResourceInfo from "./resourceInfo";
 import {GameEvent} from "../../types/eventTypes";
+import TurnCountdown from "./turnCountdown";
 
 interface Props {
     mana: Mana,
     events: GameEvent[],
     turn: number,
-    timeToTurnChange?: () => number
+    turnChangeTime: Date
 }
 
-const ResourceBar = ({mana, events, turn, timeToTurnChange} : Props) => {
+const ResourceBar = ({mana, events, turn, turnChangeTime} : Props) => {
 
     return (
         <div className={"resourceBar"}>
-            <div>Turn: {turn}</div>
+            <TurnCountdown turn={turn} turnChangeTime={turnChangeTime}></TurnCountdown>
             <ResourceInfo amount={mana.population}
                           resource={Resource.POPULATION}
                           secondaryAmount={mana.populationMax}

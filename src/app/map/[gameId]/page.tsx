@@ -104,7 +104,10 @@ const Map = () => {
                 <div className={"flex flex-col"}>
                     <ResourceBar
                         mana={adjustedMana(playerViewData.mana, eventsData)}
-                        events={eventsData} turn={playerViewData.turn}></ResourceBar>
+                        events={eventsData}
+                        turn={playerViewData.turn}
+                        turnChangeTime={playerViewData.turnChange}
+                    ></ResourceBar>
                     <div className={"flex flex-row"}>
                         <GameMap
                             setMarkedTile={setMarkedTile}

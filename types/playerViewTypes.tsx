@@ -9,7 +9,7 @@ export type PlayerViewData = {
     playerName: string,
     playerNr: PlayerNumber,
     turn: number,
-    turnChange: string,
+    turnChange: Date,
     startCoordinates: MapCoordinates,
     mapData: GameMapData,
     mana: Mana,
@@ -26,7 +26,7 @@ export function emptyPlayerView(gameId: any): PlayerViewData {
         startCoordinates: {x: 20, y: 20},
         playerNr: getPlayerNumberFromInput("PLAYER_ONE"),
         turn: 0,
-        turnChange: "",
+        turnChange: new Date(),
         mapData: {mapSize: getMapSizeFromInput("SMALL"), map: []},
         mana: {
             population: 0,

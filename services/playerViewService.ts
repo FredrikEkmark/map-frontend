@@ -47,7 +47,7 @@ function parsePlayerViewData(data: any): PlayerViewData {
         startCoordinates: data.startCoordinates,
         playerNr: getPlayerNumberFromInput(data.playerNr),
         turn: data.turn,
-        turnChange: data.turnChange,
+        turnChange: new Date(data.turnChange),
         mapData: {mapSize: getMapSizeFromInput(data.mapSize), map: parseMapData(data.map)},
         mana: data.mana,
         eventLog: data.eventLog,
