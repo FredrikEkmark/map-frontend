@@ -1,5 +1,6 @@
 "use client"
 
+import "@/styles/global/global.css";
 import { useParams } from 'next/navigation'
 import GameMap from "../../../../components/gameMap/gameMap";
 import {useEffect, useState} from "react";
@@ -129,7 +130,7 @@ const Map = () => {
                     </div>
                 </div>
             </div>
-            {playerViewData.isAdmin ? <button onClick={() => (turnChange())}>Next Turn</button> : <></>}
+            {playerViewData.isAdmin ? <button className={"button"} onClick={() => (turnChange())}>Next Turn</button> : <></>}
         </div>
     )
 }

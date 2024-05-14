@@ -15,6 +15,13 @@ p {
     font-size: 14px;
 }
 
+.button {
+    padding: 5px;
+    width: 140px;
+    border-radius: 20px;
+    background-color: #374e6b;
+}
+
 .textRow {
     display: flex;
     flex-direction: row;
