@@ -12,6 +12,10 @@ export enum BuildingTypes {
     RANCH = "RANCH",
     LEATHER_WORKER = "LEATHER_WORKER",
     FISHERY = "FISHERY",
+    MINE = "MINE",
+    BARRACK = "BARRACK",
+    ARCHERY_RANGE = "ARCHERY_RANGE",
+    STABLE = "STABLE",
     VILLAGE = "VILLAGE",
     TOWN = "TOWN",
     CITY = "CITY",
@@ -27,9 +31,11 @@ function getToolTipContent(buildingInfo: BuildingInfo): ReactNode {
         <div className={"tooltipContent"}>
             <h2>{buildingInfo.name}</h2>
             <p >{buildingInfo.tooltipText}</p>
-            <p>Base Production: {buildingInfo.baseOutput?.map((baseOutput: buildingBaseOutput) => {
-                return baseOutput.resource + " " + baseOutput.amount + ", "
-            })}</p>
+            {buildingInfo.baseOutput ?
+                <p>Base Production: {buildingInfo.baseOutput.map((baseOutput: buildingBaseOutput) => {
+                    return baseOutput.resource + " " + baseOutput.amount + ", "
+                })}</p>
+                : <></>}
             <p>Manpower Upkeep: {buildingInfo.manpowerUpkeep}</p>
             {buildingInfo.populationMaxBonus > 0 ?
                 <p>Population Max Bonus: {buildingInfo.populationMaxBonus}</p>
@@ -60,9 +66,11 @@ function getToolTipBuildContent(buildingInfo: BuildingInfo): ReactNode {
         <div className={"tooltipContent"}>
             <h2>{buildingInfo.name}</h2>
             <p >{buildingInfo.tooltipText}</p>
-            <p>Base Production: {buildingInfo.baseOutput?.map((baseOutput: buildingBaseOutput) => {
-                return baseOutput.resource + " " + baseOutput.amount + ", "
-            })}</p>
+            {buildingInfo.baseOutput ?
+                <p>Base Production: {buildingInfo.baseOutput.map((baseOutput: buildingBaseOutput) => {
+                    return baseOutput.resource + " " + baseOutput.amount + ", "
+                })}</p>
+                : <></>}
             <p>Manpower Upkeep: {buildingInfo.manpowerUpkeep}</p>
             {buildingInfo.populationMaxBonus > 0 ?
                 <p>Population Max Bonus: {buildingInfo.populationMaxBonus}</p>
@@ -310,6 +318,71 @@ export const FISHERY: BuildingInfo = {
 }
 FISHERY.tooltipContent = getToolTipContent(FISHERY)
 FISHERY.tooltipBuildContent = getToolTipBuildContent(FISHERY)
+export const MINE: BuildingInfo = {
+    name: "Mine",
+    img: `/media/images/buildings/mine.png`,
+    completeAtProgress: 500,
+    type: BuildingTypes.MINE,
+    buildableElevation: [Elevation.LOWLANDS, Elevation.HIGHLANDS, Elevation.MOUNTAIN],
+    elevationModifiers: ["Highlands +50%", "Mountain + 100%"],
+    temperatureModifiers: ["Arctic -80%", "Temperate +20%", "Tropical -20%"],
+    precipitationModifiers: ["None +50%", "High -50%"],
+    baseOutput: [{resource: Resource.FOOD, amount: 5}],
+    populationMaxBonus: 0,
+    manpowerUpkeep: 100,
+    nonManpowerCost: {iron: 2},
+    tooltipText: "",
+    tooltipContent: <></>,
+    tooltipBuildContent: <></>,
+}
+MINE.tooltipContent = getToolTipContent(MINE)
+MINE.tooltipBuildContent = getToolTipBuildContent(MINE)
+export const BARRACK: BuildingInfo = {
+    name: "Barrack",
+    img: `/media/images/buildings/barrack.png`,
+    completeAtProgress: 500,
+    type: BuildingTypes.BARRACK,
+    buildableElevation: [Elevation.LOWLANDS, Elevation.HIGHLANDS],
+    populationMaxBonus: 0,
+    manpowerUpkeep: 50,
+    nonManpowerCost: {wood: 100, stone: 200},
+    tooltipText: "",
+    tooltipContent: <></>,
+    tooltipBuildContent: <></>,
+}
+BARRACK.tooltipContent = getToolTipContent(BARRACK)
+BARRACK.tooltipBuildContent = getToolTipBuildContent(BARRACK)
+export const ARCHERY_RANGE: BuildingInfo = {
+    name: "Archery Range",
+    img: `/media/images/buildings/archeryRange.png`,
+    completeAtProgress: 500,
+    type: BuildingTypes.ARCHERY_RANGE,
+    buildableElevation: [Elevation.LOWLANDS, Elevation.HIGHLANDS],
+    populationMaxBonus: 0,
+    manpowerUpkeep: 50,
+    nonManpowerCost: {wood: 200, stone: 100},
+    tooltipText: "",
+    tooltipContent: <></>,
+    tooltipBuildContent: <></>,
+}
+ARCHERY_RANGE.tooltipContent = getToolTipContent(ARCHERY_RANGE)
+ARCHERY_RANGE.tooltipBuildContent = getToolTipBuildContent(ARCHERY_RANGE)
+export const STABLE: BuildingInfo = {
+    name: "Stable",
+    img: `/media/images/buildings/stable.png`,
+    completeAtProgress: 600,
+    type: BuildingTypes.STABLE,
+    buildableElevation: [Elevation.LOWLANDS, Elevation.HIGHLANDS],
+    baseOutput: [{resource: Resource.HORSES, amount: 1}],
+    populationMaxBonus: 50,
+    manpowerUpkeep: 100,
+    nonManpowerCost: {wood: 250, stone: 150},
+    tooltipText: "",
+    tooltipContent: <></>,
+    tooltipBuildContent: <></>,
+}
+STABLE.tooltipContent = getToolTipContent(STABLE)
+STABLE.tooltipBuildContent = getToolTipBuildContent(STABLE)
 export const VILLAGE: BuildingInfo = {
     name: "Village",
     img: `/media/images/buildings/village.png`,
@@ -389,6 +462,14 @@ export function getBuildingInfo(building: BuildingTypes) : BuildingInfo {
             return LEATHER_WORKER
         case BuildingTypes.FISHERY:
             return FISHERY
+        case BuildingTypes.MINE:
+            return MINE
+        case BuildingTypes.BARRACK:
+            return BARRACK
+        case BuildingTypes.ARCHERY_RANGE:
+            return ARCHERY_RANGE
+        case BuildingTypes.STABLE:
+            return STABLE
         case BuildingTypes.VILLAGE:
             return VILLAGE
         case BuildingTypes.TOWN:

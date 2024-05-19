@@ -1,11 +1,11 @@
 import "@/styles/gameUi/gameUi.css";
 import "@/styles/global/global.css";
 import Image from "next/image";
-import {BuildingInfo, BuildingTypes} from "../../types/buildingTypes";
-import {GameEventType} from "../../types/eventTypes";
-import {MapTileData} from "../../types/mapTypes";
+import {BuildingInfo, BuildingTypes} from "../../../types/buildingTypes";
+import {GameEventType} from "../../../types/eventTypes";
+import {MapTileData} from "../../../types/mapTypes";
 import {useState} from "react";
-import Tooltip from "../global/tooltip";
+import Tooltip from "../../global/tooltip";
 
 interface Props {
     building: BuildingInfo,

@@ -23,14 +23,25 @@ interface Props {
     markedTile: MapCoordinates | null
     setMarkedTile: (coordinates: MapCoordinates) => void;
     events: GameEvent[]
+    requestingMoveCoordinates: boolean,
+    setMoveCoordinates: (coordinates: MapCoordinates) => void,
 }
 
-const GameMap = ({centerViewCoordinates, setCenterViewCoordinates, mapData, markedTile, setMarkedTile, events}: Props) => {
+const GameMap = ({centerViewCoordinates, setCenterViewCoordinates, mapData, markedTile, setMarkedTile, events, requestingMoveCoordinates, setMoveCoordinates}: Props) => {
 
     const [mouseOverTile, setMouseOverTile] = useState<MapCoordinates | null>(null)
 
     const numRows = 13;
     const numCols = 15;
+
+    const setMarkedOrRequestedTile = (coordinates: MapCoordinates) => {
+        console.log("Requested move " + requestingMoveCoordinates)
+        if (requestingMoveCoordinates) {
+            setMoveCoordinates(coordinates)
+        } else {
+            setMarkedTile(coordinates)
+        }
+    }
 
     const applyEdge = (row: number, col: number): TileEdge => {
 
@@ -79,7 +90,8 @@ const GameMap = ({centerViewCoordinates, setCenterViewCoordinates, mapData, mark
             tileTerrainValue: getTileTerrainValueFromInput(0),
             tileOwner: getPlayerNumberFromInput("NONE"),
             building: {type: getBuildingInfo(BuildingTypes.NONE),
-            progress: 0}
+            progress: 0},
+            army: null,
         }
 
         for (const tile of mapData.map) {
@@ -143,7 +155,7 @@ const GameMap = ({centerViewCoordinates, setCenterViewCoordinates, mapData, mark
                     key: col,
                     edge: applyEdge(row, col),
                     tileData: getTile(row, col),
-                    setMarkedTile: setMarkedTile,
+                    setMarkedTile: setMarkedOrRequestedTile,
                     isMarked: isMarkedTile(row, col),
                     tileEvents: getEventsOnTile(row,col),
                     setMouseOverTile: setMouseOverTile,

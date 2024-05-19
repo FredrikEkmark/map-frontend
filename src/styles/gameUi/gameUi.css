@@ -105,9 +105,11 @@
             0 0 8px 0 rgba(15, 100, 146, 0.2),
             0 0 9px 0 rgba(15, 100, 146, 0.2),
             0 0 10px 0 rgba(15, 100, 146, 0.2);
+    overflow-y: auto;
 }
 
 .tileInfoDisplay .addEventButton {
+    margin-top: 8px;
     width: 100%;
     background-color: #374e6b;
     border-radius: 20px;
@@ -115,6 +117,7 @@
 }
 
 .tileInfoDisplay .addEventButtonReject {
+    margin-top: 8px;
     width: 100%;
     background-color: #374e6b;
     padding: 0px 6px;
@@ -123,10 +126,40 @@
     border-color: #da0a0a;
 }
 
+.tileInfoDisplay .unitEventButtons {
+    overflow-y: auto;
+}
+
+.tileInfoDisplay .eventSpecificsView {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.eventSpecificsView .doubleConfirmButton {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+}
+
+.confirmButton {
+    justify-self: center;
+    margin-top: 8px;
+    margin-right: 10px;
+    margin-lef: 10px;
+    width: 120px;
+    background-color: #374e6b;
+    border-radius: 20px;
+    padding: 4px 10px;
+}
+
 .buildViewDisplay {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    overflow-y: auto;
 }
 
 .buildEventButton {

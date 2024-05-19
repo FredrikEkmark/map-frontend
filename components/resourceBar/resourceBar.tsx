@@ -26,9 +26,11 @@ const ResourceBar = ({mana, events, turn, turnChangeTime} : Props) => {
             <ResourceInfo amount={mana.food} resource={Resource.FOOD}></ResourceInfo>
             <ResourceInfo amount={mana.wood} resource={Resource.WOOD}></ResourceInfo>
             <ResourceInfo amount={mana.stone} resource={Resource.STONE}></ResourceInfo>
+            <ResourceInfo amount={mana.iron} resource={Resource.IRON}></ResourceInfo>
             <ResourceInfo amount={mana.leather} resource={Resource.LEATHER}></ResourceInfo>
             <ResourceInfo amount={mana.simpleClothes} resource={Resource.SIMPLE_CLOTHES}></ResourceInfo>
             <ResourceInfo amount={mana.furniture} resource={Resource.FURNITURE}></ResourceInfo>
+            <ResourceInfo amount={mana.horses} resource={Resource.HORSES}></ResourceInfo>
         </div>
     )
 }

@@ -10,7 +10,7 @@ import {log} from "util";
 interface Props {
     eventsData: GameEvent[],
     setMarkedTile: (coordinate: MapCoordinates | null) => void,
-    removeEvent: (coordinates: MapCoordinates) => void,
+    removeEvent: (eventId: string) => void,
     mapData: GameMapData,
     eventLog: EventLog[],
     setCenterViewCoordinates: (coordinates: MapCoordinates) => void,
@@ -46,7 +46,7 @@ const ActionInterface = ({eventsData, setMarkedTile, setCenterViewCoordinates, r
             return (<div className={"eventListing"} key={event.eventId}>
                 <div className={"textRow"}>
                     {eventName(event)}
-                    <button onClick={() => removeEvent(event.primaryTileCoordinates)}>
+                    <button onClick={() => removeEvent(event.eventId)}>
                         <Image src={"/media/images/ui/close.png"} alt={"remove"} width={14} height={14}/>
                     </button>
                 </div>

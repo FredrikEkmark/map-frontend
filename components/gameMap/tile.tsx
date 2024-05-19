@@ -4,6 +4,7 @@ import {MapCoordinates, MapTileData, TileEdge} from "../../types/mapTypes";
 import Image from "next/image";
 import {NONE} from "../../types/buildingTypes";
 import {GameEvent} from "../../types/eventTypes";
+import {Army} from "../../types/unitTypes";
 
 interface Props {
     tileData: MapTileData,
@@ -16,6 +17,12 @@ interface Props {
 
 const Tile = ({ tileData, edge = TileEdge.NONE , setMarkedTile, isMarked, setMouseOverTile, tileEvents}: Props) => {
 
+    const armyPresent = () => {
+        if (tileData.army) {
+            return (<Image src={`/media/images/units/army.png`} className={"army"}
+                           alt={"army"} height={30} width={30}></Image>)
+        }
+    }
     const tileContent = () => {
         if (!tileData.visible) {
             return (<Image src={`/media/images/tile/fog.png`} className={"img"}
@@ -58,7 +65,7 @@ const Tile = ({ tileData, edge = TileEdge.NONE , setMarkedTile, isMarked, setMou
 
     return (
         <div onMouseOver={() => setMouseOverTile(tileData.coordinates)} onClick={() => setMarkedTile(tileData.coordinates)} className={`border ${edge}`} style={tileStyle()}>
-            <div className={`tile ${tileData.tileTerrainValue.css} ${edge}`}>{tileContent()}</div>
+            <div className={`tile ${tileData.tileTerrainValue.css} ${edge}`}>{armyPresent()}{tileContent()}</div>
         </div>
     )
 }

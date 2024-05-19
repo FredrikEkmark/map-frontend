@@ -87,8 +87,10 @@ function parseManaCost(cost: any): ManaCost {
         wood: typeof cost.wood === "number" ? cost.wood : 0,
         stone: typeof cost.stone === "number" ? cost.stone : 0,
         leather: typeof cost.leather === "number" ? cost.leather : 0,
+        iron: typeof cost.iron === "number" ? cost.iron : 0,
         furniture: typeof cost.furniture === "number" ? cost.furniture : 0,
         simpleClothes: typeof cost.simpleClothes === "number" ? cost.simpleClothes : 0,
+        horses: typeof cost.horses === "number" ? cost.horses : 0,
     }
 }
 

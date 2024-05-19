@@ -1,6 +1,7 @@
 import {PlayerNumber} from "./playerViewTypes";
 import {BuildingInfo} from "./buildingTypes";
 import React, {ReactNode} from "react";
+import {Army} from "./unitTypes";
 
 export type GameMapData = {
     map: MapTileData[]
@@ -13,6 +14,7 @@ export type MapTileData = {
     tileTerrainValue: TileTerrainValue,
     visible: boolean,
     building: TileBuildingData,
+    army: Army | null,
 }
 
 export type TileBuildingData = {

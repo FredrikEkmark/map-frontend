@@ -19,10 +19,16 @@ export function canPayManaInFull(playerMana: Mana, cost: ManaCost): boolean {
     if (playerMana.leather < (cost.leather || 0))
         return false
 
+    if (playerMana.iron < (cost.iron || 0))
+        return false
+
     if (playerMana.simpleClothes < (cost.simpleClothes || 0))
         return false
 
     if (playerMana.furniture < (cost.furniture || 0))
+        return false
+
+    if (playerMana.horses < (cost.horses || 0))
         return false
 
     return true

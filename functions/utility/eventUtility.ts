@@ -13,6 +13,13 @@ export function eventName(event: GameEvent)  {
         case GameEventType.EXPLORE_EVENT: return "Exploring";
         case GameEventType.DEMOLISH_EVENT: return "Demolishing";
         case GameEventType.CLAIM_TILE_EVENT: return "Claiming Tile";
+        case GameEventType.RECRUIT_EVENT: return "Recruit Regiment";
+        case GameEventType.DISMISS_EVENT: return "Dismiss Regiments";
+        case GameEventType.MOVE_EVENT: return "Move Army";
+        case GameEventType.SPLIT_ARMY_EVENT: return "Split Army";
+        case GameEventType.CONQUER_EVENT: return "Conquer Tile";
+        case GameEventType.RAID_EVENT: return "Raid Tile";
+        case GameEventType.FORTIFY_EVENT: return "Fortify Army";
     }
 }
 
@@ -30,4 +37,8 @@ export function findAllEventsInMap(mapCoordinates: MapCoordinates | null, map: G
         }
     })
     return array;
+}
+
+export function getUnitEventButton() {
+
 }

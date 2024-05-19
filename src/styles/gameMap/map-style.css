@@ -29,7 +29,10 @@
     object-fit: cover;
 }
 
-
+.container .tile .army { /* Set the height of the image to fill the container */
+    object-fit: cover;
+    position: absolute;
+}
 
 .container .border {
     width: var(--d);

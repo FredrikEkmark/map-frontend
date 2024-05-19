@@ -1,6 +1,6 @@
 import "@/styles/gameUi/gameUi.css";
 import "@/styles/global/global.css";
-import TileInfoDisplay from "./tileInfoDisplay";
+import TileInfoDisplay from "./tileInfoDisplay/tileInfoDisplay";
 import {MapCoordinates} from "../../types/mapTypes";
 import {PlayerViewData} from "../../types/playerViewTypes";
 import {BuildEventData, EmptyEventData, GameEvent, GameEventType, NewEventDTO} from "../../types/eventTypes";
@@ -20,9 +20,11 @@ interface Props {
     setEventsData: (events: GameEvent[]) => void,
     setCenterViewCoordinates: (coordinates: MapCoordinates) => void,
     adjustedMana: Mana
+    moveCoordinates: MapCoordinates | null,
+    setRequestingMoveCoordinates: (state: boolean) => void,
 }
 
-const GameUI = ({markedTile, setMarkedTile, playerViewData, eventsData, setEventsData, setCenterViewCoordinates, adjustedMana}: Props) => {
+const GameUI = ({markedTile, setMarkedTile, playerViewData, eventsData, setEventsData, setCenterViewCoordinates, adjustedMana, moveCoordinates, setRequestingMoveCoordinates}: Props) => {
 
     const [markedTileEvents, setMarkedTileEvents] = (
         useState<GameEvent[]>(findAllEventsInMap(markedTile, eventsData)))
@@ -42,7 +44,6 @@ const GameUI = ({markedTile, setMarkedTile, playerViewData, eventsData, setEvent
         }
 
         if (!canPayManaInFull(adjustedMana, cost)) {
-            // toDo add error messaging
             return false
         }
 
@@ -65,9 +66,9 @@ const GameUI = ({markedTile, setMarkedTile, playerViewData, eventsData, setEvent
         }
     }
 
-    const removeEvent = async (coordinates: MapCoordinates) => {
+    const removeEvent = async (eventId: string) => {
         const event = eventsData.find((event => {
-            return event.primaryTileCoordinates === coordinates
+            return event.eventId === eventId
         }))
         if (!event) {
             return
@@ -99,6 +100,8 @@ const GameUI = ({markedTile, setMarkedTile, playerViewData, eventsData, setEvent
                 addEvent={addEvent}
                 removeEvent={removeEvent}
                 playerOwnedTiles={playerClaimedTiles()}
+                moveCoordinates={moveCoordinates}
+                setRequestingMoveCoordinates={setRequestingMoveCoordinates}
             >
             </TileInfoDisplay>
         </div>

@@ -21,6 +21,12 @@ const Map = () => {
     const [eventsData, setEventsData] = useState<GameEvent[]>([])
     const [markedTile, setMarkedTile] = useState<MapCoordinates | null>(null)
     const [centerViewCoordinates, setCenterViewCoordinates] = useState<MapCoordinates>({x: 20, y: 20})
+    const [moveCoordinates, setMoveCoordinate] = useState<MapCoordinates | null>(null)
+    const [requestingMoveCoordinates, setRequestingMoveCoordinate] = useState<boolean>(false)
+
+    useEffect(() => {
+        setMoveCoordinate(null)
+    }, [requestingMoveCoordinates]);
 
     const adjustedMana = (mana: Mana, events: GameEvent[]) : Mana => {
         let adjustedMana: Mana = {
@@ -30,9 +36,11 @@ const Map = () => {
             food: mana.food,
             wood: mana.wood,
             stone: mana.stone,
+            iron: mana.iron,
             leather: mana.leather,
             furniture: mana.furniture,
-            simpleClothes: mana.simpleClothes
+            simpleClothes: mana.simpleClothes,
+            horses: mana.horses,
         }
         events.map((event: GameEvent) => {
             adjustedMana.manpower -= event.cost.manpower ? event.cost.manpower : 0
@@ -40,8 +48,10 @@ const Map = () => {
             adjustedMana.wood -= event.cost.wood ? event.cost.wood : 0
             adjustedMana.stone -= event.cost.stone ? event.cost.stone : 0
             adjustedMana.leather -= event.cost.leather ? event.cost.leather : 0
+            adjustedMana.iron -= event.cost.iron ? event.cost.iron : 0
             adjustedMana.furniture -= event.cost.furniture ? event.cost.furniture : 0
             adjustedMana.simpleClothes -= event.cost.simpleClothes ? event.cost.simpleClothes : 0
+            adjustedMana.horses -= event.cost.horses ? event.cost.horses : 0
         })
         return adjustedMana
     }
@@ -116,7 +126,9 @@ const Map = () => {
                             centerViewCoordinates={centerViewCoordinates}
                             setCenterViewCoordinates={setCenterViewCoordinates}
                             mapData={playerViewData.mapData}
-                            events={eventsData}>
+                            events={eventsData}
+                            requestingMoveCoordinates={requestingMoveCoordinates}
+                            setMoveCoordinates={setMoveCoordinate}>
                         </GameMap>
                         <GameUI
                             markedTile={markedTile}
@@ -125,7 +137,9 @@ const Map = () => {
                             eventsData={eventsData}
                             setEventsData={setEventsData}
                             setCenterViewCoordinates={safeCenterViewPoint}
-                            adjustedMana={adjustedMana(playerViewData.mana, eventsData)}>
+                            adjustedMana={adjustedMana(playerViewData.mana, eventsData)}
+                            moveCoordinates={moveCoordinates}
+                            setRequestingMoveCoordinates={setRequestingMoveCoordinate}>
                         </GameUI>
                     </div>
                 </div>

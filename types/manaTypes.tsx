@@ -6,8 +6,10 @@ export enum Resource {
     WOOD = "Wood",
     LEATHER = "Leather",
     STONE = "Stone",
+    IRON = "Iron",
     FURNITURE = "Furniture",
     SIMPLE_CLOTHES = "Simple Clothes",
+    HORSES = "Horses",
     MANPOWER = "Manpower",
     POPULATION = "Population",
 }
@@ -76,6 +78,15 @@ export const LEATHER: ResourceInfoType = {
 
 LEATHER.tooltipContent = getToolTipContent(LEATHER);
 
+export const IRON: ResourceInfoType = {
+    name: "Iron",
+    img: `/media/images/resources/iron.png`,
+    tooltipText: "Iron",
+    tooltipContent: <></>
+}
+
+IRON.tooltipContent = getToolTipContent(IRON);
+
 export const FURNITURE: ResourceInfoType = {
     name: "Furniture",
     img: `/media/images/resources/furniture.png`,
@@ -95,6 +106,15 @@ export const SIMPLE_CLOTHES: ResourceInfoType = {
 }
 
 SIMPLE_CLOTHES.tooltipContent = getToolTipContent(SIMPLE_CLOTHES);
+
+export const HORSES: ResourceInfoType = {
+    name: "Horses",
+    img: `/media/images/resources/horses.png`,
+    tooltipText: "Horses",
+    tooltipContent: <></>
+}
+
+HORSES.tooltipContent = getToolTipContent(HORSES);
 
 export const MANPOWER: ResourceInfoType = {
     name: "Manpower",
@@ -130,10 +150,14 @@ export function getResourceInfo(resource: Resource) : ResourceInfoType {
             return STONE
         case Resource.LEATHER:
             return LEATHER
+        case Resource.IRON:
+            return IRON
         case Resource.FURNITURE:
             return FURNITURE
         case Resource.SIMPLE_CLOTHES:
             return SIMPLE_CLOTHES
+        case Resource.HORSES:
+            return HORSES
         case Resource.MANPOWER:
             return MANPOWER
         case Resource.POPULATION:
@@ -148,9 +172,11 @@ export type Mana = {
     food: number,
     stone: number,
     wood: number,
+    iron: number,
     leather: number,
     furniture: number,
     simpleClothes: number,
+    horses: number,
 }
 
 export type ManaCost = {
@@ -158,7 +184,9 @@ export type ManaCost = {
     food?: number,
     stone?: number,
     wood?: number,
+    iron?: number,
     leather?: number,
     furniture?: number,
     simpleClothes?: number,
+    horses?: number,
 }
