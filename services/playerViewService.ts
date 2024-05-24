@@ -4,20 +4,17 @@ import {getMapSizeFromInput, getTileTerrainValueFromInput, MapTileData, TileBuil
 import {getBuildingInfo} from "../types/buildingTypes";
 import {Army, Regiment} from "../types/unitTypes";
 
+const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL
+const PLAYER_VIEW_API_URL = `${BASE_URL}/api/playerView`
+const LOGIN_URL = `${BASE_URL}/login`;
 
-// Define the base URL for your backend API
-const BASE_URL = 'http://localhost:8080/api/playerView';
-const LOGIN = 'http://localhost:8080/login';
-const HOME = 'http://localhost:8080';
 
-// Define functions for interacting with the backend
 const playerViewService = {
-    // Function to fetch player data
+
     getPlayerViewData: async (gameId: string): Promise<PlayerViewData> => {
         const token = localStorage.getItem("token");
-        console.log("running player view call")
         try {
-            const response = await axios.get<PlayerViewData>(`${BASE_URL}/${gameId}`,{
+            const response = await axios.get<PlayerViewData>(`${PLAYER_VIEW_API_URL}/${gameId}`,{
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -30,9 +27,9 @@ const playerViewService = {
             return parsePlayerViewData(response.data);
         } catch (error) {
             if ((error as AxiosError).response?.status === 401) {
-                window.location.href = LOGIN;
+                window.location.href = LOGIN_URL;
             }
-            // Handle errors appropriately
+
             console.error('Error fetching player data:', error);
             throw error;
         }

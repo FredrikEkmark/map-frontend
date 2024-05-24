@@ -77,7 +77,7 @@ const Map = () => {
                 const playerViewResponse = await playerViewService.getPlayerViewData(params.gameId);
                 setPlayerViewData(playerViewResponse);
                 if (!playerViewResponse.isUpdating) {
-                    const gameEventsResponse = await eventService.getAllPlayerEvent(params.gameId, playerViewResponse.playerNr)
+                    const gameEventsResponse = await eventService.getAllPlayerEvent(params.gameId)
                     setEventsData(gameEventsResponse)
                 }
                 const startCoordinates = {x: playerViewResponse.startCoordinates.x + (playerViewResponse.startCoordinates.x % 2), y: playerViewResponse.startCoordinates.y}

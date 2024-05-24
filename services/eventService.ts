@@ -1,17 +1,18 @@
 import axios, {AxiosError} from 'axios';
 import {GameEvent, NewEventDTO} from "../types/eventTypes";
-import {getPlayerNumberFromInput, PlayerNumber} from "../types/playerViewTypes";
+import {getPlayerNumberFromInput} from "../types/playerViewTypes";
 import {ManaCost} from "../types/manaTypes";
 
-const BASE_URL = 'http://localhost:8080/api/event';
-const LOGIN = 'http://localhost:8080/login';
+const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL
+const EVENT_API_URL = `${BASE_URL}/api/event`
+const LOGIN_URL = `${BASE_URL}/login`
 
 const eventService = {
 
-    getAllPlayerEvent: async (gameId: string, player: PlayerNumber): Promise<GameEvent[]> => {
+    getAllPlayerEvent: async (gameId: string): Promise<GameEvent[]> => {
         const token = localStorage.getItem("token");
         try {
-            const response = await axios.get<any>(`${BASE_URL}/${gameId}`,{
+            const response = await axios.get<any>(`${EVENT_API_URL}/${gameId}`,{
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -20,7 +21,7 @@ const eventService = {
             return parseEvents(response.data);
         } catch (error) {
             if ((error as AxiosError).response?.status === 401) {
-                window.location.href = LOGIN;
+                window.location.href = LOGIN_URL;
             }
             console.error('Error fetching event data:', error);
             throw error;
@@ -29,9 +30,8 @@ const eventService = {
 
     postNewEvent: async (event: NewEventDTO): Promise<GameEvent[]> => {
         const token = localStorage.getItem("token");
-        console.log(event)
         try {
-            const response = await axios.post<any>(`${BASE_URL}`, event,{
+            const response = await axios.post<any>(`${EVENT_API_URL}`, event,{
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -39,7 +39,7 @@ const eventService = {
             return parseEvents(response.data);
         } catch (error) {
             if ((error as AxiosError).response?.status === 401) {
-                window.location.href = LOGIN;
+                window.location.href = LOGIN_URL;
             }
             console.error('Error fetching event data:', error);
             throw error;
@@ -50,7 +50,7 @@ const eventService = {
         const token = localStorage.getItem("token");
         try {
             const response = await axios.delete<any>(
-                `${BASE_URL}/${event.gameId}/${event.eventId}`,{
+                `${EVENT_API_URL}/${event.gameId}/${event.eventId}`,{
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
@@ -58,7 +58,7 @@ const eventService = {
             return parseEvents(response.data);
         } catch (error) {
             if ((error as AxiosError).response?.status === 401) {
-                window.location.href = LOGIN;
+                window.location.href = LOGIN_URL;
             }
             console.error('Error fetching event data:', error);
             throw error;
