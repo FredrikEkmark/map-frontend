@@ -25,9 +25,10 @@ interface Props {
     events: GameEvent[]
     requestingMoveCoordinates: boolean,
     setMoveCoordinates: (coordinates: MapCoordinates) => void,
+    unitValidMoveLocations: MapCoordinates[],
 }
 
-const GameMap = ({centerViewCoordinates, setCenterViewCoordinates, mapData, markedTile, setMarkedTile, events, requestingMoveCoordinates, setMoveCoordinates}: Props) => {
+const GameMap = ({centerViewCoordinates, setCenterViewCoordinates, mapData, markedTile, setMarkedTile, events, requestingMoveCoordinates, setMoveCoordinates, unitValidMoveLocations}: Props) => {
 
     const [mouseOverTile, setMouseOverTile] = useState<MapCoordinates | null>(null)
 
@@ -135,6 +136,15 @@ const GameMap = ({centerViewCoordinates, setCenterViewCoordinates, mapData, mark
         return false
     }
 
+    const isPossibleMoveTile = (tile: MapTileData): boolean => {
+
+        if (unitValidMoveLocations.includes(tile.coordinates)) {
+            return true
+        }
+
+        return false;
+    }
+
     const getEventsOnTile = (row: number, col: number) => {
         const y = (centerViewCoordinates.y - ((numCols - 1) / 2) + col) % mapData.mapSize.width;
         const x = centerViewCoordinates.x - ((numRows - 1) / 2) + row;
@@ -151,14 +161,16 @@ const GameMap = ({centerViewCoordinates, setCenterViewCoordinates, mapData, mark
             const tiles: ReactElement[] = [];
             const numTiles = row % 2 === 0 ? numCols : numCols - 1;
             for (let col = 0; col < numTiles; col++) {
+                const tile = getTile(row, col)
                 const tileElement = createElement(Tile, {
                     key: col,
                     edge: applyEdge(row, col),
-                    tileData: getTile(row, col),
+                    tileData: tile,
                     setMarkedTile: setMarkedOrRequestedTile,
                     isMarked: isMarkedTile(row, col),
                     tileEvents: getEventsOnTile(row,col),
                     setMouseOverTile: setMouseOverTile,
+                    isPossibleMove: isPossibleMoveTile(tile),
                 });
                 tiles.push(tileElement);
             }

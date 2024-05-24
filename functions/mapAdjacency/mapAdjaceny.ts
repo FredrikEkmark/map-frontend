@@ -1,6 +1,6 @@
 import {findTileInMap} from "../utility/mapUtility";
 import {PlayerNumber} from "../../types/playerViewTypes";
-import {MapCoordinates, MapTileData} from "../../types/mapTypes";
+import {Elevation, MapCoordinates, MapTileData, PathCoordinates} from "../../types/mapTypes";
 
 function getXOffset(tileDistance: number) {
 
@@ -170,6 +170,26 @@ export function tilesInRange(tileDistance: number) {
     return counter
 }
 
+function getAdjacentTiles(tileDistance: number, centerCoordinates: MapCoordinates, map: MapTileData[]): MapTileData[] {
+
+    const adjacentTiles: MapTileData[] = []
+
+    const xOffset = getXOffset(tileDistance)
+    const yOffset = getYOffset(centerCoordinates.x, tileDistance)
+
+    for (let i = 0; i < xOffset.length; i++) {
+        const coordinates = {
+            x: xOffset[i] + centerCoordinates.x,
+            y: yOffset[i] + centerCoordinates.y
+        }
+        const tile = findTileInMap(coordinates, map);
+        if (tile) {
+            adjacentTiles.push(tile);
+        }
+    }
+    return adjacentTiles
+}
+
 export function ownerIsAdjacent(owner: PlayerNumber, centerCoordinates: MapCoordinates, map: MapTileData[]): boolean {
 
     const tileDistance = 0
@@ -212,4 +232,70 @@ export function visibleIsAdjacent(centerCoordinates: MapCoordinates, map: MapTil
     }
 
     return false;
+}
+
+function getAdjacentTraversableTilesFromCoordinates(
+    centerCoordinates: MapCoordinates,
+    traversableElevations: Elevation[],
+    map: MapTileData[]): MapTileData[] {
+
+    const adjacentTiles = getAdjacentTiles(0, centerCoordinates, map)
+    const adjacentTraversableTiles: MapTileData[] = []
+
+    adjacentTiles.map((tile) => {
+        if (traversableElevations.includes(tile.tileTerrainValue.elevation)) {
+            adjacentTraversableTiles.push(tile)
+        }
+    })
+
+    return adjacentTraversableTiles;
+}
+
+export function getValidMovementLocations(markedTile: MapCoordinates,
+                                          map: MapTileData[],
+                                          player: PlayerNumber,
+                                          traversableElevations: Elevation[]): MapCoordinates[] {
+
+    const startTile = findTileInMap(markedTile, map)
+
+    if (!startTile?.army) {
+        return []
+    }
+
+    const army = startTile.army
+    const movement = army.armyMovement
+    const reachableCoordinates: MapCoordinates[] = [];
+
+    const queue: PathCoordinates[] = [{ coordinates: markedTile, pathIteration: 0 }]
+    const visited: Set<string> = new Set()
+    visited.add(JSON.stringify(markedTile))
+
+    while (queue.length > 0) {
+
+        const currentCoordinates = queue.shift();
+
+        if (currentCoordinates) {
+
+            reachableCoordinates.push(currentCoordinates.coordinates);
+
+            if (currentCoordinates.pathIteration < movement) {
+                const adjacentTiles = getAdjacentTraversableTilesFromCoordinates(
+                    currentCoordinates.coordinates,
+                    traversableElevations,
+                    map
+                )
+
+                for (const tile of adjacentTiles) {
+                    const adjacentCoordinates = tile.coordinates;
+                    const adjacentCoordinatesString = JSON.stringify(adjacentCoordinates);
+
+                    if (!visited.has(adjacentCoordinatesString)) {
+                        queue.push({coordinates: adjacentCoordinates, pathIteration: currentCoordinates.pathIteration + 1});
+                        visited.add(adjacentCoordinatesString);
+                    }
+                }
+            }
+        }
+    }
+    return reachableCoordinates
 }

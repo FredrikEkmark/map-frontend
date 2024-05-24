@@ -27,6 +27,11 @@ export type MapCoordinates = {
     y: number,
 }
 
+export type PathCoordinates = {
+    coordinates: MapCoordinates;
+    pathIteration: number;
+}
+
 export enum TileEdge {
     NONE = "",
     RIGHT = "rightEdge",

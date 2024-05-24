@@ -19,7 +19,6 @@ const BuildView = ({addEvent, setBuildView, tile} : Props) => {
             <BuildingEventButton building={getBuildingInfo(BuildingTypes.RANCH)} addEvent={addEvent} setBuildView={setBuildView} tile={tile}></BuildingEventButton>
             <BuildingEventButton building={getBuildingInfo(BuildingTypes.LUMBER_CAMP)} addEvent={addEvent} setBuildView={setBuildView} tile={tile}></BuildingEventButton>
             <BuildingEventButton building={getBuildingInfo(BuildingTypes.QUARRY)} addEvent={addEvent} setBuildView={setBuildView} tile={tile}></BuildingEventButton>
-            <BuildingEventButton building={getBuildingInfo(BuildingTypes.CARPENTRY)} addEvent={addEvent} setBuildView={setBuildView} tile={tile}></BuildingEventButton>
             <BuildingEventButton building={getBuildingInfo(BuildingTypes.LEATHER_WORKER)} addEvent={addEvent} setBuildView={setBuildView} tile={tile}></BuildingEventButton>
             <BuildingEventButton building={getBuildingInfo(BuildingTypes.FISHERY)} addEvent={addEvent} setBuildView={setBuildView} tile={tile}></BuildingEventButton>
             <BuildingEventButton building={getBuildingInfo(BuildingTypes.VILLAGE)} addEvent={addEvent} setBuildView={setBuildView} tile={tile}></BuildingEventButton>

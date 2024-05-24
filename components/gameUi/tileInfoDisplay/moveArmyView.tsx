@@ -12,9 +12,10 @@ interface Props {
     setMoveArmyView: (state: boolean) => void
     moveCoordinates: MapCoordinates | null
     setRequestingMoveCoordinates: (state: boolean) => void,
+    unitValidMoveLocations: MapCoordinates[],
 
 }
-const MoveArmyView = ({addEvent, army, dividedRegiments, setDivideRegiments, setMoveArmyView, setUnitView, moveCoordinates, setRequestingMoveCoordinates}: Props) => {
+const MoveArmyView = ({addEvent, army, dividedRegiments, setDivideRegiments, setMoveArmyView, setUnitView, moveCoordinates, setRequestingMoveCoordinates, unitValidMoveLocations}: Props) => {
 
     const confirm = () => {
 
@@ -52,6 +53,16 @@ const MoveArmyView = ({addEvent, army, dividedRegiments, setDivideRegiments, set
         setRequestingMoveCoordinates(false)
     }
 
+    const validMove = (): boolean => {
+        if (!moveCoordinates) {
+            return false
+        }
+        if (unitValidMoveLocations.includes(moveCoordinates)) {
+            return true
+        }
+        return false
+    }
+
     return (
         <div className={"tileInfoDisplay"}>
             <div>
@@ -69,12 +80,12 @@ const MoveArmyView = ({addEvent, army, dividedRegiments, setDivideRegiments, set
                 </div>}
             </div>
             <div className={"eventSpecificsView"}>
-            {!moveCoordinates ?
-                <button className={"confirmButton"} onClick={() => cancel()}>Cancel</button> :
+            {validMove() ?
                 <div className={"doubleConfirmButton"}>
                     <button className={"confirmButton"} onClick={() => confirm()}>Confirm</button>
                     <button className={"confirmButton"} onClick={() => cancel()} >Cancel</button>
-                </div>}
+                </div> :
+                <button className={"confirmButton"} onClick={() => cancel()}>Cancel</button>}
             </div>
 
         </div>

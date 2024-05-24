@@ -13,9 +13,10 @@ interface Props {
     isMarked: boolean,
     tileEvents: GameEvent[],
     setMouseOverTile: (coordinates: MapCoordinates) => void,
+    isPossibleMove: boolean
 }
 
-const Tile = ({ tileData, edge = TileEdge.NONE , setMarkedTile, isMarked, setMouseOverTile, tileEvents}: Props) => {
+const Tile = ({ tileData, edge = TileEdge.NONE , setMarkedTile, isMarked, setMouseOverTile, tileEvents, isPossibleMove}: Props) => {
 
     const armyPresent = () => {
         if (tileData.army) {
@@ -48,6 +49,11 @@ const Tile = ({ tileData, edge = TileEdge.NONE , setMarkedTile, isMarked, setMou
         if (isMarked) {
             return {backgroundColor: 'rgba(0, 0, 0)'}
         }
+
+        if (isPossibleMove) {
+            return {backgroundColor: 'rgb(38,38,38)'}
+        }
+
         if (tileEvents.length > 0) {
             const backgroundColor = 'rgba(0, 0, 0)';
             const linearGradientColor = `repeating-conic-gradient(

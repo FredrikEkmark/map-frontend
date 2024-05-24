@@ -16,9 +16,10 @@ interface Props {
     tile: MapTileData
     moveCoordinates: MapCoordinates | null,
     setRequestingMoveCoordinates: (state: boolean) => void,
+    unitValidMoveLocations: MapCoordinates[],
 
 }
-const UnitView = ({addEvent, ownerTileIsAdjacent, setUnitView, tile, moveCoordinates, setRequestingMoveCoordinates} : Props) => {
+const UnitView = ({addEvent, ownerTileIsAdjacent, setUnitView, tile, moveCoordinates, setRequestingMoveCoordinates, unitValidMoveLocations} : Props) => {
     const [moveArmyView, setMoveArmyView] = useState<boolean>(false)
     const [divideArmyView, setDivideArmyView] = useState<boolean>(false)
     const [dividedRegiments, setDividedRegiments] = useState<string[]>([])
@@ -189,7 +190,8 @@ const UnitView = ({addEvent, ownerTileIsAdjacent, setUnitView, tile, moveCoordin
                 setDivideRegiments={setDividedRegiments}
                 setMoveArmyView={setMoveArmyView}
                 setUnitView={setUnitView}
-                setRequestingMoveCoordinates={setRequestingMoveCoordinates}></MoveArmyView>
+                setRequestingMoveCoordinates={setRequestingMoveCoordinates}
+                unitValidMoveLocations={unitValidMoveLocations}></MoveArmyView>
         } else {
             setDividedRegiments([])
             setDivideArmyView(false)

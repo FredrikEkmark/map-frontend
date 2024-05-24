@@ -27,8 +27,10 @@ interface Props {
     playerOwnedTiles: number,
     moveCoordinates: MapCoordinates | null,
     setRequestingMoveCoordinates: (state: boolean) => void,
+    unitValidMoveLocations: MapCoordinates[],
+
 }
-const TileInfoDisplay = ({mapData, markedTile, setCenterViewCoordinates, playerNr, tileEvents, addEvent, removeEvent, mana, playerOwnedTiles, moveCoordinates, setRequestingMoveCoordinates}: Props) => {
+const TileInfoDisplay = ({mapData, markedTile, setCenterViewCoordinates, playerNr, tileEvents, addEvent, removeEvent, mana, playerOwnedTiles, moveCoordinates, setRequestingMoveCoordinates, unitValidMoveLocations}: Props) => {
 
     const getGeneralEvents = (): GameEvent[] => {
         return tileEvents.filter((event: GameEvent) => {
@@ -50,8 +52,6 @@ const TileInfoDisplay = ({mapData, markedTile, setCenterViewCoordinates, playerN
                 event.eventType == GameEventType.FORTIFY_EVENT
         });
     }
-
-
 
     const getMarkedTileData = () => {
         if (!markedTile) {
@@ -192,6 +192,10 @@ const TileInfoDisplay = ({mapData, markedTile, setCenterViewCoordinates, playerN
         setOwnedUnitPresent(isOwnedUnitPresent)
     }, [tile]);
 
+    useEffect(() => {
+
+    }, []);
+
 
     const eventButtons = () => {
 
@@ -250,7 +254,8 @@ const TileInfoDisplay = ({mapData, markedTile, setCenterViewCoordinates, playerN
                               setUnitView={setUnitView}
                               tile={tile}
                               moveCoordinates={moveCoordinates}
-                              setRequestingMoveCoordinates={setRequestingMoveCoordinates}></UnitView>)
+                              setRequestingMoveCoordinates={setRequestingMoveCoordinates}
+                              unitValidMoveLocations={unitValidMoveLocations}></UnitView>)
         }
     }
 

@@ -22,9 +22,10 @@ interface Props {
     adjustedMana: Mana
     moveCoordinates: MapCoordinates | null,
     setRequestingMoveCoordinates: (state: boolean) => void,
+    unitValidMoveLocations: MapCoordinates[],
 }
 
-const GameUI = ({markedTile, setMarkedTile, playerViewData, eventsData, setEventsData, setCenterViewCoordinates, adjustedMana, moveCoordinates, setRequestingMoveCoordinates}: Props) => {
+const GameUI = ({markedTile, setMarkedTile, playerViewData, eventsData, setEventsData, setCenterViewCoordinates, adjustedMana, moveCoordinates, setRequestingMoveCoordinates, unitValidMoveLocations}: Props) => {
 
     const [markedTileEvents, setMarkedTileEvents] = (
         useState<GameEvent[]>(findAllEventsInMap(markedTile, eventsData)))
@@ -102,6 +103,7 @@ const GameUI = ({markedTile, setMarkedTile, playerViewData, eventsData, setEvent
                 playerOwnedTiles={playerClaimedTiles()}
                 moveCoordinates={moveCoordinates}
                 setRequestingMoveCoordinates={setRequestingMoveCoordinates}
+                unitValidMoveLocations={unitValidMoveLocations}
             >
             </TileInfoDisplay>
         </div>

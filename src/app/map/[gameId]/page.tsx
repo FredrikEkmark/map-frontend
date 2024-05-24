@@ -1,7 +1,7 @@
 "use client"
 
 import "@/styles/global/global.css";
-import { useParams } from 'next/navigation'
+import {useParams} from 'next/navigation'
 import GameMap from "../../../../components/gameMap/gameMap";
 import {useEffect, useState} from "react";
 import playerViewService from "../../../../services/playerViewService";
@@ -9,12 +9,14 @@ import GameUI from "../../../../components/gameUi/gameUI";
 import ResourceBar from "../../../../components/resourceBar/resourceBar";
 import eventService from "../../../../services/eventService";
 import {PlayerViewData} from "../../../../types/playerViewTypes";
-import {MapCoordinates} from "../../../../types/mapTypes";
+import {Elevation, MapCoordinates} from "../../../../types/mapTypes";
 import {GameEvent} from "../../../../types/eventTypes";
 import {Mana} from "../../../../types/manaTypes";
 import turnChangeService from "../../../../services/turnChangeService";
+import {getValidMovementLocations} from "../../../../functions/mapAdjacency/mapAdjaceny";
 
 const Map = () => {
+
 
     const params = useParams<{ gameId: string;}>()
     const [playerViewData, setPlayerViewData] = useState<PlayerViewData>()
@@ -23,6 +25,7 @@ const Map = () => {
     const [centerViewCoordinates, setCenterViewCoordinates] = useState<MapCoordinates>({x: 20, y: 20})
     const [moveCoordinates, setMoveCoordinate] = useState<MapCoordinates | null>(null)
     const [requestingMoveCoordinates, setRequestingMoveCoordinate] = useState<boolean>(false)
+    const [unitValidMoveLocations, setUnitValidMoveLocations] = useState<MapCoordinates[]>([])
 
     useEffect(() => {
         setMoveCoordinate(null)
@@ -55,6 +58,22 @@ const Map = () => {
         })
         return adjustedMana
     }
+
+    useEffect(() => {
+        if (markedTile && playerViewData && requestingMoveCoordinates) {
+                const gameMap = playerViewData.mapData.map
+                const traversableElevations: Elevation[] = [Elevation.HIGHLANDS, Elevation.LOWLANDS]
+                const validMoveLocations = getValidMovementLocations(
+                    markedTile,
+                    gameMap,
+                    playerViewData.playerNr,
+                    traversableElevations)
+                setUnitValidMoveLocations(validMoveLocations)
+
+        } else {
+            setUnitValidMoveLocations([])
+        }
+    }, [requestingMoveCoordinates]);
 
     const safeCenterViewPoint = (coordinates: MapCoordinates) => {
         if (!playerViewData) {
@@ -128,7 +147,8 @@ const Map = () => {
                             mapData={playerViewData.mapData}
                             events={eventsData}
                             requestingMoveCoordinates={requestingMoveCoordinates}
-                            setMoveCoordinates={setMoveCoordinate}>
+                            setMoveCoordinates={setMoveCoordinate}
+                            unitValidMoveLocations={unitValidMoveLocations}>
                         </GameMap>
                         <GameUI
                             markedTile={markedTile}
@@ -139,7 +159,8 @@ const Map = () => {
                             setCenterViewCoordinates={safeCenterViewPoint}
                             adjustedMana={adjustedMana(playerViewData.mana, eventsData)}
                             moveCoordinates={moveCoordinates}
-                            setRequestingMoveCoordinates={setRequestingMoveCoordinate}>
+                            setRequestingMoveCoordinates={setRequestingMoveCoordinate}
+                            unitValidMoveLocations={unitValidMoveLocations}>
                         </GameUI>
                     </div>
                 </div>
