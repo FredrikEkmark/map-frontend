@@ -13,7 +13,7 @@ const Tooltip = ({children, tooltipContent, bottomDistance = 300} : Props) => {
     const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
 
     const handleMouseOver = (event: React.MouseEvent<HTMLDivElement>) => {
-        // toDO write in report about using chatGPT for this
+
         setIsVisible(true);
         const offsetX = 10; // Offset from cursor
         const offsetY = 10; // Offset from cursor

@@ -20,7 +20,7 @@ const Tile = ({ tileData, edge = TileEdge.NONE , setMarkedTile, isMarked, setMou
 
     const armyPresent = () => {
         if (tileData.army) {
-            return (<Image src={`/media/images/units/army.png`} className={"army"}
+            return (<Image src={`/media/images/units/army_${tileData.army.owner.name}.png`} className={"army"}
                            alt={"army"} height={30} width={30}></Image>)
         }
     }

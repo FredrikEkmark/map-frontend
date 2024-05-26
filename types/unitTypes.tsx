@@ -21,7 +21,7 @@ export type Regiment = {
    equipmentModifier: number,
    regimentName: string,
    unitAmount: number,
-   unitType: string, // todo change to enum or simmular
+   unitType: UnitType,
 }
 
 export enum UnitType {
