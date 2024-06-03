@@ -2,11 +2,11 @@
 
 import "@/styles/global/global.css";
 import {useParams} from 'next/navigation'
-import GameMap from "../../../../components/gameMap/gameMap";
+import GameMap from "../../../../components/mapPage/gameMap/gameMap";
 import {useEffect, useState} from "react";
 import playerViewService from "../../../../services/playerViewService";
-import GameUI from "../../../../components/gameUi/gameUI";
-import ResourceBar from "../../../../components/resourceBar/resourceBar";
+import GameUI from "../../../../components/mapPage/gameUi/gameUI";
+import ResourceBar from "../../../../components/mapPage/resourceBar/resourceBar";
 import eventService from "../../../../services/eventService";
 import {PlayerViewData} from "../../../../types/playerViewTypes";
 import {Elevation, MapCoordinates} from "../../../../types/mapTypes";

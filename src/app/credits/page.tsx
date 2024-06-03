@@ -1,4 +1,4 @@
-import Tooltip from "../../../components/global/tooltip";
+import Tooltip from "../../../components/mapPage/global/tooltip";
 
 const About = () => {
     return (

@@ -1,16 +1,16 @@
 import "@/styles/gameUi/gameUi.css";
 import "@/styles/global/global.css";
 import TileInfoDisplay from "./tileInfoDisplay/tileInfoDisplay";
-import {MapCoordinates} from "../../types/mapTypes";
-import {PlayerViewData} from "../../types/playerViewTypes";
-import {BuildEventData, EmptyEventData, GameEvent, GameEventType, NewEventDTO} from "../../types/eventTypes";
+import {MapCoordinates} from "../../../types/mapTypes";
+import {PlayerViewData} from "../../../types/playerViewTypes";
+import {BuildEventData, EmptyEventData, GameEvent, GameEventType, NewEventDTO} from "../../../types/eventTypes";
 import {useEffect, useState} from "react";
-import eventService from "../../services/eventService";
-import {Mana, ManaCost} from "../../types/manaTypes";
+import eventService from "../../../services/eventService";
+import {Mana, ManaCost} from "../../../types/manaTypes";
 import ActionInterface from "./actionInterface";
-import {findAllEventsInMap} from "../../functions/utility/eventUtility";
-import {numberOfPlayerOwnedTiles} from "../../functions/utility/mapUtility";
-import {canPayManaInFull} from "../../functions/utility/manaUtility";
+import {findAllEventsInMap} from "../../../functions/utility/eventUtility";
+import {numberOfPlayerOwnedTiles} from "../../../functions/utility/mapUtility";
+import {canPayManaInFull} from "../../../functions/utility/manaUtility";
 
 interface Props {
     markedTile: MapCoordinates | null,

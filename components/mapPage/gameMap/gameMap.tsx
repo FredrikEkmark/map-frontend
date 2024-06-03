@@ -10,11 +10,11 @@ import {
     MapMove,
     MapTileData,
     TileEdge
-} from "../../types/mapTypes";
-import {getPlayerNumberFromInput} from "../../types/playerViewTypes";
-import {BuildingTypes, getBuildingInfo} from "../../types/buildingTypes";
-import {GameEvent} from "../../types/eventTypes";
-import {findAllEventsInMap} from "../../functions/utility/eventUtility";
+} from "../../../types/mapTypes";
+import {getPlayerNumberFromInput} from "../../../types/playerViewTypes";
+import {BuildingTypes, getBuildingInfo} from "../../../types/buildingTypes";
+import {GameEvent} from "../../../types/eventTypes";
+import {findAllEventsInMap} from "../../../functions/utility/eventUtility";
 
 interface Props {
     centerViewCoordinates: MapCoordinates

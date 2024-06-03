@@ -1,7 +1,7 @@
 import "@/styles/resourceBar/resourceBar.css";
 import "@/styles/global/global.css";
 import Image from "next/image";
-import {ResourceInfoType} from "../../types/manaTypes";
+import {ResourceInfoType} from "../../../types/manaTypes";
 import {useEffect, useState} from "react";
 import Tooltip from "../global/tooltip";
 

@@ -1,10 +1,10 @@
 import "@/styles/gameMap/map-style.css";
 import "@/styles/global/global.css";
-import {MapCoordinates, MapTileData, TileEdge} from "../../types/mapTypes";
+import {MapCoordinates, MapTileData, TileEdge} from "../../../types/mapTypes";
 import Image from "next/image";
-import {NONE} from "../../types/buildingTypes";
-import {GameEvent} from "../../types/eventTypes";
-import {Army} from "../../types/unitTypes";
+import {NONE} from "../../../types/buildingTypes";
+import {GameEvent} from "../../../types/eventTypes";
+import {Army} from "../../../types/unitTypes";
 
 interface Props {
     tileData: MapTileData,

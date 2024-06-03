@@ -1,11 +1,11 @@
 import "@/styles/resourceBar/resourceBar.css";
 import "@/styles/global/global.css";
-import {eventName} from "../../../functions/utility/eventUtility";
+import {eventName} from "../../../../functions/utility/eventUtility";
 import Image from "next/image";
 import Tooltip from "../../global/tooltip";
-import {GameEvent, GameEventType} from "../../../types/eventTypes";
-import {getRecruitedUnitFromBuilding} from "../../../types/unitTypes";
-import {MapTileData} from "../../../types/mapTypes";
+import {GameEvent, GameEventType} from "../../../../types/eventTypes";
+import {getRecruitedUnitFromBuilding} from "../../../../types/unitTypes";
+import {MapTileData} from "../../../../types/mapTypes";
 interface Props {
     addEvent: (evenType: GameEventType, eventData: any, cost: any) => Promise<boolean>,
     removeEvent: (eventId: string) => void,

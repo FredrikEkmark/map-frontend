@@ -1,8 +1,8 @@
 import "@/styles/global/global.css";
 import "@/styles/gameUi/gameUi.css";
-import {Army, Regiment} from "../../../types/unitTypes";
+import {Army, Regiment} from "../../../../types/unitTypes";
 import {useState} from "react";
-import {GameEventType} from "../../../types/eventTypes";
+import {GameEventType} from "../../../../types/eventTypes";
 
 
 

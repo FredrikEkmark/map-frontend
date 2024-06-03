@@ -1,8 +1,8 @@
 import "@/styles/global/global.css";
 import "@/styles/gameUi/gameUi.css";
-import {MapCoordinates} from "../../../types/mapTypes";
-import {GameEventType} from "../../../types/eventTypes";
-import {Army} from "../../../types/unitTypes";
+import {MapCoordinates} from "../../../../types/mapTypes";
+import {GameEventType} from "../../../../types/eventTypes";
+import {Army} from "../../../../types/unitTypes";
 interface Props {
     addEvent: (evenType: GameEventType, eventData: any, cost: any) => Promise<boolean>,
     army: Army,

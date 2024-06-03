@@ -1,13 +1,13 @@
 import "@/styles/resourceBar/resourceBar.css";
 import "@/styles/global/global.css";
-import {GameEventType} from "../../../types/eventTypes";
-import {MapCoordinates, MapTileData} from "../../../types/mapTypes";
+import {GameEventType} from "../../../../types/eventTypes";
+import {MapCoordinates, MapTileData} from "../../../../types/mapTypes";
 import {useEffect, useState} from "react";
 import Tooltip from "../../global/tooltip";
-import {Army} from "../../../types/unitTypes";
+import {Army} from "../../../../types/unitTypes";
 import DivideArmyView from "./divideArmyView";
 import MoveArmyView from "./moveArmyView";
-import {NONE} from "../../../types/playerViewTypes";
+import {NONE} from "../../../../types/playerViewTypes";
 
 interface Props {
     addEvent: (evenType: GameEventType, eventData: any, cost: any) => Promise<boolean>,

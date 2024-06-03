@@ -1,8 +1,8 @@
 import Tooltip from "../../global/tooltip";
 import "@/styles/gameUi/gameUi.css";
 import "@/styles/global/global.css";
-import {GameEvent} from "../../../types/eventTypes";
-import {eventName} from "../../../functions/utility/eventUtility";
+import {GameEvent} from "../../../../types/eventTypes";
+import {eventName} from "../../../../functions/utility/eventUtility";
 import Image from "next/image";
 
 interface Props {

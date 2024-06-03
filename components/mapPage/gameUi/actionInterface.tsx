@@ -1,8 +1,8 @@
 import "@/styles/gameUi/gameUi.css";
 import "@/styles/global/global.css";
-import {EventLog, GameEvent, GameEventType} from "../../types/eventTypes";
-import {GameMapData, MapCoordinates} from "../../types/mapTypes";
-import {eventName} from "../../functions/utility/eventUtility";
+import {EventLog, GameEvent, GameEventType} from "../../../types/eventTypes";
+import {GameMapData, MapCoordinates} from "../../../types/mapTypes";
+import {eventName} from "../../../functions/utility/eventUtility";
 import Image from "next/image";
 import {JSX, ReactNode, useState} from "react";
 import {log} from "util";

@@ -1,4 +1,4 @@
-import GameMap from "../../../components/gameMap/gameMap";
+import GameMap from "../../../components/mapPage/gameMap/gameMap";
 
 const SelectMap = () => {
 

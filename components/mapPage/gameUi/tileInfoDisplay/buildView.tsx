@@ -1,9 +1,9 @@
 import "@/styles/resourceBar/resourceBar.css";
 import "@/styles/global/global.css";
 import BuildingEventButton from "./buildingEventButton";
-import {BuildingTypes, getBuildingInfo} from "../../../types/buildingTypes";
-import {GameEventType} from "../../../types/eventTypes";
-import {MapTileData} from "../../../types/mapTypes";
+import {BuildingTypes, getBuildingInfo} from "../../../../types/buildingTypes";
+import {GameEventType} from "../../../../types/eventTypes";
+import {MapTileData} from "../../../../types/mapTypes";
 
 interface Props {
     addEvent: (evenType: GameEventType, eventData: any, cost: any) => Promise<boolean>,
